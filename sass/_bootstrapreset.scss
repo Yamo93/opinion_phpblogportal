@@ -1,0 +1,12 @@
+.container .form-group label, 
+.form-group .form-control,
+.form-group .form-text, .btn-primary {
+    font-size: 2rem;
+    font-family: $secondary-font;
+}
+
+.container .form-group .form-check-label, 
+.container .form-group .form-text {
+    font-size: 1.6rem;
+    margin-left: 5px;
+}

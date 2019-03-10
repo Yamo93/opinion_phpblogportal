@@ -1,0 +1,67 @@
+$electronblue: #0984e3;
+$mintgreen: #00b894;
+$brightyellow: #fdcb6e;
+$red: #d63031;
+$white: #EFEFEF;
+$black: #232323;
+$primary-font: 'Tinos', serif;
+$secondary-font: 'Open Sans', sans-serif;
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+    scroll-behavior: smooth;
+}
+
+html {
+    font-size: 62.5%;
+
+    @media screen and (max-width: 850px) {
+        font-size: 56.25%;
+    }
+}
+
+body {
+    position: relative;
+    font-family: $primary-font;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $secondary-font;
+}
+
+h1 {
+    font-size: 2.6rem;
+}
+
+h2 {
+    font-size: 2.4rem;
+}
+
+h3 {
+    font-size: 2.2rem;
+}
+
+p, li, a {
+    font-size: 1.8rem;
+}
+
+ul {
+    list-style: none;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    // color: $electronblue;
+    font-weight: 600;
+    font-size: inherit;
+}
+
+a:hover, a:active {
+    color: darken($electronblue, 10%);
+}

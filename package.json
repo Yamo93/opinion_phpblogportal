@@ -1,0 +1,14 @@
+{
+  "name": "mediumproject",
+  "version": "1.0.0",
+  "description": "Medium Project",
+  "main": "index.js",
+  "scripts": {
+    "compile": "node-sass sass/main.scss css/style.css -w"
+  },
+  "author": "Yamo Gebrewold",
+  "license": "ISC",
+  "devDependencies": {
+    "node-sass": "^4.11.0"
+  }
+}
