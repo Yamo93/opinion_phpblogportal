@@ -1,7 +1,7 @@
 .container .form-group label, 
 .form-group .form-control,
-.form-group .form-text, .btn-primary {
-    font-size: 2rem;
+.form-group .form-text, .btn, .card a.btn:link, .card a.btn:visited {
+    font-size: 1.8rem;
     font-family: $secondary-font;
 }
 
@@ -9,4 +9,22 @@
 .container .form-group .form-text {
     font-size: 1.6rem;
     margin-left: 5px;
+}
+
+.jumbotron {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.card {
+    width: 50%;
+    margin: 0 auto;
+
+    .card-title {
+        font-size: 2.2rem;
+
+        span {
+            color: $mintgreen;
+        }
+    }
 }

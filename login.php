@@ -19,7 +19,7 @@
     <meta name="msapplication-config" content="./img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Tinos" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Tinos:400,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -33,23 +33,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-        <a class="nav-link" href="#">Om webbplatsen<span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="about.php">Om webbplatsen<span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-        <a class="nav-link" href="#">Huvudsidan</a>
+        <a class="nav-link" href="main.php">Huvudsidan</a>
         </li>
 
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form> -->
         </div>
         </nav>
     </header>
     <div class="login">
         <div class="container">
             <form>
+            <h1 class="login__title">Logga in på Opinion.</h1>
             <div class="form-group">
             <label for="InputUsername1">Användarnamn</label>
             <input type="text" class="form-control" id="InputUsername1" placeholder="Ange användarnamn">
@@ -63,7 +60,20 @@
             <label class="form-check-label" for="exampleCheck1">Låt mig förbli inloggad</label>
             </div>
             <button type="submit" class="btn btn-primary">Logga in</button>
+            <a href="#" class="forgot">
+            <button type="submit" class="btn btn-warning">Glömt lösenord</button>
+            </a>
             </form>
+
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title">Är du ny på Opinion?</h5>
+                <p class="card-text">Du kan enkelt registrera ett kostnadsfritt konto genom att klicka på knappen nedanför.</p>
+                <div class="buttons">
+                    <a href="register.php" class="card-link"><button class="btn btn-success btn-sm">Registrera dig nu</button></a>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

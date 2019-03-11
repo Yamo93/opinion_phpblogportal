@@ -1,7 +1,52 @@
 .login {
     padding: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media screen and (max-width: 450px) {
+        padding: 2rem;
+    }
+
+    &__title {
+        font-weight: 600;
+        margin-bottom: 3rem;
+    }
 
     .container {
-        width: 50%;
+        width: 40%;
+
+        @media screen and (max-width: 700px) {
+            width: 60%;
+        }
+
+        @media screen and (max-width: 550px) {
+            width: 80%;
+        }
+
+        @media screen and (max-width: 450px) {
+            width: 100%;
+        }
+        
+        .card {
+            margin-top: 3rem;
+            width: 100%;
+        }
+
+        .card, .card-body {
+
+            .card-title {
+                font-size: 2rem;
+            }
+
+            .buttons {
+                text-align: center;
+                
+                .btn {
+                    font-size: 1.6rem;
+                    font-family: $secondary-font;
+                }
+            }
+        }
     }
 }

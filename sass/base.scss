@@ -2,7 +2,7 @@ $electronblue: #0984e3;
 $mintgreen: #00b894;
 $brightyellow: #fdcb6e;
 $red: #d63031;
-$white: #EFEFEF;
+$white: #FEFEFE;
 $black: #232323;
 $primary-font: 'Tinos', serif;
 $secondary-font: 'Open Sans', sans-serif;
@@ -29,6 +29,7 @@ html {
 body {
     position: relative;
     font-family: $primary-font;
+    background-color: $white;
 }
 
 h1, h2, h3, h4, h5, h6 {

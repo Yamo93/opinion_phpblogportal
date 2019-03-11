@@ -1,12 +1,70 @@
 .header {
 
-    .navbar-brand {
-        font-size: 2.2rem;
-        color: $electronblue;
-        transition: all .3s;
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 3rem 2rem;
+        // font-family: $secondary-font;
+        // font-size: 1.8rem;
 
-        &:hover {
-            color: darken($electronblue, 15%);
+        &-primarylist, &-secondarylist {
+            width: 30%;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
         }
+
+        &-primarylist {
+            @media screen and (max-width: 1050px) {
+                width: 35%;
+            }
+        }
+
+        &-secondarylist {
+            width: 20%;
+
+            @media screen and (max-width: 1050px) {
+                width: 25%;
+            }
+        }
+
+        &-brand {
+            font-size: 2.2rem;
+
+            a {
+                color: $mintgreen;
+            }
+        }
+    }
+
+    &__search {
+        width: 30%;
+        input[type=search] {
+            padding: 3px 5px;
+            border: 1.2px solid $electronblue;
+            font: inherit;
+            font-size: 1.8rem;
+            transition: all .3s;
+            
+            &:focus {
+                outline: none;
+                border: 1.2px solid $mintgreen;
+                box-shadow: 1px 1.5px 2px rgba(0, 0, 0, .4);
+            }
+        }
+
+        &-btn {
+            padding: 3px 5px;
+            border: 1.2px solid darken($electronblue, 15%);
+            font-size: 1.8rem;
+            background-color: $mintgreen;
+            color: $white;
+            transition: all .3s;
+            &:hover {
+                background-color: darken($mintgreen, 10%);
+            }
+        }
+
     }
 }
