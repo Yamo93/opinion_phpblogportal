@@ -13,9 +13,17 @@
 
             a.active:link, a.active:visited {
                 color: $mintgreen;
+                padding-bottom: .5px;
+                border-bottom: 1.5px solid currentColor;
+
             }
         }
     }
+}
+
+.card-welcome {
+    padding: 3rem;
+    background-color: papayawhip;
 }
 
 .mainpage {

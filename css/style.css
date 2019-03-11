@@ -206,7 +206,13 @@ a:hover, a:active {
     font-weight: 600;
     font-size: 1.4rem; }
     .categories ul li a.active:link, .categories ul li a.active:visited {
-      color: #00b894; }
+      color: #00b894;
+      padding-bottom: .5px;
+      border-bottom: 1.5px solid currentColor; }
+
+.card-welcome {
+  padding: 3rem;
+  background-color: papayawhip; }
 
 .mainpage {
   margin: 5rem 0;
@@ -230,3 +236,8 @@ a:hover, a:active {
       height: 1.5px;
       width: 100%;
       background: linear-gradient(to right, #0984e3, rgba(0, 184, 148, 0.3)); }
+
+.footer {
+  width: 100%;
+  background-color: #0984e3;
+  color: #FEFEFE; }
