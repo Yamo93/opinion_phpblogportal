@@ -57,67 +57,10 @@
         </ul>
     </nav>
 
-    <!-- Välkomstmeddelande -->
-    <div class="card text-center card-welcome">
-        <div class="card-body">
-        <h5 class="card-title">Välkommen till <span>Opinion</span>!</h5>
-        <p class="card-text">Här får du dela med dig av dina tankar.</p>
-        <a href="register.php" class="btn btn-primary">Registrera dig för att delta.</a>
-        </div>
-    </div>
+    <!-- Inläggtitel -->
 
-    <div class="mainpage">
-        <section class="mainpage__left">
-            <h1 class="mainpage__title">De senaste blogginläggen</h1>
-            <article class="mainpage__article">
-                <h2 class="mainpage__article-title">This is a title.</h2>
-                <p class="mainpage__article-desc">This is a description of the article.</p>
-                <p class="mainpage__article-author">By <span>John Smith</span></p>
-                <p class="mainpage__article-date">2019-01-01 13:00</p>
-                <p class="mainpage__article-read">Fyra minuters läsning</p>
-                <a href="#" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
-            </article>
-            <article class="mainpage__article">
-                <h2 class="mainpage__article-title">This is a title.</h2>
-                <p class="mainpage__article-desc">This is a description of the article.</p>
-                <p class="mainpage__article-author">By <span>John Smith</span></p>
-                <p class="mainpage__article-date">2019-01-01 13:00</p>
-                <p class="mainpage__article-read">Fyra minuters läsning</p>
-                <a href="#" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
-            </article>
-            <article class="mainpage__article">
-                <h2 class="mainpage__article-title">This is a title.</h2>
-                <p class="mainpage__article-desc">This is a description of the article.</p>
-                <p class="mainpage__article-author">By <span>John Smith</span></p>
-                <p class="mainpage__article-date">2019-01-01 13:00</p>
-                <p class="mainpage__article-read">Fyra minuters läsning</p>
-                <a href="#" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
-            </article>
-        </section>
-        <section class="mainpage__right">
-            <h1 class="mainpage__title">Statistik om <span>Opinion</span></h1>
-            <div class="amountusers">
-                <i class="fas fa-users usersicon"></i>
-                <h2>Antalet användare:</h2>
-                <p class="info"><span>2934</span> användare</p>
-            </div>
-            <div class="mostread">
-                <i class="fas fa-fire-alt fireicon"></i>
-                <h2>Opinions mest lästa inlägg:</h2>
-                <ul>
-                    <li><p class="post">Lorem ipsum dolor sit amet consectetur</p>
-                    <p class="author">Av <span>User1</span></p>
-                    <p class="reads">20 läsningar</p></li>
-                    <li><p class="post">Lorem ipsum dolor sit amet</p>
-                    <p class="author">Av <span>User2</span></p>
-                    <p class="reads">25 läsningar</p></li>
-                    <li><p class="post">Lorem ipsum dolor sit amet consectetur adipisicing</p>
-                    <p class="author">Av <span>User3</span></p>
-                    <p class="reads">30 läsningar</p></li>
-                </ul>
-            </div>
-        </section>
-    </div>
+    <!-- Innehåll -->
+
 
     <footer class="footer">
         <ul>

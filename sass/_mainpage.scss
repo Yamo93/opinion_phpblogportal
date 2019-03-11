@@ -1,0 +1,180 @@
+.categories {
+    ul {
+        width: 80%;
+        margin: 5rem auto;
+        display: flex;
+        justify-content: space-between;
+
+        li {
+            text-transform: uppercase;
+            font-family: $secondary-font;
+            font-weight: 600;
+            font-size: 1.4rem;
+
+            a.active:link, a.active:visited {
+                color: $mintgreen;
+                padding-bottom: .5px;
+                border-bottom: 1.5px solid currentColor;
+
+            }
+        }
+    }
+}
+
+.card-welcome {
+    padding: 3rem;
+    background-color: papayawhip;
+}
+
+.mainpage {
+    margin: 5rem 0;
+    padding: 5rem;
+    display: flex;
+    justify-content: space-between;
+
+    &__left {
+        width: 65%;
+    }
+
+    &__right {
+        width: 25%;
+    }
+
+    &__title {
+        font-size: 2.2rem;
+        font-weight: 600;
+        padding-bottom: 1.5rem;
+        position: relative;
+
+        span {
+            color: $mintgreen;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 1.5px;
+            width: 100%;
+            background: linear-gradient(to right, rgba($mintgreen, 1), rgba($red, .8));
+        }
+    }
+
+    &__article {
+        padding: 3rem 0;
+
+        &-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        &-desc {
+            font-size: 1.8rem;
+            opacity: .9;
+        }
+
+        &-author {
+            font-weight: 600;
+            margin-bottom: 0;
+
+            span {
+                color: $electronblue;
+            }
+        }
+
+        &-date, &-read {
+            display: inline-block;
+            margin-right: .5rem;
+            font-size: 1.6rem;
+        }
+
+        &-read {
+            color: $mintgreen;
+
+            &::before {
+                content: "\2014";
+                color: rgba(#333, .5);
+                margin-right: 6px;
+            }
+        }
+
+        &-readbtn:link, &-readbtn:visited {
+            display: block;
+            width: 90px;
+            font-size: 1.6rem;
+        }
+    }
+
+    &__article:not(:last-child) {
+        border-bottom: .3px solid rgba(#333, .6);
+    }
+
+    .amountusers, .mostread {
+        padding: 2rem 0;
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .amountusers {
+        padding-bottom: 1rem;
+        border-bottom: .5px dotted $electronblue;
+
+        .info {
+            span {
+                font-weight: 600;
+                color: $electronblue;
+            }
+        }
+    }
+
+    .mostread {
+        ul {
+
+            li {
+                margin-bottom: 1rem;
+                p {
+                    margin: 0;
+                }
+
+                .post {
+                    font-size: 1.6rem;
+                }
+
+                .author {
+                    font-size: 1.5rem;
+
+                    span {
+                        font-weight: 600;
+                        color: $mintgreen;
+                    }
+                }
+
+                .reads {
+                    color: $electronblue;
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+
+    .usersicon, .fireicon {
+        font-size: 4rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .usersicon {
+        color: $mintgreen;
+    }
+
+    .fireicon {
+        color: $red;
+    }
+
+
+}

@@ -16,7 +16,7 @@ html {
 body {
   position: relative;
   font-family: "Tinos", serif;
-  background-color: #FEFEFE; }
+  background-color: #f3f3f3; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", sans-serif; }
@@ -90,7 +90,7 @@ a:hover, a:active {
   .welcome__list-item {
     font-size: 2rem;
     font-weight: 600;
-    color: #FEFEFE;
+    color: #f3f3f3;
     margin-bottom: 1.5rem;
     letter-spacing: 1.5px; }
   .welcome__right {
@@ -116,6 +116,12 @@ a:hover, a:active {
     margin-bottom: 1.5rem;
     font-size: 1.8rem;
     font-family: "Open Sans", sans-serif; }
+
+.header .navbar {
+  align-items: baseline; }
+
+.header .navbar-brand {
+  font-size: 2.2rem; }
 
 .header__nav {
   display: flex;
@@ -157,7 +163,7 @@ a:hover, a:active {
     border: 1.2px solid #065999;
     font-size: 1.8rem;
     background-color: #00b894;
-    color: #FEFEFE;
+    color: #f3f3f3;
     transition: all .3s; }
     .header__search-btn:hover {
       background-color: #00856b; }
@@ -228,6 +234,8 @@ a:hover, a:active {
     font-weight: 600;
     padding-bottom: 1.5rem;
     position: relative; }
+    .mainpage__title span {
+      color: #00b894; }
     .mainpage__title::after {
       content: '';
       position: absolute;
@@ -235,9 +243,90 @@ a:hover, a:active {
       left: 0;
       height: 1.5px;
       width: 100%;
-      background: linear-gradient(to right, #0984e3, rgba(0, 184, 148, 0.3)); }
+      background: linear-gradient(to right, #00b894, rgba(214, 48, 49, 0.8)); }
+  .mainpage__article {
+    padding: 3rem 0; }
+    .mainpage__article-title {
+      font-size: 2.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem; }
+    .mainpage__article-desc {
+      font-size: 1.8rem;
+      opacity: .9; }
+    .mainpage__article-author {
+      font-weight: 600;
+      margin-bottom: 0; }
+      .mainpage__article-author span {
+        color: #0984e3; }
+    .mainpage__article-date, .mainpage__article-read {
+      display: inline-block;
+      margin-right: .5rem;
+      font-size: 1.6rem; }
+    .mainpage__article-read {
+      color: #00b894; }
+      .mainpage__article-read::before {
+        content: "\2014";
+        color: rgba(51, 51, 51, 0.5);
+        margin-right: 6px; }
+    .mainpage__article-readbtn:link, .mainpage__article-readbtn:visited {
+      display: block;
+      width: 90px;
+      font-size: 1.6rem; }
+  .mainpage__article:not(:last-child) {
+    border-bottom: 0.3px solid rgba(51, 51, 51, 0.6); }
+  .mainpage .amountusers, .mainpage .mostread {
+    padding: 2rem 0; }
+    .mainpage .amountusers h2, .mainpage .mostread h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 1rem; }
+  .mainpage .amountusers {
+    padding-bottom: 1rem;
+    border-bottom: 0.5px dotted #0984e3; }
+    .mainpage .amountusers .info span {
+      font-weight: 600;
+      color: #0984e3; }
+  .mainpage .mostread ul li {
+    margin-bottom: 1rem; }
+    .mainpage .mostread ul li p {
+      margin: 0; }
+    .mainpage .mostread ul li .post {
+      font-size: 1.6rem; }
+    .mainpage .mostread ul li .author {
+      font-size: 1.5rem; }
+      .mainpage .mostread ul li .author span {
+        font-weight: 600;
+        color: #00b894; }
+    .mainpage .mostread ul li .reads {
+      color: #0984e3;
+      font-size: 1.5rem; }
+  .mainpage .usersicon, .mainpage .fireicon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem; }
+  .mainpage .usersicon {
+    color: #00b894; }
+  .mainpage .fireicon {
+    color: #d63031; }
 
 .footer {
   width: 100%;
   background-color: #0984e3;
-  color: #FEFEFE; }
+  color: #f3f3f3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 5rem; }
+  .footer ul {
+    margin-bottom: 2rem; }
+    .footer ul li a:link, .footer ul li a:visited {
+      color: #f3f3f3;
+      transition: all .3s; }
+    .footer ul li a:hover, .footer ul li a:active {
+      color: #dadada; }
+  .footer .copyright {
+    color: #f3f3f3;
+    font-size: 1.6rem; }
+
+#FormControlFile1 {
+  font-size: 1.6rem; }
