@@ -1,0 +1,17 @@
+#addPost, #editPost {
+
+    #modalTitle {
+        font-size: 2.2rem;
+    }
+
+    .modal-body {
+        label {
+            font-size: 1.8rem;
+            font-family: $secondary-font;
+        }
+
+        .form-control {
+            font-family: $primary-font;
+        }
+    }
+}

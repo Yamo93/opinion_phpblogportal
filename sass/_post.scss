@@ -1,0 +1,59 @@
+.post {
+    width: 70%;
+    min-height: 90vh;
+    padding: 5rem 15%;
+    margin: 0 auto;
+
+    &__title {
+        font-weight: 600;
+        margin-bottom: 2.5rem;
+    }
+
+    &__desc {
+        opacity: .8;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    &__author {
+        display: flex;
+        margin-bottom: 2rem;
+
+        .post__authorimg {
+            width: 7rem;
+            height: 7rem;
+            background-image: url(../img/userimgs/yamo93.jpeg);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .post__authorinfo {
+            margin-left: 1.5rem;
+
+            .post__authorname, .post__date, .post__read {
+                font-size: 1.4rem;
+                margin-bottom: .5rem;
+            }
+
+            .post__authorname {
+                span {
+                    font-weight: 600;
+                    color: $electronblue;
+                }
+            }
+
+            .post__read {
+                color: $mintgreen;
+            }
+        }
+
+    }
+
+    &__para {
+        width: 90%;
+    }
+
+    .editbtn {
+        margin-bottom: 3rem;
+    }
+}
