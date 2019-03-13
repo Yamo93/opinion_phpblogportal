@@ -1,13 +1,26 @@
 <?php
     $subtitle = 'Huvudsidan';
-
-
-
-    // Loggar in "fejk" för testskäl
-    $_SESSION['username'] = "Yamo93";
+    include_once('includes/config.php');
 
     if(isset($_SESSION['username'])) {
         include_once('includes/loginheader.php');
+
+        $post = new Post();
+    
+        if(isset($_POST['addpost'])) {
+            // print_R($_POST);
+            if($post->addPost($_POST['title'], $_POST['desc'], $_POST['editor1'], 15)) {
+                $message = '<div class="alert alert-success" role="alert">
+                Blogginlägget har publicerats!
+              </div>';
+            } else {
+                $message = '<div class="alert alert-danger" role="alert">
+                Något gick fel. Vänligen försök igen.
+              </div>';
+            }
+        }
+
+
     } else {
         include_once('includes/defaultheader.php');
     }
@@ -28,7 +41,13 @@
     </nav>
 
     <!-- Välkomstmeddelande -->
+    <div class="container" style="margin-bottom: 3rem;">
     <?php 
+    if(isset($message)) echo $message;
+    ?>
+    </div>
+
+    <?php
     if(!isset($_SESSION['username'])) {
         echo '<div class="card text-center card-welcome">
         <div class="card-body">

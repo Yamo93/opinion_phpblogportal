@@ -30,7 +30,7 @@
         }
 
         &-secondarylist {
-            width: 25%;
+            width: 30%;
             align-items: center;
 
             @media screen and (max-width: 1050px) {
@@ -39,6 +39,7 @@
 
             li {
                 a:link, a:visited {
+                    // display: block;
                     span {
                         color: $mintgreen;
                     }

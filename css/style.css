@@ -140,7 +140,7 @@ a:hover, a:active {
     .header__nav-primarylist {
       width: 35%; } }
   .header__nav-secondarylist {
-    width: 25%;
+    width: 30%;
     align-items: center; }
     @media screen and (max-width: 1050px) {
       .header__nav-secondarylist {

@@ -39,11 +39,11 @@
         <form method="post">
             <div class="form-group">
             <label for="blogtitle">Titel</label>
-            <input type="text" class="form-control" id="blogtitle" placeholder="Ange inläggets titel" required>
+            <input type="text" name="title" class="form-control" id="blogtitle" placeholder="Ange inläggets titel" required>
             </div>
             <div class="form-group">
             <label for="blogdesc">Beskrivning</label>
-            <input type="text" class="form-control" id="blogdesc" placeholder="Skriv en kort beskrivning om inlägget" required>
+            <input type="text" name="desc" class="form-control" id="blogdesc" placeholder="Skriv en kort beskrivning om inlägget" required>
             </div>
             <div class="form-group">
             <label for="blogcategory">Välj ämne (frivilligt)</label>
@@ -63,7 +63,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
-            <button name="addpost" type="submit" class="btn btn-success">Lägg till inlägg</button>
+            <input type="submit" name="addpost" class="btn btn-success" value="Lägg till inlägg">
         </form>
     </div>
         </div>
@@ -89,6 +89,7 @@
                 <li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPost">
                 Skapa ett inlägg
                 </button></li>
+                <li><a href="logout.php" class="btn btn-warning">Logga ut</a></li>
             </ul>
 
         </nav>

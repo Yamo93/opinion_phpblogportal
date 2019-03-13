@@ -1,5 +1,24 @@
 <?php
+    include_once('includes/config.php');
+
     $subtitle = 'Logga in';
+    $user = new User();
+
+    if(isset($_SESSION['username'])) {
+        header("Location: main.php");
+    }
+
+
+    if(isset($_POST['submit'])) {
+        if($user->loginUser($_POST['username'], $_POST['password'])) {
+            $_SESSION['username'] = $_POST['username'];
+            header("Location: main.php");
+        } else {
+            $message = '<div class="alert alert-danger" role="alert">
+            Användarnamnet eller lösenordet är felaktigt. Vänligen försök igen.
+          </div>';
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -45,21 +64,22 @@
     </header>
     <div class="login">
         <div class="container">
-            <form>
+            <form method="post">
             <h1 class="login__title">Logga in på Opinion.</h1>
+            <?php if(isset($message)) echo $message; ?>
             <div class="form-group">
             <label for="InputUsername1">Användarnamn</label>
-            <input type="text" class="form-control" id="InputUsername1" placeholder="Ange användarnamn">
+            <input type="text" class="form-control" id="InputUsername1" placeholder="Ange användarnamn" name="username">
             </div>
             <div class="form-group">
             <label for="InputPassword1">Lösenord</label>
-            <input type="password" class="form-control" id="InputPassword1" placeholder="Ange lösenord">
+            <input type="password" class="form-control" id="InputPassword1" placeholder="Ange lösenord" name="password">
             </div>
             <div class="form-group form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">Låt mig förbli inloggad</label>
             </div>
-            <button type="submit" class="btn btn-primary">Logga in</button>
+            <input type="submit" class="btn btn-primary" name="submit" value="Logga in">
             <a href="#" class="forgot">
             <button type="submit" class="btn btn-warning">Glömt lösenord</button>
             </a>
