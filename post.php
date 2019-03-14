@@ -5,7 +5,9 @@
     $user = new User();
     
     // Hämtar användarinfo
-    $userinfo = $user->getUserInfo($_SESSION['id']);
+    if(isset($_SESSION['username'])) {
+        $userinfo = $user->getUserInfo($_SESSION['id']);
+    }
 
     $subtitle = 'Inlägg av ' . $userinfo['firstname'];
 
@@ -49,12 +51,14 @@
     }
 
     // Kolla om det är den inloggade användarens post, om så: visa edit-knapp och delete-knapp
-    if($selectedpost['user_id'] === $_SESSION['id']) {
-        // Den inloggade användaren är författaren
-        $authorIsLoggedIn = true;
-    } else {
-        // Den inloggade användaren är inte författaren
-        $authorIsLoggedIn = false;
+    if(isset($_SESSION['id'])) {
+        if($selectedpost['user_id'] === $_SESSION['id']) {
+            // Den inloggade användaren är författaren
+            $authorIsLoggedIn = true;
+        } else {
+            // Den inloggade användaren är inte författaren
+            $authorIsLoggedIn = false;
+        }
     }
 
 
