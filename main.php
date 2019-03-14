@@ -2,14 +2,16 @@
     $subtitle = 'Huvudsidan';
     include_once('includes/config.php');
 
+    $post = new Post();
+    $user = new User();
+
     if(isset($_SESSION['username'])) {
         include_once('includes/loginheader.php');
 
-        $post = new Post();
     
         if(isset($_POST['addpost'])) {
             // print_R($_POST);
-            if($post->addPost($_POST['title'], $_POST['desc'], $_POST['editor1'], 15)) {
+            if($post->addPost($_POST['title'], $_POST['desc'], $_POST['editor1'], $_SESSION['id'], $_POST['categoryid'])) {
                 $message = '<div class="alert alert-success" role="alert">
                 Blogginlägget har publicerats!
               </div>';
@@ -25,7 +27,6 @@
         include_once('includes/defaultheader.php');
     }
 
-    $user = new User();
 ?>
 
     <!-- Kategorifält -->
@@ -48,6 +49,7 @@
     </div>
 
     <?php
+
     if(!isset($_SESSION['username'])) {
         echo '<div class="card text-center card-welcome">
         <div class="card-body">
@@ -57,9 +59,12 @@
         </div>
         </div>';
     } else {
+        $userinfo = $user->getUserInfo($_SESSION['id']);
+        $firstname = $userinfo['firstname'];
+
         echo '<div class="card text-center card-welcome">
         <div class="card-body">
-        <h5 class="card-title">Välkommen till Opinion, <span>Yamo</span>!</h5>
+        <h5 class="card-title">Välkommen till Opinion, <span>' . $firstname . '</span>!</h5>
         <p class="card-text">Här får du dela med dig av dina tankar.</p>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPost">
         Börja skriv ett inlägg
@@ -72,37 +77,33 @@
     <div class="mainpage">
         <section class="mainpage__left">
             <h1 class="mainpage__title">De senaste blogginläggen</h1>
+
+            <?php 
+                $result = $post->getPosts(5);
+                foreach($result as $grabbedpost => $val) { ?>
             <article class="mainpage__article">
-                <h2 class="mainpage__article-title">This is a title.</h2>
-                <p class="mainpage__article-desc">This is a description of the article.</p>
-                <p class="mainpage__article-author">By <span>John Smith</span></p>
-                <p class="mainpage__article-date">2019-01-01 13:00</p>
+                <h2 class="mainpage__article-title"><?= $val['title']; ?></h2>
+                <p class="mainpage__article-desc"><?= $val['description']; ?></p>
+                <p class="mainpage__article-category">Kategori: <span><?= $post->getCategoryName($val['category_id']); ?></span></p>
+                <p class="mainpage__article-author">Av <span><?php
+                $userinfo = $user->getUserInfo($val['user_id']);
+                echo $userinfo['firstname'] . ' ' . $userinfo['lastname'];
+                ?></span></p>
+                <p class="mainpage__article-date"><?= $val['created_date']; ?></p>
                 <p class="mainpage__article-read">Fyra minuters läsning</p>
-                <a href="#" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
+                <a href="post.php?id=<?= $val['id']; ?>" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
             </article>
-            <article class="mainpage__article">
-                <h2 class="mainpage__article-title">This is a title.</h2>
-                <p class="mainpage__article-desc">This is a description of the article.</p>
-                <p class="mainpage__article-author">By <span>John Smith</span></p>
-                <p class="mainpage__article-date">2019-01-01 13:00</p>
-                <p class="mainpage__article-read">Fyra minuters läsning</p>
-                <a href="#" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
-            </article>
-            <article class="mainpage__article">
-                <h2 class="mainpage__article-title">This is a title.</h2>
-                <p class="mainpage__article-desc">This is a description of the article.</p>
-                <p class="mainpage__article-author">By <span>John Smith</span></p>
-                <p class="mainpage__article-date">2019-01-01 13:00</p>
-                <p class="mainpage__article-read">Fyra minuters läsning</p>
-                <a href="#" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
-            </article>
+                <?php } ?>
+
         </section>
         <section class="mainpage__right">
             <h1 class="mainpage__title">Statistik om <span>Opinion</span></h1>
             <div class="amountusers">
                 <i class="fas fa-users usersicon"></i>
                 <h2>Antalet användare:</h2>
-                <p class="info"><span>2934</span> användare</p>
+                <p class="info"><span><?php 
+                $amount = $user->countUsers(); 
+                echo $amount['amountusers']; ?></span> användare</p>
             </div>
             <div class="mostread">
                 <i class="fas fa-fire-alt fireicon"></i>

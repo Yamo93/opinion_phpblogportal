@@ -12,7 +12,21 @@
     &__desc {
         opacity: .8;
         font-size: 2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    &__category {
+            font-weight: 600;
+            margin-bottom: 2rem;
+
+            span {
+                background-color: $mintgreen;
+                font-size: 1.4rem;
+                font-weight: 300;
+                font-family: $secondary-font;
+                color: $white;
+                padding: 3px 5px;
+            }
     }
 
     &__author {
@@ -53,7 +67,15 @@
         width: 90%;
     }
 
-    .editbtn {
+    .editbtn, .deletebtn {
         margin-bottom: 3rem;
     }
+
+    .editbtn {
+        margin-right: 2rem;
+    }
+}
+
+a.returnbtn:link, a.returnbtn:visited {
+    font-size: 1.6rem;
 }

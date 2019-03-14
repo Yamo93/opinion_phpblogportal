@@ -44,6 +44,36 @@ class User {
         }
     }
 
+    function getUserID($username) {
+        $sql = "SELECT id FROM users WHERE username = '$username';";
+
+        $result = $this->db->query($sql);
+        $result = $result->fetch_assoc();
+
+        return $result['id'];
+    }
+
+    function getUserInfo($id) {
+        $sql = "SELECT * FROM users WHERE id = $id;";
+
+        $result = $this->db->query($sql);
+
+        $result = $result->fetch_assoc();
+
+        return $result;
+    }
+
+    function countUsers() {
+        $sql = "SELECT count(username) as amountusers FROM users";
+
+        $result = $this->db->query($sql);
+
+        $result = $result ->fetch_assoc();
+
+        return $result;
+    }
+
+
 }
 
 ?>

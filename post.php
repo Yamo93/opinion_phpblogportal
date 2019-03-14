@@ -1,8 +1,13 @@
 <?php
-    $subtitle = 'Inlägg av Yamo';
+    include_once('includes/config.php');
+    
+    $post = new Post();
+    $user = new User();
+    
+    // Hämtar användarinfo
+    $userinfo = $user->getUserInfo($_SESSION['id']);
 
-    // Loggar in "fejk" för testskäl
-    $_SESSION['username'] = "Yamo93";
+    $subtitle = 'Inlägg av ' . $userinfo['firstname'];
 
     if(isset($_SESSION['username'])) {
         include_once('includes/loginheader.php');
@@ -10,8 +15,72 @@
         include_once('includes/defaultheader.php');
     }
 
-    // Kolla om det är den inloggade användarens post, om så: visa edit-knapp
+
+    // Redigeringsfunktion
+    if(isset($_POST['editpost'])) {
+        if($post->editPost($_GET['id'], $_POST['title'], $_POST['desc'], $_POST['editor2'], $_POST['categoryid'])) {
+            $message = '<div class="alert alert-success" role="alert">
+            Blogginlägget har uppdaterats!
+          </div>';
+        } else {
+            $message = '<div class="alert alert-danger" role="alert">
+            Något gick fel. Vänligen försök igen.
+          </div>';
+        }
+    }
+
+    // Redigeringsfunktion
+    if(isset($_POST['delete'])) {
+        if($post->deletePost($_GET['id'])) {
+            $message = '<div class="alert alert-danger" role="alert">
+            Blogginlägget har raderats!
+          </div>';
+          $returnToMainPage = true;
+        } else {
+            $message = '<div class="alert alert-warning" role="alert">
+            Något gick fel. Vänligen försök igen.
+          </div>';
+        }
+    }
+
+    // Sparar info om inlägg + användare
+    if(isset($_GET['id'])) {
+        $selectedpost = $post->getPost($_GET['id']);
+    }
+
+    // Kolla om det är den inloggade användarens post, om så: visa edit-knapp och delete-knapp
+    if($selectedpost['user_id'] === $_SESSION['id']) {
+        // Den inloggade användaren är författaren
+        $authorIsLoggedIn = true;
+    } else {
+        // Den inloggade användaren är inte författaren
+        $authorIsLoggedIn = false;
+    }
+
+
 ?>
+
+<div class="modal" id="deletemodal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form method="post">
+      <div class="modal-header">
+        <h5 class="modal-title">Radering av inlägg</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Är du säker på att du vill radera inlägget?</p>
+      </div>
+      <div class="modal-footer">
+        <input type="submit" name="delete" value="Radera inlägget" class="btn btn-danger">
+        <button type="button" type="submit" class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
 
     <!-- Modal -->
     <div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -27,25 +96,26 @@
         <form method="post">
             <div class="form-group">
             <label for="blogtitle">Titel</label>
-            <input type="text" class="form-control" id="blogtitle" placeholder="Ange inläggets titel" required>
+            <input type="text" name="title" class="form-control" id="blogtitle" placeholder="Ange inläggets titel" value="<?= $selectedpost['title']; ?>" required>
             </div>
             <div class="form-group">
             <label for="blogdesc">Beskrivning</label>
-            <input type="text" class="form-control" id="blogdesc" placeholder="Skriv en kort beskrivning om inlägget" required>
+            <input type="text" name="desc" class="form-control" id="blogdesc" placeholder="Skriv en kort beskrivning om inlägget" value="<?= $selectedpost['description']; ?>" required>
             </div>
             <div class="form-group">
             <label for="blogcategory">Välj ämne (frivilligt)</label>
-            <select class="form-control" id="blogcategory">
-            <option value="tech">Teknologi</option>
-            <option value="halsa">Hälsa</option>
-            <option value="sport">Sport</option>
-            <option value="mat">Mat</option>
-            <option value="samhalle">Samhällsrelaterat</option>
+            <select class="form-control" id="blogcategory" name="categoryid">
+            <option value="1" <?php if($selectedpost['category_id'] == 1) echo "selected" ?>>Allmänt</option>
+            <option value="2" <?php if($selectedpost['category_id'] == 2) echo "selected" ?>>Teknologi</option>
+            <option value="3" <?php if($selectedpost['category_id'] == 3) echo "selected" ?>>Hälsa</option>
+            <option value="4" <?php if($selectedpost['category_id'] == 4) echo "selected" ?>>Sport</option>
+            <option value="5" <?php if($selectedpost['category_id'] == 5) echo "selected" ?>>Mat</option>
+            <option value="6" <?php if($selectedpost['category_id'] == 6) echo "selected" ?>>Samhällsrelaterat</option>
             </select>
             </div>
             <div class="form-group">
             <label for="blogcontent">Redigera ditt inlägg nedan</label>
-            <textarea class="form-control"  name="editor2" id="blogcontent" rows="3"></textarea>
+            <textarea class="form-control" name="editor2" id="blogcontent" rows="3"><?= $selectedpost['content']; ?></textarea>
             </div>
         </div>
         <div class="modal-footer">
@@ -69,32 +139,47 @@
         </ul>
     </nav>
     <!-- Inläggtitel -->
+    <div class="container" style="margin-bottom: 3rem;">
+    <?php 
+    if(isset($message)) echo $message;
+
+    if(isset($returnToMainPage)) {
+        echo '<a href="main.php" class="btn btn-primary returnbtn" role="button" aria-pressed="true">Gå tillbaka till huvudsidan</a>';
+    }
+    ?>
+    </div>
     <section class="post">
-        <h1 class="post__title">Det här är en titel till ett inlägg</h1>
-        <p class="post__desc">Det här är beskrivningen till själva inlägget.</p>
+        <?php if(!isset($returnToMainPage))  { ?>
+        <h1 class="post__title"><?= $selectedpost['title']; ?></h1>
+        <p class="post__desc"><?= $selectedpost['description']; ?></p>
+        <p class="post__category">Kategori: <span><?= $post->getCategoryName($selectedpost['category_id']); ?></span></p>
         <div class="post__author">
             <div class="post__authorimg"></div>
             <div class="post__authorinfo">
-                <p class="post__authorname">Av <span>Yamo Gebrewold</span></p>
-                <p class="post__date">2019-01-01 01:00</p>
+                <p class="post__authorname">Av <span><?= $userinfo['firstname'] . ' ' . $userinfo['lastname']; ?></span></p>
+                <p class="post__date"><?= $selectedpost['created_date']; ?></p>
                 <p class="post__read">4 mins läsning</p>
             </div>
         </div>
-            <?php 
-            // Kolla om det är den inloggade användarens post, om så: visa edit-knapp
-            echo '<button type="button" class="btn btn-primary editbtn" data-toggle="modal" data-target="#editPost">
-            Redigera inlägget
-            </button>';
+        <?php } ?>
+
+        <?php 
+            //  Tillåter endast att den inloggade medlemmen är inläggets författare
+
+            if($authorIsLoggedIn) {
+                echo '<button type="button" class="btn btn-primary editbtn" data-toggle="modal" data-target="#editPost">
+                Redigera inlägget
+                </button>';
+                echo '<button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#deletemodal">
+                Radera inlägget
+                </button>';
+            }
             ?>
 
         <!-- Bokmärkesknapp -->
 
-        <p class="post__para">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil aliquid praesentium, id nesciunt aperiam corrupti quae eum labore a nemo qui, autem accusamus possimus voluptatum dolorum dicta nam temporibus itaque beatae dolorem aliquam. Consequatur commodi ipsam numquam a voluptates quas consectetur quidem eveniet id laboriosam quisquam qui, fugit fuga earum.
-        </p>
-        <p class="post__para">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deserunt, voluptatum explicabo quia porro id vel quidem nobis officia delectus quisquam animi necessitatibus accusamus harum consectetur natus fugit saepe non maxime.</p>
-        <p class="post__para">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Atque impedit accusantium vel natus sequi, libero iusto! Tenetur, placeat. Veritatis ipsam, maxime rem architecto ex numquam provident dignissimos pariatur laboriosam accusamus consequuntur tempore. Rem consequatur id similique vel ipsum quas, magni ipsa nam neque optio praesentium!</p>
-        <p class="post__para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus possimus autem nam distinctio, odit cumque a saepe. Reiciendis necessitatibus corrupti illo a nesciunt voluptatem in!</p>
+        <?= $selectedpost['content']; ?>
+
     </section>
 
     <!-- Innehåll -->

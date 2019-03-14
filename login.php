@@ -13,6 +13,7 @@
         if($user->loginUser($_POST['username'], $_POST['password'])) {
             $_SESSION['username'] = $_POST['username'];
             header("Location: main.php");
+            $_SESSION['id'] = $user->getUserID($_POST['username']);
         } else {
             $message = '<div class="alert alert-danger" role="alert">
             Användarnamnet eller lösenordet är felaktigt. Vänligen försök igen.

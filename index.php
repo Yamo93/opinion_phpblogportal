@@ -1,3 +1,27 @@
+<?php
+    include_once('includes/config.php');
+
+    $subtitle = 'Logga in';
+    $user = new User();
+
+    if(isset($_SESSION['username'])) {
+        header("Location: main.php");
+    }
+
+
+    if(isset($_POST['submit'])) {
+        if($user->loginUser($_POST['username'], $_POST['password'])) {
+            $_SESSION['username'] = $_POST['username'];
+            $_SESSION['id'] = $user->getUserID($_POST['username']);
+            header("Location: main.php");
+        } else {
+            $message = '<div class="alert alert-danger" role="alert">
+            Användarnamnet eller lösenordet är felaktigt. Vänligen försök igen.
+          </div>';
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,17 +52,18 @@
             </ul>
         </div>
         <div class="welcome__right">
-            <form class="form-inline welcome__form">
+            <form method="post" class="form-inline welcome__form">
                 <div class="form-group mb-2">
-                    <label for="staticEmail2" class="sr-only">Email</label>
-                    <input type="text" class="form-control" id="staticEmail2" placeholder="Användarnamn">
+                    <input type="text" class="form-control" id="staticEmail2" placeholder="Användarnamn" name="username">
                 </div>
                 <div class="form-group mx-sm-3 mb-2">
-                    <label for="inputPassword2" class="sr-only">Password</label>
-                    <input type="password" class="form-control" id="inputPassword2" placeholder="Lösenord">
+                    <input type="password" class="form-control" id="inputPassword2" placeholder="Lösenord" name="password">
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Logga in</button>
+                <input type="submit" class="btn btn-primary mb-2" name="submit" value="Logga in">
             </form>
+            <div class="container" style="margin-bottom: 3rem;">
+            <?php if(isset($message)) echo $message; ?>
+            </div>
             <h1 class="welcome__right-title">Delta i öppna diskussioner!</h1>
             <p class="welcome__right-desc">Gå med i <span>Opinion</span> idag.</p>
             <div class="buttons">

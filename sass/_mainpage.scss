@@ -84,6 +84,19 @@
             }
         }
 
+        &-category {
+            font-weight: 600;
+
+            span {
+                background-color: $mintgreen;
+                font-size: 1.4rem;
+                font-weight: 300;
+                font-family: $secondary-font;
+                color: $white;
+                padding: 2px 3px;
+            }
+        }
+
         &-date, &-read {
             display: inline-block;
             margin-right: .5rem;

@@ -269,6 +269,15 @@ a:hover, a:active {
       margin-bottom: 0; }
       .mainpage__article-author span {
         color: #0984e3; }
+    .mainpage__article-category {
+      font-weight: 600; }
+      .mainpage__article-category span {
+        background-color: #00b894;
+        font-size: 1.4rem;
+        font-weight: 300;
+        font-family: "Open Sans", sans-serif;
+        color: #f3f3f3;
+        padding: 2px 3px; }
     .mainpage__article-date, .mainpage__article-read {
       display: inline-block;
       margin-right: .5rem;
@@ -363,7 +372,17 @@ a:hover, a:active {
   .post__desc {
     opacity: .8;
     font-size: 2rem;
+    margin-bottom: 1.5rem; }
+  .post__category {
+    font-weight: 600;
     margin-bottom: 2rem; }
+    .post__category span {
+      background-color: #00b894;
+      font-size: 1.4rem;
+      font-weight: 300;
+      font-family: "Open Sans", sans-serif;
+      color: #f3f3f3;
+      padding: 3px 5px; }
   .post__author {
     display: flex;
     margin-bottom: 2rem; }
@@ -385,5 +404,10 @@ a:hover, a:active {
         color: #00b894; }
   .post__para {
     width: 90%; }
-  .post .editbtn {
+  .post .editbtn, .post .deletebtn {
     margin-bottom: 3rem; }
+  .post .editbtn {
+    margin-right: 2rem; }
+
+a.returnbtn:link, a.returnbtn:visited {
+  font-size: 1.6rem; }

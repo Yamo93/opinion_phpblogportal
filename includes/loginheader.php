@@ -47,13 +47,13 @@
             </div>
             <div class="form-group">
             <label for="blogcategory">Välj ämne (frivilligt)</label>
-            <select class="form-control" id="blogcategory">
-            <option value="default" selected>Allmänt</option>
-            <option value="tech">Teknologi</option>
-            <option value="halsa">Hälsa</option>
-            <option value="sport">Sport</option>
-            <option value="mat">Mat</option>
-            <option value="samhalle">Samhällsrelaterat</option>
+            <select class="form-control" id="blogcategory" name="categoryid">
+            <option value="1" selected>Allmänt</option>
+            <option value="2">Teknologi</option>
+            <option value="3">Hälsa</option>
+            <option value="4">Sport</option>
+            <option value="5">Mat</option>
+            <option value="5">Samhällsrelaterat</option>
             </select>
             </div>
             <div class="form-group">
@@ -85,7 +85,11 @@
             </form>
 
             <ul class="header__nav-secondarylist">
-                <li><a href="#">Välkommen, <span>Yamo</span>!</a></li>
+                <li><a href="#">Välkommen, <span><?php 
+                $userinfo = $user->getUserInfo($_SESSION['id']);
+                $firstname = $userinfo['firstname'];
+                echo $firstname;
+                ?></span>!</a></li>
                 <li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPost">
                 Skapa ett inlägg
                 </button></li>
