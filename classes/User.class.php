@@ -63,6 +63,16 @@ class User {
         return $result;
     }
 
+    function getUserInfoFromPostID($postid) {
+        $sql = "SELECT * FROM users WHERE id = (SELECT user_id FROM posts WHERE id = $postid)";
+
+        $result = $this->db->query($sql);
+
+        $result = $result->fetch_assoc();
+
+        return $result;
+    }
+
     function countUsers() {
         $sql = "SELECT count(username) as amountusers FROM users";
 

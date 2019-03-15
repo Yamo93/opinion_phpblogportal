@@ -102,8 +102,15 @@
                 <i class="fas fa-users usersicon"></i>
                 <h2>Antalet användare:</h2>
                 <p class="info"><span><?php 
-                $amount = $user->countUsers(); 
-                echo $amount['amountusers']; ?></span> användare</p>
+                $amountusers = $user->countUsers(); 
+                echo $amountusers['amountusers']; ?></span> användare</p>
+            </div>
+            <div class="amountposts">
+            <i class="far fa-edit posticon"></i>
+                <h2>Antalet inlägg:</h2>
+                <p class="info"><span><?php 
+                $amountposts = $post->countPosts(); 
+                echo $amountposts['amountposts']; ?></span> inlägg</p>
             </div>
             <div class="mostread">
                 <i class="fas fa-fire-alt fireicon"></i>

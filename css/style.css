@@ -294,16 +294,16 @@ a:hover, a:active {
       font-size: 1.6rem; }
   .mainpage__article:not(:last-child) {
     border-bottom: 0.3px solid rgba(51, 51, 51, 0.6); }
-  .mainpage .amountusers, .mainpage .mostread {
+  .mainpage .amountusers, .mainpage .amountposts, .mainpage .mostread {
     padding: 2rem 0; }
-    .mainpage .amountusers h2, .mainpage .mostread h2 {
+    .mainpage .amountusers h2, .mainpage .amountposts h2, .mainpage .mostread h2 {
       font-size: 1.8rem;
       font-weight: 600;
       margin-bottom: 1rem; }
-  .mainpage .amountusers {
+  .mainpage .amountusers, .mainpage .amountposts {
     padding-bottom: 1rem;
     border-bottom: 0.5px dotted #0984e3; }
-    .mainpage .amountusers .info span {
+    .mainpage .amountusers .info span, .mainpage .amountposts .info span {
       font-weight: 600;
       color: #0984e3; }
   .mainpage .mostread ul li {
@@ -320,9 +320,11 @@ a:hover, a:active {
     .mainpage .mostread ul li .reads {
       color: #0984e3;
       font-size: 1.5rem; }
-  .mainpage .usersicon, .mainpage .fireicon {
+  .mainpage .usersicon, .mainpage .fireicon, .mainpage .posticon {
     font-size: 4rem;
     margin-bottom: 1.5rem; }
+  .mainpage .posticon {
+    color: #0984e3; }
   .mainpage .usersicon {
     color: #00b894; }
   .mainpage .fireicon {

@@ -85,6 +85,16 @@ class Post {
 
         return $row['name'];
     }
+
+    function countPosts() {
+        $sql = "SELECT count(id) as amountposts FROM posts";
+
+        $result = $this->db->query($sql);
+
+        $result = $result ->fetch_assoc();
+
+        return $result;
+    }
 }
 
 ?>

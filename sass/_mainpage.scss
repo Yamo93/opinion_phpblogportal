@@ -124,7 +124,7 @@
         border-bottom: .3px solid rgba(#333, .6);
     }
 
-    .amountusers, .mostread {
+    .amountusers, .amountposts, .mostread {
         padding: 2rem 0;
 
         h2 {
@@ -134,7 +134,7 @@
         }
     }
 
-    .amountusers {
+    .amountusers, .amountposts {
         padding-bottom: 1rem;
         border-bottom: .5px dotted $electronblue;
 
@@ -176,9 +176,13 @@
         }
     }
 
-    .usersicon, .fireicon {
+    .usersicon, .fireicon, .posticon {
         font-size: 4rem;
         margin-bottom: 1.5rem;
+    }
+
+    .posticon {
+        color: $electronblue;
     }
 
     .usersicon {

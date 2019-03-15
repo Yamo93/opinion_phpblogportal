@@ -4,12 +4,17 @@
     $post = new Post();
     $user = new User();
     
-    // Hämtar användarinfo
+    // Hämtar skribentens användarinfo
+    $authorinfo = $user->getUserInfoFromPostID($_GET['id']);
+
+    // Hämtar inloggade användarens info
     if(isset($_SESSION['username'])) {
         $userinfo = $user->getUserInfo($_SESSION['id']);
     }
 
-    $subtitle = 'Inlägg av ' . $userinfo['firstname'];
+
+
+    $subtitle = 'Inlägg av ' . $authorinfo['firstname'];
 
     if(isset($_SESSION['username'])) {
         include_once('includes/loginheader.php');
@@ -160,7 +165,7 @@
         <div class="post__author">
             <div class="post__authorimg"></div>
             <div class="post__authorinfo">
-                <p class="post__authorname">Av <span><?= $userinfo['firstname'] . ' ' . $userinfo['lastname']; ?></span></p>
+                <p class="post__authorname">Av <span><?= $authorinfo['firstname'] . ' ' . $authorinfo['lastname']; ?></span></p>
                 <p class="post__date"><?= $selectedpost['created_date']; ?></p>
                 <p class="post__read">4 mins läsning</p>
             </div>
@@ -170,7 +175,7 @@
         <?php 
             //  Tillåter endast att den inloggade medlemmen är inläggets författare
 
-            if($authorIsLoggedIn) {
+            if(isset($authorIsLoggedIn) && $authorIsLoggedIn) {
                 echo '<button type="button" class="btn btn-primary editbtn" data-toggle="modal" data-target="#editPost">
                 Redigera inlägget
                 </button>';
