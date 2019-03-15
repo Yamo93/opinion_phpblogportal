@@ -41,6 +41,20 @@ class Post {
         return $this->posts;
     }
 
+    function getPostsFromCategory($categoryid, $limit = 99) {
+        $sql = "SELECT * FROM posts WHERE category_id = $categoryid ORDER BY created_date DESC LIMIT $limit";
+
+        if(!$result = $this->db->query($sql)){
+            die('Fel vid SQL-fråga [' . $this->db->error . ']');
+        }
+
+        while($row = $result->fetch_assoc()) {
+            $this->posts[] = $row;
+        }
+
+        return $this->posts;
+    }
+
     function getPost($id) {
         $sql = "SELECT * FROM posts WHERE id = $id";
 

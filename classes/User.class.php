@@ -14,7 +14,58 @@ class User {
         }
     }
 
+    function isUsernameTaken($username) {
+        $sql = "SELECT * FROM users WHERE username = '$username'";
+
+        $result = $this->db->query($sql);
+
+        if($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
     function registerUser($firstname, $lastname, $username, $password, $email) {
+
+        $firstname = filter_var($firstname, FILTER_SANITIZE_STRING);
+        $lastname = filter_var($lastname, FILTER_SANITIZE_STRING);
+        $username = filter_var($username, FILTER_SANITIZE_STRING);
+        $password = filter_var($password, FILTER_SANITIZE_STRING);
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+
+        if(strlen($username) < 5) {
+            return [
+                'arrayResult' => false,
+                'alertClass' => 'danger',
+                'alertMessage' => 'Användarnamnet är mindre än fem tecken.'
+            ];
+        }
+
+        if(strlen($password) < 7) {
+            return [
+                'arrayResult' => false,
+                'alertClass' => 'danger',
+                'alertMessage' => 'Lösenordet är mindre än sju tecken.'
+            ];
+        }
+        
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))  {
+            return [
+                'arrayResult' => false,
+                'alertClass' => 'danger',
+                'alertMessage' => 'Mejladressen är felaktig.'
+            ];
+        }
+
+        if($this->isUsernameTaken($username)) {
+            return [
+                'arrayResult' => false,
+                'alertClass' => 'danger',
+                'alertMessage' => 'Användarnamnet är upptaget.'
+            ];
+        }
 
         $stmt = $this->db->prepare("INSERT INTO users(firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?)");
 
@@ -24,7 +75,20 @@ class User {
 
         $result = $stmt->execute();
 
-        return $result;
+        if($result) {
+            return [
+                'arrayResult' => $result,
+                'alertClass' => 'success',
+                'alertMessage' => 'Användare skapad!'
+            ];
+        } else {
+            return [
+                'arrayResult' => $result,
+                'alertClass' => 'danger',
+                'alertMessage' => 'Registreringen lyckades ej.'
+            ];
+        }
+
     }
 
     function loginUser($username, $password) {
@@ -81,6 +145,20 @@ class User {
         $result = $result ->fetch_assoc();
 
         return $result;
+    }
+    
+    function countUserPosts($userid) {
+        $sql = "SELECT count(id) AS amountposts FROM posts WHERE user_id = $userid";
+
+        $result = $this->db->query($sql);
+    
+        $result = $result ->fetch_assoc();
+    
+        return $result;
+    }
+
+    function countUserComments($userid) {
+        // Implement logic
     }
 
 

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Tinos:400,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/parsley.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js"></script>
 </head>
@@ -72,29 +73,44 @@
 
 
     <header class="header">
-        <nav class="header__nav">
-            <ul class="header__nav-primarylist">
-                <li class="header__nav-brand"><a href="main.php">Opinion</a></li>
-                <li><a href="main.php">Huvudsidan</a></li>
-                <li><a href="about.php">Om webbplatsen</a></li>
-            </ul>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
+        <a class="navbar-brand" href="index.php">Opinion</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <form action="" method="post" class="header__search">
-                <input type="search" name="search" id="search" placeholder="Sök efter inlägg..." class="header__search-input">
-                <input type="submit" value="Sök" class="header__search-btn">
-            </form>
-
-            <ul class="header__nav-secondarylist">
-                <li><a href="#">Välkommen, <span><?php 
-                $userinfo = $user->getUserInfo($_SESSION['id']);
-                $firstname = $userinfo['firstname'];
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="main.php">Huvudsidan <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="about.php">Om webbplatsen</a>
+            </li>
+            <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Välkommen, <span><?php 
+                $welcomeuser = $user->getUserInfo($_SESSION['id']);
+                $firstname = $welcomeuser['firstname'];
                 echo $firstname;
-                ?></span>!</a></li>
-                <li><button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPost">
+                ?></span>!
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#addPost">Skapa ett inlägg</a>
+                <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPost">
                 Skapa ett inlägg
-                </button></li>
-                <li><a href="logout.php" class="btn btn-warning">Logga ut</a></li>
-            </ul>
-
+                </button> -->
+                <a class="dropdown-item" href="profile.php?id=<?= $_SESSION['id']; ?>">Min profil</a>
+                <a class="dropdown-item" href="usersettings.php">Inställningar</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="logout.php">Logga ut</a>
+            </div>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Sök på sidan" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Sök</button>
+        </form>
+        </div>
         </nav>
     </header>

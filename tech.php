@@ -1,5 +1,5 @@
 <?php
-    $subtitle = 'Huvudsidan';
+    $subtitle = 'Teknologi';
     include_once('includes/config.php');
 
     $post = new Post();
@@ -32,12 +32,12 @@
     <!-- Kategorifält -->
     <nav class="categories">
         <ul>
-            <li><a href="#" class="active">Allmänt</a></li>
-            <li><a href="tech.php">Teknologi</a></li>
+            <li><a href="main.php">Allmänt</a></li>
+            <li><a href="#" class="active">Teknologi</a></li>
             <li><a href="halsa.php">Hälsa</a></li>
             <li><a href="sport.php">Sport</a></li>
             <li><a href="mat.php">Mat</a></li>
-            <li><a href="samhalle.php">Samhällsrelaterat</a></li>
+            <li><a href="/samhalle">Samhällsrelaterat</a></li>
         </ul>
     </nav>
 
@@ -76,10 +76,10 @@
 
     <div class="mainpage">
         <section class="mainpage__left">
-            <h1 class="mainpage__title">De senaste blogginläggen</h1>
+            <h1 class="mainpage__title">De senaste blogginläggen inom ämnet <span>Teknologi</span></h1>
 
             <?php 
-                $result = $post->getPosts(5);
+                $result = $post->getPostsFromCategory(2, 5);
                 foreach($result as $grabbedpost => $val) { ?>
             <article class="mainpage__article">
                 <h2 class="mainpage__article-title"><?= $val['title']; ?></h2>

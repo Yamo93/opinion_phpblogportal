@@ -2,6 +2,18 @@
 
     .navbar {
         align-items: baseline;
+
+        .nav-item {
+            a:link, a:visited {
+                font-family: $secondary-font;
+                font-size: 1.6rem;
+            }
+        }
+
+        input[type=search] {
+            font-size: 1.6rem;
+            font-family: $secondary-font;
+        }
     }
 
     .navbar-brand {

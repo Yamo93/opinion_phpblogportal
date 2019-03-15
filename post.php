@@ -139,12 +139,12 @@
     <!-- Kategorifält -->
     <nav class="categories">
         <ul>
-            <li><a href="#" class="active">Allmänt</a></li>
-            <li><a href="/tech">Teknologi</a></li>
-            <li><a href="/halsa">Hälsa</a></li>
-            <li><a href="/sport">Sport</a></li>
-            <li><a href="/mat">Mat</a></li>
-            <li><a href="/samhalle">Samhällsrelaterat</a></li>
+            <li><a href="main.php">Allmänt</a></li>
+            <li><a href="tech.php">Teknologi</a></li>
+            <li><a href="halsa.php">Hälsa</a></li>
+            <li><a href="sport.php">Sport</a></li>
+            <li><a href="mat.php">Mat</a></li>
+            <li><a href="samhalle.php">Samhällsrelaterat</a></li>
         </ul>
     </nav>
     <!-- Inläggtitel -->
@@ -165,7 +165,7 @@
         <div class="post__author">
             <div class="post__authorimg"></div>
             <div class="post__authorinfo">
-                <p class="post__authorname">Av <span><?= $authorinfo['firstname'] . ' ' . $authorinfo['lastname']; ?></span></p>
+                <p class="post__authorname">Av <span><a href="profile.php?id=<?= $authorinfo['id']; ?>" target="_blank"><?= $authorinfo['firstname'] . ' ' . $authorinfo['lastname']; ?></a></span></p>
                 <p class="post__date"><?= $selectedpost['created_date']; ?></p>
                 <p class="post__read">4 mins läsning</p>
             </div>
@@ -194,20 +194,6 @@
     <!-- Innehåll -->
 
 
-    <footer class="footer">
-        <ul>
-            <li><a href="about.php">Om webbplatsen</a></li>
-            <li><a href="contact.php">Kontakta oss</a></li>
-        </ul>
-        <p class="copyright">&copy; Copyright 2019 av Yamo Gebrewold.</p>
-    </footer>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-        CKEDITOR.replace( 'editor1' );
-        CKEDITOR.replace( 'editor2' );
-    </script>
-</body>
-</html>
+<?php 
+    include_once('includes/footer.php');
+?>

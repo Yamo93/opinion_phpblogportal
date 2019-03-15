@@ -122,6 +122,12 @@ a:hover, a:active {
 
 .header .navbar {
   align-items: baseline; }
+  .header .navbar .nav-item a:link, .header .navbar .nav-item a:visited {
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.6rem; }
+  .header .navbar input[type=search] {
+    font-size: 1.6rem;
+    font-family: "Open Sans", sans-serif; }
 
 .header .navbar-brand {
   font-size: 2.2rem; }
@@ -180,6 +186,7 @@ a:hover, a:active {
       background-color: #00856b; }
 
 .login {
+  margin-top: 5rem;
   padding: 5rem;
   display: flex;
   justify-content: center;
@@ -212,20 +219,22 @@ a:hover, a:active {
         font-size: 1.6rem;
         font-family: "Open Sans", sans-serif; }
 
-.categories ul {
-  width: 80%;
-  margin: 5rem auto;
-  display: flex;
-  justify-content: space-between; }
-  .categories ul li {
-    text-transform: uppercase;
-    font-family: "Open Sans", sans-serif;
-    font-weight: 600;
-    font-size: 1.4rem; }
-    .categories ul li a.active:link, .categories ul li a.active:visited {
-      color: #00b894;
-      padding-bottom: .5px;
-      border-bottom: 1.5px solid currentColor; }
+.categories {
+  margin-top: 12rem; }
+  .categories ul {
+    width: 80%;
+    margin: 5rem auto;
+    display: flex;
+    justify-content: space-between; }
+    .categories ul li {
+      text-transform: uppercase;
+      font-family: "Open Sans", sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem; }
+      .categories ul li a.active:link, .categories ul li a.active:visited {
+        color: #00b894;
+        padding-bottom: .5px;
+        border-bottom: 1.5px solid currentColor; }
 
 .card-welcome {
   padding: 3rem;
@@ -353,6 +362,12 @@ a:hover, a:active {
 #FormControlFile1 {
   font-size: 1.6rem; }
 
+.has-error input[type="text"], .has-error input[type="email"], .has-error input[type="password"], .has-error select {
+  border: 1px solid #a94442; }
+
+.help-block {
+  color: #d63031; }
+
 #addPost #modalTitle, #editPost #modalTitle {
   font-size: 2.2rem; }
 
@@ -413,3 +428,48 @@ a:hover, a:active {
 
 a.returnbtn:link, a.returnbtn:visited {
   font-size: 1.6rem; }
+
+.profile {
+  width: 80%;
+  min-height: 50vh;
+  padding: 2rem 15%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .profile__title {
+    font-weight: 600;
+    margin-bottom: 2.5rem; }
+  .profile__img {
+    width: 9rem;
+    height: 9rem;
+    margin-bottom: 3rem;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1.5px rgba(0, 0, 0, 0.5);
+    background-image: url(../img/userimgs/yamo93.jpeg);
+    background-size: cover;
+    background-position: center; }
+  .profile__info {
+    width: 100%;
+    border: 0.5px solid #00b894;
+    box-shadow: 1px 1px 1.5px rgba(0, 0, 0, 0.3);
+    background-color: papayawhip;
+    padding: 3rem 2rem;
+    margin-bottom: 4rem; }
+    .profile__info .titlewrapper {
+      text-align: center; }
+    .profile__info-title {
+      display: inline-block;
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      padding-bottom: .5rem;
+      border-bottom: 1.5px solid #0984e3; }
+  .profile__fullname-text, .profile__username-text, .profile__registerdate-text, .profile__amountposts-text, .profile__amountcomments-text {
+    font-size: 1.8rem;
+    color: #065999; }
+    .profile__fullname-text span, .profile__username-text span, .profile__registerdate-text span, .profile__amountposts-text span, .profile__amountcomments-text span {
+      display: inline-block;
+      margin-left: 5px;
+      font-weight: bold;
+      color: #232323; }
