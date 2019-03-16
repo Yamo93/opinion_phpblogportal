@@ -168,12 +168,22 @@
                     margin: 0;
                 }
 
-                .popularpost {
-                    font-size: 1.6rem;
+                .popularcategory {
+                    &:link, &:visited {
+                        font-size: 1.8rem;
+                        font-weight: bold;
+                        color: $electronblue;
+                        transition: all .3s;
+                    }
+
+                    &:hover, &:active {
+                        color: darken($electronblue, 15%);
+                    }
                 }
 
-                .popularauthor {
+                .amountcategoryposts {
                     font-size: 1.5rem;
+                    color: $red;
 
                     span {
                         font-weight: 600;

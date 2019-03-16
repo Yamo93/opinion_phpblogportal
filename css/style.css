@@ -329,11 +329,17 @@ a:hover, a:active {
     margin-bottom: 1rem; }
     .mainpage .mostread ul li p {
       margin: 0; }
-    .mainpage .mostread ul li .popularpost {
-      font-size: 1.6rem; }
-    .mainpage .mostread ul li .popularauthor {
-      font-size: 1.5rem; }
-      .mainpage .mostread ul li .popularauthor span {
+    .mainpage .mostread ul li .popularcategory:link, .mainpage .mostread ul li .popularcategory:visited {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #0984e3;
+      transition: all .3s; }
+    .mainpage .mostread ul li .popularcategory:hover, .mainpage .mostread ul li .popularcategory:active {
+      color: #065999; }
+    .mainpage .mostread ul li .amountcategoryposts {
+      font-size: 1.5rem;
+      color: #d63031; }
+      .mainpage .mostread ul li .amountcategoryposts span {
         font-weight: 600;
         color: #00b894; }
     .mainpage .mostread ul li .reads {

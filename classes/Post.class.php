@@ -100,6 +100,18 @@ class Post {
         return $row['name'];
     }
 
+    function getCategories() {
+        $sql = "SELECT * FROM categories";
+
+        $result = $this->db->query($sql);
+
+        while ($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
     function countPosts() {
         $sql = "SELECT count(id) as amountposts FROM posts";
 
@@ -135,6 +147,39 @@ class Post {
         $result = $result->fetch_assoc();
 
         return $result;
+    }
+
+    function orderPopularTopics() {
+        // Figure out a way to collect counts for one specific post, and then order them. Maybe with a mysql trigger... Can they store arrays?
+        $sql = "SELECT
+        category_id,
+        COUNT(*) AS amountcategoryposts
+    FROM
+        posts
+    GROUP BY
+        category_id
+    ORDER BY
+        amountcategoryposts DESC LIMIT 3;"; // this calculates the three hottest topics on the site
+
+        $result = $this->db->query($sql);
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
+    function orderPopularPosts() {
+        $sql = "SELECT
+        post_id,
+        COUNT(*) AS popularposts
+    FROM
+        visits
+    GROUP BY
+        post_id
+    ORDER BY
+        popularposts DESC LIMIT 3"; // this (hopefully) calculates the hottest posts on the site
+
     }
 }
 

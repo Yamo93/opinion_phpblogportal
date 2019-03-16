@@ -33,12 +33,12 @@
     <!-- Kategorifält -->
     <nav class="categories">
         <ul>
-            <li><a href="#">Allmänt</a></li>
-            <li><a href="/tech">Teknologi</a></li>
-            <li><a href="/halsa">Hälsa</a></li>
-            <li><a href="/sport">Sport</a></li>
-            <li><a href="/mat">Mat</a></li>
-            <li><a href="/samhalle">Samhällsrelaterat</a></li>
+            <li><a href="main.php">Allmänt</a></li>
+            <li><a href="tech.php">Teknologi</a></li>
+            <li><a href="halsa.php">Hälsa</a></li>
+            <li><a href="sport.php">Sport</a></li>
+            <li><a href="mat.php">Mat</a></li>
+            <li><a href="samhalle.php">Samhällsrelaterat</a></li>
         </ul>
     </nav>
     <!-- Inläggtitel -->
