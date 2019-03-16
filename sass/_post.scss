@@ -29,9 +29,16 @@
             }
     }
 
+    &__visits {
+        font-size: 1.6rem;
+        margin-bottom: 2.5rem;
+
+        span { color: $electronblue; }
+    }
+
     &__author {
         display: flex;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
 
         .post__authorimg {
             width: 7rem;

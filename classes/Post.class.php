@@ -109,6 +109,33 @@ class Post {
 
         return $result;
     }
+
+    function recordPostVisit($ip, $post_id) {
+        // Kontrollerar om ip-adressen redan finns
+        $sql = "SELECT * FROM visits WHERE visitor_ip_address = '$ip' AND post_id = $post_id";
+
+        $result = $this->db->query($sql);
+
+        if($result->num_rows > 0) {
+            // Ip-adressen finns redan
+            return false;
+        } else {
+            // Spara ip-adressen
+            $sql = "INSERT INTO visits(post_id, visitor_ip_address) VALUES($post_id, '$ip')";
+
+            $result = $this->db->query($sql);
+
+            return $result;
+        }
+    }
+
+    function countPostVisits($post_id) {
+        $sql = "SELECT count(id) AS amountvisits FROM visits WHERE post_id = $post_id";
+        $result = $this->db->query($sql);
+        $result = $result->fetch_assoc();
+
+        return $result;
+    }
 }
 
 ?>

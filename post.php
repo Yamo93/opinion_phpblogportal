@@ -138,6 +138,9 @@
 
     <!-- Kategorifält -->
     <nav class="categories">
+    <?php 
+    $post->recordPostVisit($_SERVER['REMOTE_ADDR'], $_GET['id']);
+    ?>
         <ul>
             <li><a href="main.php">Allmänt</a></li>
             <li><a href="tech.php">Teknologi</a></li>
@@ -170,6 +173,12 @@
                 <p class="post__read">4 mins läsning</p>
             </div>
         </div>
+        <p class="post__visits">Antal visningar: <span>
+        <?php 
+        $visitsarray = $post->countPostVisits($_GET['id']);
+        extract($visitsarray);
+        echo $amountvisits;
+        ?> </span> </p>
         <?php } ?>
 
         <?php 

@@ -253,7 +253,8 @@ a:hover, a:active {
     font-size: 2.2rem;
     font-weight: 600;
     padding-bottom: 1.5rem;
-    position: relative; }
+    position: relative;
+    line-height: 1.7em; }
     .mainpage__title span {
       color: #00b894; }
     .mainpage__title::after {
@@ -297,6 +298,15 @@ a:hover, a:active {
         content: "\2014";
         color: rgba(51, 51, 51, 0.5);
         margin-right: 6px; }
+    .mainpage__article-visits {
+      display: inline-block;
+      font-size: 1.6rem;
+      color: #0984e3;
+      background-color: rgba(0, 184, 148, 0.3);
+      padding: 3px;
+      border: 0.5px solid #00b894; }
+      .mainpage__article-visits span {
+        font-weight: bold; }
     .mainpage__article-readbtn:link, .mainpage__article-readbtn:visited {
       display: block;
       width: 90px;
@@ -400,9 +410,14 @@ a:hover, a:active {
       font-family: "Open Sans", sans-serif;
       color: #f3f3f3;
       padding: 3px 5px; }
+  .post__visits {
+    font-size: 1.6rem;
+    margin-bottom: 2.5rem; }
+    .post__visits span {
+      color: #0984e3; }
   .post__author {
     display: flex;
-    margin-bottom: 2rem; }
+    margin-bottom: 1rem; }
     .post__author .post__authorimg {
       width: 7rem;
       height: 7rem;

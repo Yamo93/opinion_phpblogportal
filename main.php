@@ -91,6 +91,15 @@
                 ?></a></span></p>
                 <p class="mainpage__article-date"><?= $val['created_date']; ?></p>
                 <p class="mainpage__article-read">Fyra minuters läsning</p>
+                <div class="visitswrapper">
+                <p class="mainpage__article-visits">Antal läsningar: <span>
+                    <?php 
+                    $visits = $post->countPostVisits($val['id']);
+                    extract($visits);
+                    echo $amountvisits;
+                    ?>
+                </span></p>
+                </div>
                 <a href="post.php?id=<?= $val['id']; ?>" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
             </article>
                 <?php } ?>
