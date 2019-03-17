@@ -74,6 +74,70 @@
     }
     ?>
 
+            <?php 
+            $usersArray = $user->getAllUsers();
+            ?>
+    <div class="container userlist">
+    <p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">Visa alla användare</a>
+    </p>
+    <div class="row">
+    <div class="col">
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+        <div class="card card-body">
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Notering!</strong> Vänligen klicka på användarens inläggstitlar för att läsa innehållet.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+            <div class="accordion" id="accordionExample">
+            <!-- Beginning of card -->
+            <?php foreach($usersArray as $index =>  $userArray) { ?>
+            <div class="card cardwrapper">
+            <div class="card-header" id="<?= $userArray['id'] ?>">
+            <h2 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#user<?= $userArray['id'] ?>" aria-expanded="true" aria-controls="user<?= $userArray['id'] ?>">
+                <?= $userArray['firstname'] . ' ' . $userArray['lastname'] . ' (' . $userArray['username'] . ')'; ?>
+            </button>
+            </h2>
+            </div>
+
+            <div id="user<?= $userArray['id'] ?>" class="collapse" aria-labelledby="<?= $userArray['id'] ?>" data-parent="#accordionExample">
+            <div class="card-body">
+                <?php 
+                $userPosts = $post->getPostsFromUser($userArray['id']);
+                if($userPosts) { ?>
+
+                <ol>
+                    <h3><?= $userArray['username'] . 's inlägg:'; ?> <span class="showprofile"><a href="profile.php?id=<?= $userArray['id'] ?>" target="_blank">Visa <?= $userArray['username'] . 's profil' ?></a></span></h3>
+                <?php foreach($userPosts as $index => $userPost) { ?>
+                        <p><a href="post.php?id=<?= $userPost['id']; ?>" class="userpostlink" target="_blank"><?= $userPost['title']; ?></a><span class="userpostdate"><?= substr($userPost['created_date'], 0, 10) ?></span></p>
+                        
+                    <?php } ?>
+
+                </ol>
+                <?php } else { ?>
+                    <h3><?= $userArray['username'] . 's inlägg:'; ?> <span class="showprofile"><a href="profile.php?id=<?= $userArray['id'] ?>" target="_blank">Visa <?= $userArray['username'] . 's profil' ?></a></span></h3>
+                    <?php
+                    echo "Inga inlägg skrivna.";
+                }
+                ?>
+            </div>
+            </div>
+            </div>
+
+            <?php } ?>
+
+
+
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
     <div class="mainpage">
         <section class="mainpage__left">
             <h1 class="mainpage__title">De senaste blogginläggen</h1>

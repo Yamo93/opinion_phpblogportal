@@ -67,6 +67,26 @@ class Post {
         return $result;
     }
 
+    function getPostsFromUser($user_id) {
+        $sql = "SELECT * FROM posts WHERE user_id = $user_id ORDER BY created_date DESC";
+
+        $result = $this->db->query($sql);
+
+        if($result->num_rows > 1) {
+            while($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            
+        return $rows;
+
+        } elseif($result->num_rows == 1) {
+            return $result;
+        } else {
+            return false;
+        }
+        
+    }
+
     function editPost($id, $title, $desc, $content, $categoryid) {
         $categoryid = intval($categoryid);
         $id = intval($id);

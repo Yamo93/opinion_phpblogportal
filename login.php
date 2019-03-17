@@ -9,16 +9,20 @@
     }
 
 
-    if(isset($_POST['submit'])) {
+    if(isset($_POST['submit']) && !empty($_POST['username']) && !empty($_POST['password'])) {
         if($user->loginUser($_POST['username'], $_POST['password'])) {
             $_SESSION['username'] = $_POST['username'];
-            header("Location: main.php");
             $_SESSION['id'] = $user->getUserID($_POST['username']);
+            header("Location: main.php");
         } else {
             $message = '<div class="alert alert-danger" role="alert">
             Användarnamnet eller lösenordet är felaktigt. Vänligen försök igen.
           </div>';
         }
+    } else if (isset($_POST['submit']) && (empty($_POST['username']) || empty($_POST['password']))) {
+        $message = '<div class="alert alert-danger" role="alert">
+            Vänligen fyll i båda fälten.
+          </div>';
     }
 ?>
 

@@ -137,6 +137,18 @@ class User {
         return $result;
     }
 
+    function getAllUsers() {
+        $sql = "SELECT * FROM users";
+
+        $result = $this->db->query($sql);
+
+        while($row = $result->fetch_assoc()) {
+            $rows[] = $row;
+        }
+
+        return $rows;
+    }
+
     function countUsers() {
         $sql = "SELECT count(username) as amountusers FROM users";
 

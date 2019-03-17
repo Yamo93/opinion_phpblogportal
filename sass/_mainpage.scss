@@ -27,6 +27,72 @@
     background-color: papayawhip;
 }
 
+.userlist {
+    margin: 4rem auto;
+    text-align: center;
+
+    .collapse, .multi-collapse {
+        font-size: 1.8rem;
+        text-align: left;
+    }
+
+    .accordion .cardwrapper {
+        width: 80%;
+
+        h3 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .showprofile {
+            display: inline-block;
+            margin-left: 1rem;
+            font-size: 1.4rem;
+            padding: 3px;
+            background-color: $electronblue;
+            transition: all .3s;
+            
+            a:link, a:visited {
+                color: $white;
+            }
+
+            &:hover {
+                background-color: darken($electronblue, 15%);
+            }
+        }
+
+        ol {
+            list-style-type: decimal;
+        }
+
+        p {
+            margin-bottom: 0;
+
+            .userpostlink {
+                margin-bottom: .5rem;
+                // display: flex;
+                // justify-content: space-between;
+                // flex-wrap: wrap;
+    
+            }
+    
+            span.userpostdate {
+                margin-left: 1rem;
+                margin-bottom: 1rem;
+                font-size: 1.2rem;
+                padding: 3px;
+                background-color: rgba($mintgreen, .3);
+                color: $black;
+                box-shadow: .5px .5px 1px $mintgreen;
+            }
+
+        }
+
+
+    }
+}
+
 .mainpage {
     margin: 5rem 0;
     padding: 5rem;
@@ -218,3 +284,4 @@
 
 
 }
+
