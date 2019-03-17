@@ -81,13 +81,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-            <a class="nav-link" href="main.php">Huvudsidan <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="about.php">Om webbplatsen</a>
-            </li>
-            <li class="nav-item active dropdown">
+        <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Välkommen, <span><?php 
                 $welcomeuser = $user->getUserInfo($_SESSION['id']);
@@ -104,6 +98,27 @@
                 <a class="dropdown-item" href="usersettings.php">Inställningar</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="logout.php">Logga ut</a>
+            </div>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="main.php">Huvudsidan <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="about.php">Om webbplatsen</a>
+            </li>
+
+            <!-- Dropdown för kategorier i små menyer -->
+            <li class="nav-item active dropdown categoriesdropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategorier
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="category.php?id=1">Allmänt</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="category.php?id=2">Teknologi</a>
+                <a class="dropdown-item" href="category.php?id=3">Hälsa</a>
+                <a class="dropdown-item" href="category.php?id=4">Sport</a>
+                <a class="dropdown-item" href="category.php?id=5">Mat</a>
+                <a class="dropdown-item" href="category.php?id=6">Samhällsrelaterat</a>
             </div>
             </li>
         </ul>

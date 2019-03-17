@@ -30,16 +30,10 @@
 ?>
 
     <!-- Kategorifält -->
-    <nav class="categories">
-        <ul>
-            <li><a href="#" class="active">Allmänt</a></li>
-            <li><a href="tech.php">Teknologi</a></li>
-            <li><a href="halsa.php">Hälsa</a></li>
-            <li><a href="sport.php">Sport</a></li>
-            <li><a href="mat.php">Mat</a></li>
-            <li><a href="samhalle.php">Samhällsrelaterat</a></li>
-        </ul>
-    </nav>
+<?php 
+    // Laddar in kategorymenyn dynamiskt (från databasen)
+    include_once('includes/categories.php');
+?>
 
     <!-- Välkomstmeddelande -->
     <div class="container" style="margin-bottom: 3rem;">
@@ -146,7 +140,7 @@
                 $result = $post->getPosts(5);
                 foreach($result as $grabbedpost => $val) { ?>
             <article class="mainpage__article">
-                <h2 class="mainpage__article-title"><?= $val['title']; ?></h2>
+                <h2 class="mainpage__article-title"><a href="post.php?id=<?= $val['id']; ?>"><?= $val['title']; ?></a></h2>
                 <p class="mainpage__article-desc"><?= $val['description']; ?></p>
                 <p class="mainpage__article-category">Kategori: <span><?= $post->getCategoryName($val['category_id']); ?></span></p>
                 <p class="mainpage__article-author">Av <span><a href="profile.php?id=<?= $val['user_id'];?>" target="_blank"><?php

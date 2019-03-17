@@ -78,6 +78,9 @@ a:hover, a:active {
   .welcome__left, .welcome__right {
     width: 50%;
     height: 100vh; }
+    @media screen and (max-width: 850px) {
+      .welcome__left, .welcome__right {
+        height: 100%; } }
   .welcome__left {
     background: linear-gradient(to right, #4a7c41d3, #17664cc5), url(../img/bg_img/simone-hutsch-1420289-unsplash.jpg);
     background-size: cover;
@@ -128,6 +131,11 @@ a:hover, a:active {
   .header .navbar input[type=search] {
     font-size: 1.6rem;
     font-family: "Open Sans", sans-serif; }
+  .header .navbar .categoriesdropdown {
+    display: none; }
+    @media screen and (max-width: 700px) {
+      .header .navbar .categoriesdropdown {
+        display: block; } }
 
 .header .navbar-brand {
   font-size: 2.2rem; }
@@ -221,6 +229,9 @@ a:hover, a:active {
 
 .categories {
   margin-top: 12rem; }
+  @media screen and (max-width: 700px) {
+    .categories {
+      display: none; } }
   .categories ul {
     width: 80%;
     margin: 5rem auto;
@@ -239,15 +250,31 @@ a:hover, a:active {
 .card-welcome {
   padding: 3rem;
   background-color: papayawhip; }
+  @media screen and (max-width: 700px) {
+    .card-welcome {
+      margin-top: 12rem; } }
+  @media screen and (max-width: 500px) {
+    .card-welcome {
+      width: 80%; } }
+  @media screen and (max-width: 500px) {
+    .card-welcome {
+      width: 90%; } }
 
 .userlist {
   margin: 4rem auto;
-  text-align: center; }
+  text-align: center;
+  padding: .7rem; }
   .userlist .collapse, .userlist .multi-collapse {
     font-size: 1.8rem;
     text-align: left; }
+  @media screen and (max-width: 500px) {
+    .userlist .card.card-body {
+      width: 90%; } }
   .userlist .accordion .cardwrapper {
     width: 80%; }
+    @media screen and (max-width: 500px) {
+      .userlist .accordion .cardwrapper {
+        width: 100%; } }
     .userlist .accordion .cardwrapper h3 {
       font-size: 2rem;
       font-weight: bold;
@@ -283,10 +310,24 @@ a:hover, a:active {
   padding: 5rem;
   display: flex;
   justify-content: space-between; }
+  @media screen and (max-width: 700px) {
+    .mainpage {
+      flex-direction: column; } }
   .mainpage__left {
     width: 65%; }
+    @media screen and (max-width: 700px) {
+      .mainpage__left {
+        width: 100%; } }
   .mainpage__right {
     width: 25%; }
+    @media screen and (max-width: 700px) {
+      .mainpage__right {
+        width: 50%;
+        margin: 0 auto;
+        margin-top: 3rem; } }
+    @media screen and (max-width: 700px) {
+      .mainpage__right {
+        width: 100%; } }
   .mainpage__title {
     font-size: 2.2rem;
     font-weight: 600;
@@ -437,6 +478,13 @@ a:hover, a:active {
   min-height: 90vh;
   padding: 5rem 15%;
   margin: 0 auto; }
+  @media screen and (max-width: 700px) {
+    .post {
+      padding: 5rem 2rem;
+      width: 80%; } }
+  @media screen and (max-width: 500px) {
+    .post {
+      width: 100%; } }
   .post__title {
     font-weight: 600;
     margin-bottom: 2.5rem; }
@@ -497,6 +545,19 @@ a.returnbtn:link, a.returnbtn:visited {
   flex-direction: column;
   justify-content: center;
   align-items: center; }
+  @media screen and (max-width: 700px) {
+    .profile {
+      margin-top: 7rem;
+      padding: 2rem 3rem;
+      min-height: none;
+      height: 80%; } }
+  @media screen and (max-width: 500px) {
+    .profile {
+      justify-content: flex-start;
+      width: 100%; } }
+  @media screen and (max-width: 400px) {
+    .profile {
+      padding: 1.5rem 2rem; } }
   .profile__title {
     font-weight: 600;
     margin-bottom: 2.5rem; }

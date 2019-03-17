@@ -1,5 +1,10 @@
 .categories {
     margin-top: 12rem;
+
+    @media screen and (max-width: 700px) {
+        display: none;
+    }
+
     ul {
         width: 80%;
         margin: 5rem auto;
@@ -25,19 +30,41 @@
 .card-welcome {
     padding: 3rem;
     background-color: papayawhip;
+
+    @media screen and (max-width: 700px) {
+        margin-top: 12rem;
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 80%;
+    }
+    @media screen and (max-width: 500px) {
+        width: 90%;
+    }
 }
 
 .userlist {
     margin: 4rem auto;
     text-align: center;
+    padding: .7rem;
 
     .collapse, .multi-collapse {
         font-size: 1.8rem;
         text-align: left;
     }
 
+    .card.card-body {
+        @media screen and (max-width: 500px) {
+            width: 90%;
+        }
+    }
+
     .accordion .cardwrapper {
         width: 80%;
+
+        @media screen and (max-width: 500px) {
+            width: 100%;
+        }
 
         h3 {
             font-size: 2rem;
@@ -99,12 +126,30 @@
     display: flex;
     justify-content: space-between;
 
+    @media screen and (max-width: 700px) {
+        flex-direction: column;
+    }
+
     &__left {
         width: 65%;
+
+        @media screen and (max-width: 700px) {
+            width: 100%;
+        }
     }
 
     &__right {
         width: 25%;
+
+        @media screen and (max-width: 700px) {
+            width: 50%;
+            margin: 0 auto;
+            margin-top: 3rem;
+        }
+
+        @media screen and (max-width: 700px) {
+            width: 100%;
+        }
     }
 
     &__title {

@@ -142,12 +142,12 @@
     $post->recordPostVisit($_SERVER['REMOTE_ADDR'], $_GET['id']);
     ?>
         <ul>
-            <li><a href="main.php">Allmänt</a></li>
-            <li><a href="tech.php">Teknologi</a></li>
-            <li><a href="halsa.php">Hälsa</a></li>
-            <li><a href="sport.php">Sport</a></li>
-            <li><a href="mat.php">Mat</a></li>
-            <li><a href="samhalle.php">Samhällsrelaterat</a></li>
+            <li><a href="category.php?id=1">Allmänt</a></li>
+            <li><a href="category.php?id=2">Teknologi</a></li>
+            <li><a href="category.php?id=3">Hälsa</a></li>
+            <li><a href="category.php?id=4">Sport</a></li>
+            <li><a href="category.php?id=5">Mat</a></li>
+            <li><a href="category.php?id=6">Samhällsrelaterat</a></li>
         </ul>
     </nav>
     <!-- Inläggtitel -->

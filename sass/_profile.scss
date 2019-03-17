@@ -8,6 +8,22 @@
     justify-content: center;
     align-items: center;
 
+    @media screen and (max-width: 700px) {
+        margin-top: 7rem;
+        padding: 2rem 3rem;
+        min-height: none;
+        height: 80%;
+    }
+
+    @media screen and (max-width: 500px) {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    @media screen and (max-width: 400px) {
+        padding: 1.5rem 2rem;
+    }
+
     &__title {
         font-weight: 600;
         margin-bottom: 2.5rem;
