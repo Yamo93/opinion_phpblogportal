@@ -3,6 +3,12 @@
 class Post {
     private $db;
     private $posts = [];
+    public $postID;
+    public $reactionType;
+    public $userID;
+    public $numLikes;
+    public $numDislikes;
+
 
     function __construct() {
         $this->db = new mysqli(DB_HOST, DB_USERNAME, DB_PASSWORD,DB_NAME);
@@ -199,6 +205,42 @@ class Post {
         post_id
     ORDER BY
         popularposts DESC LIMIT 3"; // this (hopefully) calculates the hottest posts on the site
+
+    }
+
+    function loadPostLikesAPI() {
+        $sql = "SELECT 
+        (SELECT count(*) FROM reactions WHERE type = 1 AND post_id = " . $this->postID . ") as likes,
+        (SELECT count(*) FROM reactions WHERE type = 2 AND post_id = " . $this->postID . ")  as dislikes;";
+
+        $result = $this->db->query($sql);
+        $row = $result->fetch_assoc();
+
+        $this->numLikes = $row['likes'];
+        $this->numDislikes = $row['dislikes'];
+
+        
+    }
+
+    function addReactionAPI() {
+
+        //Kontrollera om användaren redan har reagerat tidigare
+        $stmt = $this->db->prepare("SELECT * FROM reactions WHERE user_id = ? AND post_id = ?");
+        $stmt->bind_param("dd", $this->userID, $this->postID);
+
+        $stmt->execute();
+        $stmt_result = $stmt->get_result() or trigger_error($stmt->error, E_USER_ERROR);
+
+        if($stmt_result->num_rows>0) {
+            // Användare har redan reagerat (här kan man möjligtvis OGILLA / byta typ av reaktion beroende på vad man klickar)
+            return false;
+        } else {
+            // Lägg till reaktion
+            $stmt = $this->db->prepare("INSERT INTO reactions(type, user_id, post_id) VALUES(?, ?, ?);");
+            $stmt->bind_param("ddd", $this->reactionType, $this->userID, $this->postID);
+            $result = $stmt->execute();
+            return $result;
+        }
 
     }
 }

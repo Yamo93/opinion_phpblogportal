@@ -532,6 +532,22 @@ a:hover, a:active {
     margin-bottom: 3rem; }
   .post .editbtn {
     margin-right: 2rem; }
+  .post .reactions {
+    display: flex; }
+    .post .reactions .like {
+      margin-right: 2rem; }
+    .post .reactions .like span, .post .reactions .dislike span {
+      font-size: 1.6rem;
+      padding: 2px 5px;
+      background-color: #f3f3f3;
+      box-shadow: .5px .5px .5px #333; }
+    .post .reactions .likelink, .post .reactions .dislikelink {
+      font-size: 1.6rem;
+      margin-right: .5rem; }
+    .post .reactions .likelink {
+      color: #00b894; }
+    .post .reactions .dislikelink {
+      color: red; }
 
 a.returnbtn:link, a.returnbtn:visited {
   font-size: 1.6rem; }

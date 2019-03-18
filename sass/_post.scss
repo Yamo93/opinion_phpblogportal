@@ -90,6 +90,38 @@
     .editbtn {
         margin-right: 2rem;
     }
+
+    .reactions {
+        display: flex;
+
+        .like {
+            margin-right: 2rem;
+        }
+
+        .like, .dislike {
+            span {
+                font-size: 1.6rem;
+                padding: 2px 5px;
+                background-color: $white;
+                box-shadow: .5px .5px .5px #333;
+            }
+        }
+
+        .likelink, .dislikelink {
+            font-size: 1.6rem;
+            margin-right: .5rem;
+        }
+
+        .likelink {
+            color: $mintgreen;
+        }
+
+        .dislikelink {
+            color: red;
+        }
+
+
+    }
 }
 
 a.returnbtn:link, a.returnbtn:visited {

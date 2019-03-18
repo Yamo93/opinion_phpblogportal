@@ -182,7 +182,10 @@
         <?php } ?>
 
         <?php 
-            //  Tillåter endast att den inloggade medlemmen är inläggets författare
+        // $post->postID = isset($_GET['id']) ? $_GET['id'] : die();
+        // print_r($post->loadPostLikesAPI());
+
+            //  Kontrollerar att den inloggade medlemmen är inläggets författare
 
             if(isset($authorIsLoggedIn) && $authorIsLoggedIn) {
                 echo '<button type="button" class="btn btn-primary editbtn" data-toggle="modal" data-target="#editPost">
@@ -197,7 +200,64 @@
         <!-- Bokmärkesknapp -->
 
         <?= $selectedpost['content']; ?>
+        
+        <div class="reactions">
+            <script>
+                let xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                if (this.status === 200 && this.readyState === 4) {
+                let reactions = JSON.parse(this.response);
 
+                document.querySelector('.numlikes').textContent = reactions.likes;
+                document.querySelector('.numdislikes').textContent = reactions.dislikes;
+                }
+                }
+                xhttp.open('GET', './loadreactions.php?id=<?php echo $_GET['id']; ?>', true);
+                xhttp.send();
+            </script>
+
+            <div class="like">
+                <button class="likelink" data-type="1">Gilla <i class="fas fa-thumbs-up"></i></button>
+                <span class="numlikes">0</span>
+            </div>
+            <div class="dislike">
+                <button class="dislikelink" data-type="2">Ogilla <i class="fas fa-thumbs-down"></i></button><span class="numdislikes">0</span>
+            </div>
+            
+            <script>
+                document.querySelector('.likelink').addEventListener('click', addReaction);
+                document.querySelector('.dislikelink').addEventListener('click', addReaction);
+
+                function addReaction() {
+                    console.log(this.dataset.type);
+                    var http = new XMLHttpRequest();
+                    var url = 'addreaction.php';
+                    var params = {
+                        postID: <?= $_GET['id']; ?>,
+                        userID: <?= $user->getUserID($_SESSION['username']); ?>,
+                        type: this.dataset.type
+                    };
+                    http.open('POST', url, true);
+
+                    //Send the proper header information along with the request
+                    http.setRequestHeader('Content-type', 'application/json');
+                    http.send(JSON.stringify(params));
+                    http.onreadystatechange = function() {//Call a function when the state changes.
+                    if(http.readyState == 4 && http.status == 200) {
+                    // alert(http.responseText);
+
+                    // Laddar in nya reaktioner här
+                    let reactions = JSON.parse(http.responseText);
+                    document.querySelector('.numlikes').textContent = reactions.likes;
+                    document.querySelector('.numdislikes').textContent = reactions.dislikes;
+                    }
+                    }
+                    http.send(params);
+                }
+                
+
+            </script>
+        </div>
     </section>
 
     <!-- Innehåll -->
