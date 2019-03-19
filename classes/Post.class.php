@@ -9,6 +9,7 @@ class Post {
     public $numLikes;
     public $numDislikes;
     public $userHasReacted;
+    public $numComments;
 
 
     function __construct() {
@@ -263,6 +264,31 @@ class Post {
             return $result;
         }
 
+    }
+
+    function loadCommentsAPI() {
+
+        $sql = "SELECT * FROM comments WHERE post_id = " . $this->postID . " ORDER BY date DESC;";
+        $result = $this->db->query($sql);
+
+        if(!$result = $this->db->query($sql)){
+            die('Fel vid SQL-fråga [' . $this->db->error . ']');
+        }
+
+        if($result->num_rows == 1) {
+            return [
+                'result' => $result,
+                'fetchedArray' => $result->fetch_assoc()
+            ];
+        } elseif($result->num_rows > 1) {
+            // $comments[] = $result->num_rows;
+            while($row = $result->fetch_assoc()) {
+                $comments[] = $row;
+            }
+
+        }
+        
+        return $comments;
     }
 }
 

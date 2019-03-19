@@ -69,6 +69,7 @@
 
 ?>
 
+<?php if(isset($authorIsLoggedIn) && $authorIsLoggedIn) : ?>
 <div class="modal" id="deletemodal" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -90,6 +91,7 @@
     </div>
   </div>
 </div>
+
 
     <!-- Modal -->
     <div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -135,6 +137,8 @@
         </div>
     </div>
     </div>
+
+    <?php endif; ?>
 
     <!-- Kategorifält -->
     <nav class="categories">
@@ -239,7 +243,6 @@
                 document.querySelector('.dislikelink').addEventListener('click', addReaction);
 
                 function addReaction() {
-                    console.log(this.dataset.type);
                     var http = new XMLHttpRequest();
                     var url = 'addreaction.php';
                     var params = {
@@ -281,32 +284,94 @@
         </div>
 
         <section class="commentsection">
-                <h1>50 kommentarer</h1>
+                <h1 class="commentsection__title">Inga kommentarer än</h1>
                 <div class="commentbox">
                     <div class="commentbox__left">
                         <div class="commentbox__img"></div>
                     </div>
                     <div class="commentbox__right">
                         <form method="post">
-                            <textarea name="comment" id="commentbox" cols="30" rows="10" placeholder="Vänligen skriv en kommentar"></textarea>
-                            <input type="submit" value="Skicka" name="submitcomment">
+                            <textarea name="comment" id="commentfield" cols="30" rows="5" placeholder="Vänligen skriv en kommentar"></textarea>
+                            <input type="submit" value="Skicka" name="submitcomment" class="commentbox__submit">
                         </form>
                     </div>
                 </div>
                 <!-- Slut på kommentarfältet -->
-                <div class="comments">
+                <script>
+                let xhttpComment = new XMLHttpRequest();
+                xhttpComment.onreadystatechange = function () {
+                if (this.status === 200 && this.readyState === 4) {
+                let comments = JSON.parse(this.response);
+
+                if (comments instanceof Array === false) {
+                    document.querySelector('.commentsection__title').textContent = "1 kommentar";
+                    let markup = `
                     <div class="comment">
+                            <div class="comment__left">
+                                <div class="comment__img"></div>
+                            </div>
+                            <div class="comment__right">
+                                <h2 class="comment__author" data-userid="${comments.user_id}">
+                                @${comments.username} <span>(${comments.firstname} ${comments.lastname})</span></h2>
+                                <p class="comment__text" data-postid="${comments.post_id}">${comments.content}</p>
+                                <p class="comment__date">Publicerad ${comments.date}</p>
+                            </div>
+                        </div>
+                    `;
+                        document.querySelector('.comments').insertAdjacentHTML('beforeend', markup);
+
+                } else if (comments instanceof Array) {
+                document.querySelector('.commentsection__title').textContent = comments.length + ' kommentarer';
+                comments.forEach(comment => {
+                let markup = `
+                <div class="comment">
                         <div class="comment__left">
                             <div class="comment__img"></div>
                         </div>
                         <div class="comment__right">
-                            <h2 class="comment__author">@Yamo93</h2>
-                            <p class="comment__text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo recusandae dolore tenetur perspiciatis eius maxime quae suscipit obcaecati, doloribus non?</p>
+                            <h2 class="comment__author" data-userid="${comment.user_id}">
+                            @${comment.username} <span>(${comment.firstname} ${comment.lastname})</span></h2>
+                            <p class="comment__text" data-postid="${comment.post_id}">${comment.content}</p>
+                            <p class="comment__date">Publicerad ${comment.date}</p>
                         </div>
                     </div>
+                `;
+                    document.querySelector('.comments').insertAdjacentHTML('beforeend', markup);
+                });
+
+                }
+
+
+                }
+                }
+                xhttpComment.open('GET', './loadcomments.php?id=<?= $_GET['id']; ?>', true);
+                xhttpComment.send();
+                </script>
+                <div class="comments">
+                    <!-- <div class="comment">
+                        <div class="comment__left">
+                            <div class="comment__img"></div>
+                        </div>
+                        <div class="comment__right">
+                            <h2 class="comment__author">@Yamo93 <span>(Yamo Gebrewold)</span></h2>
+                            <p class="comment__text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo recusandae dolore tenetur perspiciatis eius maxime quae suscipit obcaecati, doloribus non?</p>
+                            <p class="comment__date">Publicerad 2019-01-01 00:00</p>
+                        </div>
+                    </div> -->
+                    <!-- Slut på kommentar -->
+
+                    <!-- <div class="comment">
+                        <div class="comment__left">
+                            <div class="comment__img"></div>
+                        </div>
+                        <div class="comment__right">
+                            <h2 class="comment__author">@Yamo93 <span>(Yamo Gebrewold)</span></h2>
+                            <p class="comment__text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo recusandae dolore tenetur perspiciatis eius maxime quae suscipit obcaecati, doloribus non?</p>
+                            <p class="comment__date">Publicerad 2019-01-01 00:00</p>
+                        </div>
+                    </div> -->
                     <!-- Slut på kommentar -->
                 </div>
-        </div>
     </section>
     </section>
 

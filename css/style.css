@@ -463,7 +463,7 @@ a:hover, a:active {
 .help-block {
   color: #d63031; }
 
-#addPost #modalTitle, #editPost #modalTitle {
+#addPost #modalTitle, #addPost #createModalTitle, #editPost #modalTitle, #editPost #createModalTitle {
   font-size: 2.2rem; }
 
 #addPost .modal-body label, #editPost .modal-body label {
@@ -563,6 +563,81 @@ a:hover, a:active {
 
 a.returnbtn:link, a.returnbtn:visited {
   font-size: 1.6rem; }
+
+.commentsection {
+  width: 100%;
+  height: 100%;
+  margin: 5rem 0; }
+  .commentsection__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem; }
+  .commentsection .commentbox {
+    background-color: rgba(204, 204, 204, 0.5);
+    padding: 3rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: space-between; }
+    .commentsection .commentbox__left {
+      width: 20%; }
+    .commentsection .commentbox__img {
+      width: 8rem;
+      height: 8rem;
+      background-image: url(../img/userimgs/yamo93.jpeg);
+      background-position: center;
+      background-size: cover; }
+    .commentsection .commentbox__right {
+      width: 70%; }
+      .commentsection .commentbox__right #commentfield {
+        width: 100%;
+        font-size: 1.6rem;
+        padding: .5rem; }
+    .commentsection .commentbox__submit {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 1rem 2.5rem;
+      background-color: #0984e3;
+      color: #f3f3f3;
+      font-size: 1.4rem;
+      font-family: "Open Sans", sans-serif;
+      border: 0.5px solid #f3f3f3;
+      transition: all .3s; }
+      .commentsection .commentbox__submit:hover {
+        background-color: #065999; }
+  .commentsection .comments {
+    width: 100%;
+    padding: 2.5rem 1rem; }
+    .commentsection .comments .comment {
+      display: flex;
+      justify-content: space-between;
+      padding: 2rem 0;
+      border-bottom: 1px dotted #00b894; }
+      .commentsection .comments .comment__left {
+        width: 15%; }
+        .commentsection .comments .comment__left .comment__img {
+          width: 6rem;
+          height: 6rem;
+          background-image: url(../img/userimgs/yamo93.jpeg);
+          background-position: center;
+          background-size: cover; }
+      .commentsection .comments .comment__right {
+        width: 80%; }
+      .commentsection .comments .comment__author {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #065999; }
+        .commentsection .comments .comment__author span {
+          font-size: 1.6rem;
+          color: rgba(0, 184, 148, 0.8); }
+      .commentsection .comments .comment__text {
+        font-size: 1.6rem;
+        line-height: 1.6em; }
+      .commentsection .comments .comment__date {
+        font-size: 1.4rem;
+        font-weight: 600;
+        font-family: "Open Sans", sans-serif;
+        color: #0984e3; }
 
 .profile {
   width: 80%;

@@ -117,8 +117,19 @@ class User {
         return $result['id'];
     }
 
+
     function getUserInfo($id) {
         $sql = "SELECT * FROM users WHERE id = $id;";
+
+        $result = $this->db->query($sql);
+
+        $result = $result->fetch_assoc();
+
+        return $result;
+    }
+
+    function getUsername($id) {
+        $sql = "SELECT username FROM users WHERE id = $id;";
 
         $result = $this->db->query($sql);
 

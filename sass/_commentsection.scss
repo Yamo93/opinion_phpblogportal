@@ -1,0 +1,109 @@
+.commentsection {
+    width: 100%;
+    height: 100%;
+    margin: 5rem 0;
+
+    &__title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 2rem;
+    }
+
+    .commentbox {
+        background-color: rgba(#ccc, .5);
+        padding: 3rem;
+        margin-bottom: 2.5rem;
+        display: flex;
+        justify-content: space-between;
+
+        &__left {
+            width: 20%;
+        }
+
+        &__img {
+            width: 8rem;
+            height: 8rem;
+            background-image: url(../img/userimgs/yamo93.jpeg);
+            background-position: center;
+            background-size: cover;
+        }
+
+        &__right {
+            width: 70%;
+
+            #commentfield {
+                width: 100%;
+                font-size: 1.6rem;
+                padding: .5rem;
+            }
+        }
+
+        &__submit {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 1rem 2.5rem;
+            background-color: $electronblue;
+            color: $white;
+            font-size: 1.4rem;
+            font-family: $secondary-font;
+            border: .5px solid $white;
+            transition: all .3s;
+
+            &:hover {
+                background-color: darken($electronblue, 15%);
+            }
+        }
+    }
+
+    .comments {
+        width: 100%;
+        padding: 2.5rem 1rem;
+
+        .comment {
+            display: flex;
+            justify-content: space-between;
+            padding: 2rem 0;
+            border-bottom: 1px dotted $mintgreen;
+
+            &__left {
+                width: 15%;
+
+                .comment__img {
+                    width: 6rem;
+                    height: 6rem;
+                    background-image: url(../img/userimgs/yamo93.jpeg);
+                    background-position: center;
+                    background-size: cover;
+                }
+            }
+
+            &__right {
+                width: 80%;
+            }
+
+            &__author {
+                font-size: 1.8rem;
+                font-weight: bold;
+                color: darken($electronblue, 15%);
+                
+                span {
+                    font-size: 1.6rem;
+                    color: rgba($mintgreen, .8);
+                }
+            }
+
+            &__text {
+                font-size: 1.6rem;
+                line-height: 1.6em;
+            }
+
+            &__date {
+                font-size: 1.4rem;
+                font-weight: 600;
+                font-family: $secondary-font;
+                color: $electronblue;
+            }
+        }
+    }
+}

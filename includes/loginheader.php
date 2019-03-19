@@ -27,11 +27,11 @@
 </head>
 <body>
     <!-- Modal -->
-    <div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="createPost" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalTitle">Skapa ett inlägg</h5>
+                <h5 class="modal-title" id="createModalTitle">Skapa ett inlägg</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
@@ -61,9 +61,8 @@
                     <label for="blogcontent">Skriv ditt inlägg nedan</label>
                     <textarea class="form-control"  name="editor1" id="blogcontent" rows="3"></textarea>
                 </div>
-            </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
+            <button class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
             <input type="submit" name="addpost" class="btn btn-success" value="Lägg till inlägg">
         </div>
     </form>
@@ -83,15 +82,15 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOne" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Välkommen, <span><?php 
                 $welcomeuser = $user->getUserInfo($_SESSION['id']);
                 $firstname = $welcomeuser['firstname'];
                 echo $firstname;
                 ?></span>!
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#"  data-toggle="modal" data-target="#addPost">Skapa ett inlägg</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownOne">
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#addPost" id="createPost">Skapa ett inlägg</a>
                 <!-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addPost">
                 Skapa ett inlägg
                 </button> -->
@@ -110,9 +109,9 @@
 
             <!-- Dropdown för kategorier i små menyer -->
             <li class="nav-item active dropdown categoriesdropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategorier
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTwo" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategorier
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownTwo">
                 <a class="dropdown-item" href="category.php?id=1">Allmänt</a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="category.php?id=2">Teknologi</a>
