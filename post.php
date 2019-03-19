@@ -207,12 +207,22 @@
                 xhttp.onreadystatechange = function () {
                 if (this.status === 200 && this.readyState === 4) {
                 let reactions = JSON.parse(this.response);
+                if(reactions.userReaction) {
+                    if(reactions.userReaction.type === 1) {
+                        document.querySelector('.likelink').classList.add('hasreacted');
+                        document.querySelector('.likelink').innerHTML = 'Du har gillat <i class="fas fa-thumbs-up"></i>';
+                    }
+                    else if(reactions.userReaction.type === 2) {
+                        document.querySelector('.dislikelink').classList.add('hasreacted');
+                        document.querySelector('.dislikelink').innerHTML = 'Du har ogillat <i class="fas fa-thumbs-down"></i>';
+                    }
+                }
 
                 document.querySelector('.numlikes').textContent = reactions.likes;
                 document.querySelector('.numdislikes').textContent = reactions.dislikes;
                 }
                 }
-                xhttp.open('GET', './loadreactions.php?id=<?php echo $_GET['id']; ?>', true);
+                xhttp.open('GET', './loadreactions.php?id=<?= $_GET['id']; ?>', true);
                 xhttp.send();
             </script>
 
@@ -248,8 +258,19 @@
 
                     // Laddar in nya reaktioner här
                     let reactions = JSON.parse(http.responseText);
-                    document.querySelector('.numlikes').textContent = reactions.likes;
-                    document.querySelector('.numdislikes').textContent = reactions.dislikes;
+                    if(reactions.userReaction) {
+                    if(reactions.userReaction.type === 1) {
+                        document.querySelector('.likelink').classList.add('hasreacted');
+                        document.querySelector('.likelink').innerHTML = 'Du har gillat <i class="fas fa-thumbs-up"></i>';
+                    }
+                    else if(reactions.userReaction.type === 2) {
+                        document.querySelector('.dislikelink').classList.add('hasreacted');
+                        document.querySelector('.dislikelink').innerHTML = 'Du har ogillat <i class="fas fa-thumbs-down"></i>';
+                    }
+                }
+
+                document.querySelector('.numlikes').textContent = reactions.likes;
+                document.querySelector('.numdislikes').textContent = reactions.dislikes;
                     }
                     }
                     http.send(params);
@@ -258,6 +279,35 @@
 
             </script>
         </div>
+
+        <section class="commentsection">
+                <h1>50 kommentarer</h1>
+                <div class="commentbox">
+                    <div class="commentbox__left">
+                        <div class="commentbox__img"></div>
+                    </div>
+                    <div class="commentbox__right">
+                        <form method="post">
+                            <textarea name="comment" id="commentbox" cols="30" rows="10" placeholder="Vänligen skriv en kommentar"></textarea>
+                            <input type="submit" value="Skicka" name="submitcomment">
+                        </form>
+                    </div>
+                </div>
+                <!-- Slut på kommentarfältet -->
+                <div class="comments">
+                    <div class="comment">
+                        <div class="comment__left">
+                            <div class="comment__img"></div>
+                        </div>
+                        <div class="comment__right">
+                            <h2 class="comment__author">@Yamo93</h2>
+                            <p class="comment__text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illo recusandae dolore tenetur perspiciatis eius maxime quae suscipit obcaecati, doloribus non?</p>
+                        </div>
+                    </div>
+                    <!-- Slut på kommentar -->
+                </div>
+        </div>
+    </section>
     </section>
 
     <!-- Innehåll -->

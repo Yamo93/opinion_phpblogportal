@@ -8,6 +8,7 @@ class Post {
     public $userID;
     public $numLikes;
     public $numDislikes;
+    public $userHasReacted;
 
 
     function __construct() {
@@ -208,7 +209,7 @@ class Post {
 
     }
 
-    function loadPostLikesAPI() {
+    function loadReactionsAPI() {
         $sql = "SELECT 
         (SELECT count(*) FROM reactions WHERE type = 1 AND post_id = " . $this->postID . ") as likes,
         (SELECT count(*) FROM reactions WHERE type = 2 AND post_id = " . $this->postID . ")  as dislikes;";
@@ -219,7 +220,27 @@ class Post {
         $this->numLikes = $row['likes'];
         $this->numDislikes = $row['dislikes'];
 
-        
+        //Kontrollera om användaren redan har reagerat tidigare
+        $stmt = $this->db->prepare("SELECT * FROM reactions WHERE user_id = ? AND post_id = ?");
+        $stmt->bind_param("dd", $this->userID, $this->postID);
+
+        $stmt->execute();
+        $stmt->store_result();
+        // $stmt_result = $stmt->get_result() or trigger_error($stmt->error, E_USER_ERROR);
+
+        if($stmt->num_rows>0) {
+            $stmt->bind_result($id, $type, $user_id, $post_id);
+            $stmt->fetch();
+            $this->userHasReacted = [
+                'id' => $id,
+                'type' => $type,
+                'user_id' => $user_id,
+                'post_id' => $post_id
+            ];
+            
+            return false;
+        }
+        return true;
     }
 
     function addReactionAPI() {

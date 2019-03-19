@@ -29,15 +29,23 @@
 
     if($post->addReactionAPI()) {
         // Ladda in de uppdaterade reaktionerna
-        $post->loadPostLikesAPI();
+        if($post->loadReactionsAPI()) {
+            $postArray = [
+              'likes' => $post->numLikes,
+              'dislikes' => $post->numDislikes
+            ];
+          } else {
+            $postArray = [
+              'likes' => $post->numLikes,
+              'dislikes' => $post->numDislikes,
+              'userID' => $post->userID,
+              'postID' => $post->postID,
+              'userReaction' => $post->userHasReacted
+              ];
+          }
     } else {
         die();
     }
-
-    $postArray = [
-      'likes' => $post->numLikes,
-      'dislikes' => $post->numDislikes
-    ];
 
     print_r(json_encode($postArray));
 

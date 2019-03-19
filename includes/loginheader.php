@@ -19,7 +19,7 @@
     <meta name="msapplication-config" content="./img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Tinos:400,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7CTinos:400,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/parsley.css">
     <link rel="stylesheet" href="./css/style.css">
@@ -30,46 +30,47 @@
     <div class="modal fade" id="addPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="modalTitle">Skapa ett inlägg</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-        <form method="post">
-            <div class="form-group">
-            <label for="blogtitle">Titel</label>
-            <input type="text" name="title" class="form-control" id="blogtitle" placeholder="Ange inläggets titel" required>
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitle">Skapa ett inlägg</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="form-group">
-            <label for="blogdesc">Beskrivning</label>
-            <input type="text" name="desc" class="form-control" id="blogdesc" placeholder="Skriv en kort beskrivning om inlägget" required>
+            <div class="modal-body">
+            <form method="post">
+                <div class="form-group">
+                    <label for="blogtitle">Titel</label>
+                    <input type="text" name="title" class="form-control" id="blogtitle" placeholder="Ange inläggets titel" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogdesc">Beskrivning</label>
+                    <input type="text" name="desc" class="form-control" id="blogdesc" placeholder="Skriv en kort beskrivning om inlägget" required>
+                </div>
+                <div class="form-group">
+                    <label for="blogcategory">Välj ämne (frivilligt)</label>
+                    <select class="form-control" id="blogcategory" name="categoryid">
+                    <option value="1" selected>Allmänt</option>
+                    <option value="2">Teknologi</option>
+                    <option value="3">Hälsa</option>
+                    <option value="4">Sport</option>
+                    <option value="5">Mat</option>
+                    <option value="5">Samhällsrelaterat</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="blogcontent">Skriv ditt inlägg nedan</label>
+                    <textarea class="form-control"  name="editor1" id="blogcontent" rows="3"></textarea>
+                </div>
             </div>
-            <div class="form-group">
-            <label for="blogcategory">Välj ämne (frivilligt)</label>
-            <select class="form-control" id="blogcategory" name="categoryid">
-            <option value="1" selected>Allmänt</option>
-            <option value="2">Teknologi</option>
-            <option value="3">Hälsa</option>
-            <option value="4">Sport</option>
-            <option value="5">Mat</option>
-            <option value="5">Samhällsrelaterat</option>
-            </select>
-            </div>
-            <div class="form-group">
-            <label for="blogcontent">Skriv ditt inlägg nedan</label>
-            <textarea class="form-control"  name="editor1" id="blogcontent" rows="3"></textarea>
-            </div>
-        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
             <input type="submit" name="addpost" class="btn btn-success" value="Lägg till inlägg">
-        </form>
-    </div>
+        </div>
+    </form>
         </div>
     </div>
     </div>
+</div>
 
 
     <header class="header">

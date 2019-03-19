@@ -18,14 +18,23 @@
     $post = new Post();
     $user = new User();
 
-    $post->postID = isset($_GET['id']) ? $_GET['id'] : die();
+    $post->postID = isset($_GET['id']) ? intval($_GET['id']) : die();
+    $post->userID = intval($user->getUserID($_SESSION['username']));
 
-    $post->loadPostLikesAPI();
-
-    $postArray = [
-      'likes' => $post->numLikes,
-      'dislikes' => $post->numDislikes
-    ];
+    if($post->loadReactionsAPI()) {
+      $postArray = [
+        'likes' => $post->numLikes,
+        'dislikes' => $post->numDislikes
+      ];
+    } else {
+      $postArray = [
+        'likes' => $post->numLikes,
+        'dislikes' => $post->numDislikes,
+        'userID' => $post->userID,
+        'postID' => $post->postID,
+        'userReaction' => $post->userHasReacted
+        ];
+    }
 
     print_r(json_encode($postArray));
 
