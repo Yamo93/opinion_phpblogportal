@@ -184,6 +184,181 @@ class User {
         // Implement logic
     }
 
+    function uploadUserImg($username) {
+        if(empty($_FILES)) {
+            return false;
+        }
+
+        if(isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['size'] > 0) {
+            $target_dir = "uploadedimg/";
+            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+            $uploadOk = 1;
+            $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+            // Check if image file is a actual image or fake image
+    
+            $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+            if($check !== false) {
+                echo "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                echo "File is not an image.";
+                $uploadOk = 0;
+            }
+    
+            // Check if file already exists
+            if (file_exists($target_file)) {
+                echo "Sorry, file already exists.";
+                $uploadOk = 0;
+            }
+            // Check file size
+            if ($_FILES["fileToUpload"]["size"] > 500000) {
+                echo "Sorry, your file is too large.";
+                $uploadOk = 0;
+            }
+            // Allow certain file formats
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+            && $imageFileType != "gif" ) {
+                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            }
+            // Check if $uploadOk is set to 0 by an error
+            if ($uploadOk == 0) {
+                echo "Sorry, your file was not uploaded.";
+            // if everything is ok, try to upload file
+            } else {
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir . $username . '.' . $imageFileType)) {
+                    echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+    
+                    // Sparar filnamn i DB
+                    $stmt = $this->db->prepare("INSERT INTO images(filename, user_id) VALUES(?, ?);");
+                    $stmt->bind_param("sd", $filename, $user_id);
+    
+                    $filename = $username . '.' . $imageFileType;
+                    echo "Filename: " . $filename . "<br>";
+                    $user_id = $this->getUserID($username);
+                    
+    
+                    $result = $stmt->execute();
+    
+                    return $result;
+    
+    
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
+            }
+
+        } else {
+            echo "Image not updated.";
+        }
+    }
+
+    function isImgUploaded($user_id) {
+        $sql = "SELECT * FROM images WHERE user_id = $user_id";
+        $result = $this->db->query($sql);
+
+        if($result->num_rows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getUserImgFilename($user_id) {
+        $sql = "SELECT filename FROM images WHERE user_id = $user_id";
+        $result = $this->db->query($sql);
+
+        $result = $result->fetch_assoc();
+
+        return $result['filename'];
+    }
+
+    function updateUserImg($username, $user_id) {
+        if(empty($_FILES)) {
+            return false;
+        }
+
+        if(isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['size'] > 0) {
+            // Radera användarens bild från mapp
+            $filename = $this->getUserImgFilename($user_id);
+            if(file_exists('./uploadedimg/' . $filename)) {
+                unlink('./uploadedimg/' . $filename);
+            } else {
+                echo "couldnt remove file from folder";
+                return false;
+            }
+    
+            // Radera användarens föregående bild från db
+            $sql = "DELETE FROM images WHERE user_id = $user_id";
+            $result = $this->db->query($sql);
+    
+            if($result) { // filnamn är raderat från db
+                $target_dir = "uploadedimg/";
+                $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+                $uploadOk = 1;
+                $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+                // Check if image file is a actual image or fake image
+        
+                $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+                if($check !== false) {
+                    echo "File is an image - " . $check["mime"] . ".";
+                    $uploadOk = 1;
+                } else {
+                    echo "File is not an image.";
+                    $uploadOk = 0;
+                }
+        
+                // Check if file already exists
+                if (file_exists($target_file)) {
+                    echo "Sorry, file already exists.";
+                    $uploadOk = 0;
+                }
+                // Check file size
+                if ($_FILES["fileToUpload"]["size"] > 500000) {
+                    echo "Sorry, your file is too large.";
+                    $uploadOk = 0;
+                }
+                // Allow certain file formats
+                if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    $uploadOk = 0;
+                }
+                // Check if $uploadOk is set to 0 by an error
+                if ($uploadOk == 0) {
+                    echo "Sorry, your file was not uploaded.";
+                // if everything is ok, try to upload file
+                } else {
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir . $username . '.' . $imageFileType)) {
+                        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been updated.";
+        
+                        // Sparar filnamn i DB
+                        $stmt = $this->db->prepare("INSERT INTO images(filename, user_id) VALUES(?, ?);");
+                        $stmt->bind_param("sd", $filename, $user_id);
+        
+                        $filename = $username . '.' . $imageFileType;
+                        echo "Filename: " . $filename . "<br>";
+                        $user_id = $this->getUserID($username);
+                        
+        
+                        $result = $stmt->execute();
+        
+                        return $result;
+        
+        
+                    } else {
+                        echo "Sorry, there was an error uploading your file.";
+                    }
+                }
+    
+            }
+
+        } else {
+            echo "Image not updated.";
+        }
+
+    }
+
 
 }
 

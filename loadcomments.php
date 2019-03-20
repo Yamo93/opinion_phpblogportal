@@ -29,6 +29,7 @@
         $postArray['fetchedArray']['username'] = $userinfo['username'];
         $postArray['fetchedArray']['firstname'] = $userinfo['firstname'];
         $postArray['fetchedArray']['lastname'] = $userinfo['lastname'];
+        $postArray['fetchedArray']['filename'] = $user->getUserImgFilename($postArray['fetchedArray']['user_id']);
 
         print_r(json_encode($postArray['fetchedArray']));
 
@@ -39,6 +40,7 @@
         $val['username'] = $userinfo['username'];
         $val['firstname'] = $userinfo['firstname'];
         $val['lastname'] = $userinfo['lastname'];
+        $val['filename'] = $user->getUserImgFilename($val['user_id']);
         $array[$post] = json_decode(json_encode($val));
         }
 

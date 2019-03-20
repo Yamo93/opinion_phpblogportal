@@ -2,23 +2,34 @@
     $subtitle = 'Registrering';
 
     include_once('includes/defaultheader.php');
+    include_once('includes/config.php');
+    session_destroy();
+    
     $user = new User();
 
     ?>
 
     <?php
-    // print_r($_POST);
 
     $displayForm = true;
     global $displayForm;
 
-    if(isset($_POST['registerbtn'])  && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email'])) {
+    if(isset($_POST['registerbtn']) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email'])) {
 
         $resultArray = $user->registerUser($_POST['firstname'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
+
+
+        if(isset($_FILES['fileToUpload'])) {
+            $user->uploadUserImg($_POST['username']);
+        };
+
+
+
 
         extract($resultArray);
 
         if($arrayResult) {
+            $displayForm = false;
             $message = '<div class="alert alert-' . $alertClass . '" role="alert"  style="margin-bottom: 5rem;">
             ' . $alertMessage . '
               </div>';
@@ -37,7 +48,7 @@
             <?php if(isset($message)) echo $message; ?>
 
             <?php if($displayForm) { ?>
-            <form name="contentForm" enctype="multipart/form-data" method="post"  role="form" data-toggle="validator" novalidate="true">
+            <form method="post" enctype="multipart/form-data" action="register.php" name="contentForm" role="form" data-toggle="validator" novalidate="true">
             <h1 class="login__title">Registrera dig på Opinion.</h1>
             <div class="form-group">
             <label for="InputFirstname">Förnamn (*)</label>
@@ -65,8 +76,8 @@
             <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
-            <label for="FormControlFile1">Ladda upp ditt personliga foto (frivilligt)</label>
-            <input type="file" class="form-control-file" name="imgfile" id="FormControlFile1">
+            <label for="fileToUpload">Ladda upp ditt personliga foto (frivilligt)</label>
+            <input type="file" name="fileToUpload" id="fileToUpload" class="form-control-file">
             </div>
             <input type="submit" class="btn btn-primary" value="Registrera dig" name="registerbtn">
             </form>

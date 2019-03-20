@@ -170,7 +170,23 @@
         <p class="post__desc"><?= $selectedpost['description']; ?></p>
         <p class="post__category">Kategori: <span><?= $post->getCategoryName($selectedpost['category_id']); ?></span></p>
         <div class="post__author">
-            <div class="post__authorimg"></div>
+            <!-- <div class="post__authorimg"></div> -->
+            <?php 
+        $updateImg = false; // uppdatering ej tillgänglig
+        $uploadImg = true; // uppladdning tillgänglig
+        if($user->isImgUploaded($selectedpost['user_id'])) {
+            $updateImg = true;
+            $uploadImg = false;
+
+            $filename = $user->getUserImgFilename($selectedpost['user_id']);
+        }
+
+        ?>
+
+        <div class="post__authorimg" style="<?php if(!$uploadImg) 
+            echo 'background-image: url(./uploadedimg/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+
+            <!-- Slut på bilduppladdning -->
             <div class="post__authorinfo">
                 <p class="post__authorname">Av <span><a href="profile.php?id=<?= $authorinfo['id']; ?>" target="_blank"><?= $authorinfo['firstname'] . ' ' . $authorinfo['lastname']; ?></a></span></p>
                 <p class="post__date"><?= $selectedpost['created_date']; ?></p>
@@ -287,7 +303,21 @@
                 <h1 class="commentsection__title">Inga kommentarer än</h1>
                 <div class="commentbox">
                     <div class="commentbox__left">
-                        <div class="commentbox__img"></div>
+                        <!-- <div class="commentbox__img"></div> -->
+                        <?php 
+        $updateCommentImg = false; // uppdatering ej tillgänglig
+        $uploadCommentImg = true; // uppladdning tillgänglig
+        if($user->isImgUploaded($user->getUserID($_SESSION['username']))) {
+            $updateCommentImg = true;
+            $uploadCommentImg = false;
+
+            $filename = $user->getUserImgFilename($user->getUserID($_SESSION['username']));
+        }
+
+        ?>
+
+        <div class="commentbox__img" style="<?php if(!$uploadImg) 
+            echo 'background-image: url(./uploadedimg/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
                     </div>
                     <div class="commentbox__right">
 
@@ -302,6 +332,7 @@
 
                 function addComment() {
                     if (document.querySelector('#commentfield').value === "") {
+                        document.querySelector('.alertmsgcomment').classList.remove('alertmsgsuccess');
                         document.querySelector('.alertmsgcomment').classList.add('alertmsgempty');
                         document.querySelector('.alertmsgcomment').textContent = "Vänligen fyll i fältet.";
                         } else {
@@ -333,11 +364,18 @@
                     document.querySelector('#commentfield').value = "";
 
                     if (comments instanceof Array === false) {
+                    let imgTxt = null;
+                    let imgStyle = null;
+                    if (!comments.filename) {
+                    imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
+                    } else {
+                    imgStyle = ` style="background-image: url(./uploadedimg/${comments.filename});"`;
+                    }
                     document.querySelector('.commentsection__title').textContent = "1 kommentar";
                     let markup = `
                     <div class="comment">
                             <div class="comment__left">
-                                <div class="comment__img"></div>
+                                <div class="comment__img"${imgStyle}>${imgTxt}</div>
                             </div>
                             <div class="comment__right">
                                 <h2 class="comment__author" data-userid="${comments.user_id}">
@@ -353,10 +391,17 @@
                 document.querySelector('.commentsection__title').textContent = comments.length + ' kommentarer';
 
                 comments.forEach(comment => {
+                let imgTxt = "";
+                let imgStyle = null;
+                if (!comment.filename) {
+                    imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
+                } else {
+                    imgStyle = ` style="background-image: url(./uploadedimg/${comment.filename});"`;
+                }
                 let markup = `
                 <div class="comment">
                         <div class="comment__left">
-                            <div class="comment__img"></div>
+                            <div class="comment__img"${imgStyle}>${imgTxt}</div>
                         </div>
                         <div class="comment__right">
                             <h2 class="comment__author" data-userid="${comment.user_id}">
@@ -391,11 +436,20 @@
                 let comments = JSON.parse(this.response);
 
                 if (comments instanceof Array === false) {
+                    let imgTxt = null;
+                    let imgStyle = null;
+                    if (!comments.filename) {
+                        imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
+                    } else {
+                        imgStyle = ` style="background-image: url(./uploadedimg/${comments.filename});"`;
+                    }
+
+
                     document.querySelector('.commentsection__title').textContent = "1 kommentar";
                     let markup = `
                     <div class="comment">
                             <div class="comment__left">
-                                <div class="comment__img"></div>
+                                <div class="comment__img"${imgStyle}>${imgTxt}</div>
                             </div>
                             <div class="comment__right">
                                 <h2 class="comment__author" data-userid="${comments.user_id}">
@@ -410,10 +464,18 @@
                 } else if (comments instanceof Array) {
                 document.querySelector('.commentsection__title').textContent = comments.length + ' kommentarer';
                 comments.forEach(comment => {
+                    let imgTxt = "";
+                    let imgStyle = null;
+                    if (!comment.filename) {
+                        imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
+                    } else {
+                        imgStyle = ` style="background-image: url(./uploadedimg/${comment.filename});"`;
+                    }
+
                 let markup = `
                 <div class="comment">
                         <div class="comment__left">
-                            <div class="comment__img"></div>
+                            <div class="comment__img"${imgStyle}>${imgTxt}</div>
                         </div>
                         <div class="comment__right">
                             <h2 class="comment__author" data-userid="${comment.user_id}">

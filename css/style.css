@@ -454,7 +454,7 @@ a:hover, a:active {
     color: #f3f3f3;
     font-size: 1.6rem; }
 
-#FormControlFile1 {
+#FormControlFile1, #fileToUpload {
   font-size: 1.6rem; }
 
 .has-error input[type="text"], .has-error input[type="email"], .has-error input[type="password"], .has-error select {
@@ -593,7 +593,7 @@ a.returnbtn:link, a.returnbtn:visited {
         font-size: 1.6rem;
         padding: .5rem; }
       .commentsection .commentbox__right .alertmsgcomment {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         font-weight: bold;
         margin-bottom: .5rem; }
       .commentsection .commentbox__right .alertmsgempty {
@@ -678,9 +678,48 @@ a.returnbtn:link, a.returnbtn:visited {
     margin-bottom: 3rem;
     border-radius: 50%;
     box-shadow: 1px 1px 1.5px rgba(0, 0, 0, 0.5);
-    background-image: url(../img/userimgs/yamo93.jpeg);
     background-size: cover;
     background-position: center; }
+    .profile__img .name {
+      background-color: #00b894;
+      width: 100%;
+      height: 100%;
+      color: #f3f3f3;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .profile__img .name p {
+        font-size: 4rem; }
+  .profile .imageformwrapper {
+    padding: 3rem;
+    background-color: #f3f3f3;
+    border: 0.5px solid rgba(9, 132, 227, 0.8);
+    margin-bottom: 4rem;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center; }
+    .profile .imageformwrapper h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-bottom: 1rem; }
+    .profile .imageformwrapper form {
+      font-size: 1.6rem;
+      text-align: center; }
+      .profile .imageformwrapper form label {
+        font-size: 1.6rem;
+        margin-right: .5rem; }
+      .profile .imageformwrapper form input[type=file] {
+        margin: 1rem auto;
+        display: inline-block; }
+      .profile .imageformwrapper form input[name=updateimg] {
+        display: block;
+        margin: 0 auto;
+        margin-top: 1.5rem;
+        font-size: 1.6rem; }
   .profile__info {
     width: 100%;
     border: 0.5px solid #00b894;

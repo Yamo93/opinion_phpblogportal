@@ -5,9 +5,20 @@
     $post = new Post();
     $user = new User();
 
+
         // Hämtar användarens info
         if(isset($_GET['id'])) {
             $userinfo = $user->getUserInfo($_GET['id']);
+        }
+
+        if(isset($_POST['submitimg'])) {
+            $user->uploadUserImg($_SESSION['username']);
+        }
+
+        if(isset($_POST['updateimg'])) {
+            $user_id = $user->getUserID($_SESSION['username']);
+            $user->updateUserImg($_SESSION['username'], $user_id);
+            // echo "user id: " . $user->getUserID($_SESSION['username']);
         }
     
     
@@ -62,7 +73,46 @@
         }
         ?>
         </h1>
-        <div class="profile__img"></div>
+
+        <?php 
+        $updateImg = false; // uppdatering ej tillgänglig
+        $uploadImg = true; // uppladdning tillgänglig
+        if($user->isImgUploaded($user->getUserID($_SESSION['username']))) {
+            $updateImg = true;
+            $uploadImg = false;
+
+            $filename = $user->getUserImgFilename($user->getUserID($_SESSION['username']));
+        }
+
+        ?>
+
+        <div class="profile__img" style="<?php if(!$uploadImg) 
+            echo 'background-image: url(./uploadedimg/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+        
+        <?php if($uploadImg) { ?>
+        <div class="imageformwrapper">
+            <h2>Ladda upp din personliga bild</h2>
+            <form method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Välj din profilbild:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+            <input type="submit" value="Ladda upp bild" name="submitimg">
+            </form>
+        </div>
+        <?php } ?>
+
+        <?php if($updateImg) { ?>
+        <div class="imageformwrapper">
+            <h2>Uppdatera din personliga bild</h2>
+            <form method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Välj din nya profilbild:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload">
+
+            <input type="submit" value="Ladda upp bild" name="updateimg">
+            </form>
+        </div>
+        <?php } ?>
+
+
         <div class="profile__info">
             <div class="titlewrapper">
                 <h2 class="profile__info-title">Användarinformation</h2>
