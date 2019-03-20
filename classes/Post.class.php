@@ -10,6 +10,7 @@ class Post {
     public $numDislikes;
     public $userHasReacted;
     public $numComments;
+    public $commentContent;
 
 
     function __construct() {
@@ -289,6 +290,16 @@ class Post {
         }
         
         return $comments;
+    }
+
+    function addCommentAPI() {
+
+            // Lägg till reaktion
+            $stmt = $this->db->prepare("INSERT INTO comments(content, user_id, post_id) VALUES(?, ?, ?);");
+            $stmt->bind_param("sdd", $this->commentContent, $this->userID, $this->postID);
+            $result = $stmt->execute();
+            return $result;
+
     }
 }
 

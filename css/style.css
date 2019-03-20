@@ -592,6 +592,14 @@ a.returnbtn:link, a.returnbtn:visited {
         width: 100%;
         font-size: 1.6rem;
         padding: .5rem; }
+      .commentsection .commentbox__right .alertmsgcomment {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: .5rem; }
+      .commentsection .commentbox__right .alertmsgempty {
+        color: #d63031; }
+      .commentsection .commentbox__right .alertmsgsuccess {
+        color: #00b894; }
     .commentsection .commentbox__submit {
       display: block;
       width: 100%;

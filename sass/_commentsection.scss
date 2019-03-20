@@ -36,6 +36,20 @@
                 font-size: 1.6rem;
                 padding: .5rem;
             }
+
+            .alertmsgcomment {
+                font-size: 1.2rem;
+                font-weight: bold;
+                margin-bottom: .5rem;
+            }
+            
+            .alertmsgempty {
+                color: $red;
+            }
+
+            .alertmsgsuccess {
+                color: $mintgreen;
+            }
         }
 
         &__submit {

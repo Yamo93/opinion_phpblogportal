@@ -290,12 +290,99 @@
                         <div class="commentbox__img"></div>
                     </div>
                     <div class="commentbox__right">
-                        <form method="post">
+
                             <textarea name="comment" id="commentfield" cols="30" rows="5" placeholder="Vänligen skriv en kommentar"></textarea>
-                            <input type="submit" value="Skicka" name="submitcomment" class="commentbox__submit">
-                        </form>
+                            <div class="alertmsgcomment"></div>
+                            <button class="commentbox__submit">Skicka</button>
                     </div>
                 </div>
+                <script>
+                document.querySelector('.commentbox__submit').addEventListener('click', addComment);
+                            
+
+                function addComment() {
+                    if (document.querySelector('#commentfield').value === "") {
+                        document.querySelector('.alertmsgcomment').classList.add('alertmsgempty');
+                        document.querySelector('.alertmsgcomment').textContent = "Vänligen fyll i fältet.";
+                        } else {
+
+                            var httpCommentAdd = new XMLHttpRequest();
+                    var url = 'addcomment.php';
+                    var params = {
+                        postID: <?= $_GET['id']; ?>,
+                        userID: <?= $user->getUserID($_SESSION['username']); ?>,
+                        content: document.querySelector('#commentfield').value
+                    };
+                    httpCommentAdd.open('POST', url, true);
+
+                    //Send the proper header information along with the request
+                    httpCommentAdd.setRequestHeader('Content-type', 'application/json');
+                    httpCommentAdd.send(JSON.stringify(params));
+                    httpCommentAdd.onreadystatechange = function() {//Call a function when the state changes.
+                    if(httpCommentAdd.readyState == 4 && httpCommentAdd.status == 200) {
+                    // alert(httpCommentAdd.responseText);
+
+                    // Laddar in nya kommentarer här
+                    let comments = JSON.parse(httpCommentAdd.responseText);
+                    console.log(comments);
+                    // Rensar elementet först
+                    document.querySelector('.comments').innerHTML = "";
+                    document.querySelector('.alertmsgcomment').classList.remove('alertmsgempty');
+                    document.querySelector('.alertmsgcomment').classList.add('alertmsgsuccess');
+                    document.querySelector('.alertmsgcomment').textContent = "Meddelandet har skickats!";
+                    document.querySelector('#commentfield').value = "";
+
+                    if (comments instanceof Array === false) {
+                    document.querySelector('.commentsection__title').textContent = "1 kommentar";
+                    let markup = `
+                    <div class="comment">
+                            <div class="comment__left">
+                                <div class="comment__img"></div>
+                            </div>
+                            <div class="comment__right">
+                                <h2 class="comment__author" data-userid="${comments.user_id}">
+                                @${comments.username} <span>(${comments.firstname} ${comments.lastname})</span></h2>
+                                <p class="comment__text" data-postid="${comments.post_id}">${comments.content}</p>
+                                <p class="comment__date">Publicerad ${comments.date}</p>
+                            </div>
+                        </div>
+                    `;
+                        document.querySelector('.comments').insertAdjacentHTML('beforeend', markup);
+
+                } else if (comments instanceof Array) {
+                document.querySelector('.commentsection__title').textContent = comments.length + ' kommentarer';
+
+                comments.forEach(comment => {
+                let markup = `
+                <div class="comment">
+                        <div class="comment__left">
+                            <div class="comment__img"></div>
+                        </div>
+                        <div class="comment__right">
+                            <h2 class="comment__author" data-userid="${comment.user_id}">
+                            @${comment.username} <span>(${comment.firstname} ${comment.lastname})</span></h2>
+                            <p class="comment__text" data-postid="${comment.post_id}">${comment.content}</p>
+                            <p class="comment__date">Publicerad ${comment.date}</p>
+                        </div>
+                    </div>
+                `;
+                    document.querySelector('.comments').insertAdjacentHTML('beforeend', markup);
+                });
+
+                }
+
+                    }
+                    }
+                    httpCommentAdd.send(params);
+
+                    }
+
+                }
+                
+
+            </script>
+
+
                 <!-- Slut på kommentarfältet -->
                 <script>
                 let xhttpComment = new XMLHttpRequest();
