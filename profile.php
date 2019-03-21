@@ -89,7 +89,7 @@
         <div class="profile__img" style="<?php if(!$uploadImg) 
             echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
         
-        <?php if($uploadImg) { ?>
+        <?php if($uploadImg && $user->getUserID($_SESSION['username']) == $_GET['id']) { ?>
         <div class="imageformwrapper">
             <h2>Ladda upp din personliga bild</h2>
             <form method="post" enctype="multipart/form-data">
@@ -100,7 +100,7 @@
         </div>
         <?php } ?>
 
-        <?php if($updateImg) { ?>
+        <?php if($updateImg && $user->getUserID($_SESSION['username']) == $_GET['id']) { ?>
         <div class="imageformwrapper">
             <h2>Uppdatera din personliga bild</h2>
             <form method="post" enctype="multipart/form-data">

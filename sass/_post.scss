@@ -108,9 +108,18 @@
 
     .reactions {
         display: flex;
+        flex-direction: column;
+
+        .likes {
+            display: flex;
+        }
 
         .like {
             margin-right: 2rem;
+        }
+
+        .nolike {
+            margin-top: 2rem;
         }
 
         .like, .dislike {

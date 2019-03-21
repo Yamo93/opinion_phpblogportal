@@ -24,7 +24,7 @@
     $data = json_decode(file_get_contents("php://input"));
 
     $post->postID = $data->postID;
-    $post->userID = $data->userID;
+    $post->userID = $user->getUserID($_SESSION['username']);
     $post->reactionType = $data->type;
 
     if($post->addReactionAPI()) {

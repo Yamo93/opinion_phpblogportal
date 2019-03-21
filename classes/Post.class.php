@@ -294,7 +294,7 @@ class Post {
 
     function addCommentAPI() {
 
-            // Lägg till reaktion
+            // Lägg till kommentar
             $stmt = $this->db->prepare("INSERT INTO comments(content, user_id, post_id) VALUES(?, ?, ?);");
             $stmt->bind_param("sdd", $this->commentContent, $this->userID, $this->postID);
             $result = $stmt->execute();
@@ -302,8 +302,52 @@ class Post {
     }
 
     function loadBookmarksAPI() {
+        $sql = "SELECT * FROM bookmarks WHERE user_id = " . $this->userID . " ORDER BY date DESC;";
+        $result = $this->db->query($sql);
+
+        if(!$result = $this->db->query($sql)){
+            die('Fel vid SQL-fråga [' . $this->db->error . ']');
+        }
+
+        if($result->num_rows == 1) {
+            return [
+                'result' => $result,
+                'fetchedArray' => $result->fetch_assoc()
+            ];
+        } elseif($result->num_rows > 1) {
+
+            while($row = $result->fetch_assoc()) {
+                $bookmarks[] = $row;
+            }
+
+        }else {
+            return false;
+        }
+
         
+        return $bookmarks;
     }
+
+    function addBookmarkAPI() {
+        // Kontrollera om bokmärket redan finns
+        $stmt = $this->db->prepare("SELECT * FROM bookmarks WHERE user_id = ? AND post_id = ?");
+        $stmt->bind_param("dd", $this->userID, $this->postID);
+
+        $stmt->execute();
+        $stmt_result = $stmt->get_result() or trigger_error($stmt->error, E_USER_ERROR);
+
+        if($stmt_result->num_rows>0) {
+            // Användare har redan lagt till bokmärke
+            return false;
+        } else {
+
+        // Lägg till bokmärke
+        $stmt = $this->db->prepare("INSERT INTO bookmarks(user_id, post_id) VALUES(?, ?);");
+        $stmt->bind_param("dd", $this->userID, $this->postID);
+        $result = $stmt->execute();
+        return $result;
+    }
+}
 }
 
 ?>

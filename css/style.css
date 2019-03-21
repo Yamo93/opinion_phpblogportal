@@ -393,7 +393,7 @@ a:hover, a:active {
         font-weight: bold; }
     .mainpage__article .buttons {
       display: flex; }
-    .mainpage__article-readbtn:link, .mainpage__article-readbtn:visited, .mainpage__article-addbookmark:link, .mainpage__article-addbookmark:visited {
+    .mainpage__article-readbtn:link, .mainpage__article-readbtn:visited, .mainpage__article-addbookmark {
       display: block;
       width: 90px;
       font-size: 1.6rem; }
@@ -552,9 +552,14 @@ a:hover, a:active {
   .post .editbtn {
     margin-right: 2rem; }
   .post .reactions {
-    display: flex; }
+    display: flex;
+    flex-direction: column; }
+    .post .reactions .likes {
+      display: flex; }
     .post .reactions .like {
       margin-right: 2rem; }
+    .post .reactions .nolike {
+      margin-top: 2rem; }
     .post .reactions .like span, .post .reactions .dislike span {
       font-size: 1.6rem;
       padding: 2px 5px;
@@ -586,7 +591,9 @@ a.returnbtn:link, a.returnbtn:visited {
 .commentsection {
   width: 100%;
   height: 100%;
-  margin: 5rem 0; }
+  margin: 5rem 0;
+  padding-top: 3rem;
+  border-top: 0.5px solid rgba(9, 132, 227, 0.6); }
   .commentsection__title {
     font-size: 2rem;
     font-weight: bold;

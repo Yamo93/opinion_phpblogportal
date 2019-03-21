@@ -184,7 +184,7 @@
         ?>
 
         <div class="post__authorimg" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $authorinfo['firstname'][0] . ' ' . $authorinfo['lastname'][0] . "</p></div>"; ?></div>
 
             <!-- Slut på bilduppladdning -->
             <div class="post__authorinfo">
@@ -246,13 +246,23 @@
                 xhttp.send();
             </script>
 
-            <div class="like">
-                <button class="likelink" data-type="1">Gilla <i class="fas fa-thumbs-up"></i></button>
-                <span class="numlikes">0</span>
+            <div class="likes">
+                <div class="like">
+                    <button class="likelink" data-type="1">Gilla <i class="fas fa-thumbs-up"></i></button>
+                    <span class="numlikes">0</span>
+                </div>
+                <div class="dislike">
+                    <button class="dislikelink" data-type="2">Ogilla <i class="fas fa-thumbs-down"></i></button><span class="numdislikes">0</span>
+                </div>
             </div>
-            <div class="dislike">
-                <button class="dislikelink" data-type="2">Ogilla <i class="fas fa-thumbs-down"></i></button><span class="numdislikes">0</span>
-            </div>
+            <?php if(!isset($_SESSION['username'])) { ?>
+                <div class="alert alert-warning alert-dismissible fade show nolike" role="alert">
+                <strong>Notering!</strong> Du måste vara inloggad för att gilla eller ogilla inlägget. Vänligen <a href="register.php" target="_blank">registrera dig</a> eller <a href="login.php" target="_blank">logga in</a> om du redan är en medlem.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            <?php } ?>
             
             <script>
                 document.querySelector('.likelink').addEventListener('click', addReaction);
@@ -301,13 +311,14 @@
 
         <section class="commentsection">
                 <h1 class="commentsection__title">Inga kommentarer än</h1>
+                <?php if(isset($_SESSION['username'])) { ?>
                 <div class="commentbox">
                     <div class="commentbox__left">
                         <!-- <div class="commentbox__img"></div> -->
                         <?php 
         $updateCommentImg = false; // uppdatering ej tillgänglig
         $uploadCommentImg = true; // uppladdning tillgänglig
-        if($user->isImgUploaded($user->getUserID($_SESSION['username']))) {
+        if(isset($_SESSION['username']) && $user->isImgUploaded($user->getUserID($_SESSION['username']))) {
             $updateCommentImg = true;
             $uploadCommentImg = false;
 
@@ -326,6 +337,8 @@
                             <button class="commentbox__submit">Skicka</button>
                     </div>
                 </div>
+                <?php } ?>
+                <!-- Slut på kommentarsbox -->
                 <script>
                 document.querySelector('.commentbox__submit').addEventListener('click', addComment);
                             

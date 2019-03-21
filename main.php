@@ -29,6 +29,34 @@
 
 ?>
 
+    <script>
+
+        let xhttpBookmark = new XMLHttpRequest();
+        xhttpBookmark.onreadystatechange = function () {
+        if (this.status === 200 && this.readyState === 4) {
+        // console.log(this.responseText);
+        let bookmarks = JSON.parse(this.response);
+        // console.log(bookmarks);
+        if(bookmarks instanceof Array === false) {
+            // Print out one bookmark
+            let markup = `
+                <a class="dropdown-item" href="post.php?id=${bookmarks.post_id}" target="_blank">${bookmarks.title.length < 20 ? bookmarks.title : bookmarks.title.slice(0, 20) + '...'} av <span>${bookmarks.firstname} ${bookmarks.lastname}</span></a>
+                `;
+                document.querySelector('.bookmarkslist').insertAdjacentHTML('beforeend', markup);
+        } else if(bookmarks instanceof Array) {
+            bookmarks.forEach(bookmark => {
+                let markup = `
+                <a class="dropdown-item" href="post.php?id=${bookmark.post_id}" target="_blank">${bookmark.title.length < 20 ? bookmark.title : bookmark.title.slice(0, 20) + '...'} av <span>${bookmark.firstname} ${bookmark.lastname}</span></a>
+                `;
+                document.querySelector('.bookmarkslist').insertAdjacentHTML('beforeend', markup);
+            });
+        }
+        }
+        }
+        xhttpBookmark.open('GET', './loadbookmarks.php', true);
+        xhttpBookmark.send();
+    </script>
+
     <!-- Kategorifält -->
 <?php 
     // Laddar in kategorymenyn dynamiskt (från databasen)
@@ -160,10 +188,64 @@
                 </div>
                 <div class="buttons">
                 <a href="post.php?id=<?= $val['id']; ?>" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
-                <a href="#" class="mainpage__article-addbookmark btn btn-success">Bokmärk</a>
+                <button class="mainpage__article-addbookmark btn btn-success" data-userid="<?= $val['user_id']; ?>" data-postid="<?= $val['id']; ?>">Bokmärk</button>
                 </div>
             </article>
                 <?php } ?>
+
+                <script>
+                    
+                    if(document.querySelector('.mainpage')) {
+                        document.querySelector('.mainpage').addEventListener('click', addBookmark);
+                    }
+                    function addBookmark(event) {
+                        if(event.target.matches('.mainpage__article-addbookmark')) {
+                            console.log(event.target.dataset.postid);
+                            console.log(event.target.dataset.userid);
+                            var httpBookmarkAdd = new XMLHttpRequest();
+                            var url = 'addbookmark.php';
+                            var params = {
+                                postID: event.target.dataset.postid,
+                                userID: event.target.dataset.userid
+                            };
+                            httpBookmarkAdd.open('POST', url, true);
+                        
+
+                        // finish off the rest of the httpBookmarkAdd (just like httpCommentAdd AND THEN load in new bookmarks depending on datatype (obj or arr))
+                                            //Send the proper header information along with the request
+                        httpBookmarkAdd.setRequestHeader('Content-type', 'application/json');
+                        httpBookmarkAdd.send(JSON.stringify(params));
+                        httpBookmarkAdd.onreadystatechange = function() {//Call a function when the state changes.
+                        if(httpBookmarkAdd.readyState == 4 && httpBookmarkAdd.status == 200) {
+                        // alert(httpBookmarkAdd.responseText);
+
+                        // Laddar in nya kommentarer här
+                        let bookmarks = JSON.parse(httpBookmarkAdd.responseText);
+                        // console.log(bookmarks);
+                        // Rensar elementet först
+                        if (bookmarks instanceof Array === false) {
+
+                        
+                        document.querySelector('.bookmarkslist').innerHTML = `
+                        <a class="dropdown-item" href="bookmarks.php">Bokmärkshanteraren</a><div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="post.php?id=${bookmarks.post_id}" target="_blank">${bookmarks.title.length < 20 ? bookmarks.title : bookmarks.title.slice(0, 20) + '...'} av <span>${bookmarks.firstname} ${bookmarks.lastname}</span></a>
+                        `;
+                } else if(bookmarks instanceof Array) {
+                // Rensar elementet först
+                document.querySelector('.bookmarkslist').innerHTML = '<a class="dropdown-item" href="bookmarks.php">Bokmärkshanteraren</a><div class="dropdown-divider"></div>';
+                    
+                bookmarks.forEach(bookmark => {
+                let markup = `
+                <a class="dropdown-item" href="post.php?id=${bookmark.post_id}" target="_blank">${bookmark.title.length < 20 ? bookmark.title : bookmark.title.slice(0, 20) + '...'} av <span>${bookmark.firstname} ${bookmark.lastname}</span></a>
+                `;
+                document.querySelector('.bookmarkslist').insertAdjacentHTML('beforeend', markup);
+            });
+                }
+                    }
+                    }
+                }
+                    }
+                </script>
 
         </section>
 
