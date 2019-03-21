@@ -246,6 +246,67 @@
                 xhttp.send();
             </script>
 
+
+            <script>
+                    
+                    if(document.querySelector('.post')) {
+                        document.querySelector('.post').addEventListener('click', addBookmark);
+                    }
+                    function addBookmark(event) {
+                        if(event.target.matches('.mainpage__article-addbookmark')) {
+                            console.log(event.target.dataset.postid);
+                            console.log(event.target.dataset.userid);
+                            var httpBookmarkAdd = new XMLHttpRequest();
+                            var url = 'addbookmark.php';
+                            var params = {
+                                postID: event.target.dataset.postid,
+                                userID: event.target.dataset.userid
+                            };
+                            httpBookmarkAdd.open('POST', url, true);
+                        
+
+                        // finish off the rest of the httpBookmarkAdd (just like httpCommentAdd AND THEN load in new bookmarks depending on datatype (obj or arr))
+                                            //Send the proper header information along with the request
+                        httpBookmarkAdd.setRequestHeader('Content-type', 'application/json');
+                        httpBookmarkAdd.send(JSON.stringify(params));
+                        httpBookmarkAdd.onreadystatechange = function() {//Call a function when the state changes.
+                        if(httpBookmarkAdd.readyState == 4 && httpBookmarkAdd.status == 200) {
+                        // alert(httpBookmarkAdd.responseText);
+
+                        // Laddar in nya kommentarer här
+                        let bookmarks = JSON.parse(httpBookmarkAdd.responseText);
+                        let alertBox = `
+                        <div class="alert alert-success alert-dismissible" style="margin-top: 1.5rem;">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                        Bokmärket har sparats!
+                        </div>`;
+                        document.querySelector('.reactions').insertAdjacentHTML('beforeend', alertBox);
+                        // console.log(bookmarks);
+                        // Rensar elementet först
+                        if (bookmarks instanceof Array === false) {
+
+                        
+                        document.querySelector('.bookmarkslist').innerHTML = `
+                        <a class="dropdown-item" href="bookmarks.php">Bokmärkshanteraren</a><div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="post.php?id=${bookmarks.post_id}" target="_blank">${bookmarks.title.length < 20 ? bookmarks.title : bookmarks.title.slice(0, 20) + '...'} av <span>${bookmarks.firstname} ${bookmarks.lastname}</span></a>
+                        `;
+                } else if(bookmarks instanceof Array) {
+                // Rensar elementet först
+                document.querySelector('.bookmarkslist').innerHTML = '<a class="dropdown-item" href="bookmarks.php">Bokmärkshanteraren</a><div class="dropdown-divider"></div>';
+                    
+                bookmarks.forEach(bookmark => {
+                let markup = `
+                <a class="dropdown-item" href="post.php?id=${bookmark.post_id}" target="_blank">${bookmark.title.length < 20 ? bookmark.title : bookmark.title.slice(0, 20) + '...'} av <span>${bookmark.firstname} ${bookmark.lastname}</span></a>
+                `;
+                document.querySelector('.bookmarkslist').insertAdjacentHTML('beforeend', markup);
+            });
+                }
+                    }
+                    }
+                }
+                    }
+                </script>
+
             <div class="likes">
                 <div class="like">
                     <button class="likelink" data-type="1">Gilla <i class="fas fa-thumbs-up"></i></button>
@@ -255,9 +316,10 @@
                     <button class="dislikelink" data-type="2">Ogilla <i class="fas fa-thumbs-down"></i></button><span class="numdislikes">0</span>
                 </div>
             </div>
+            <button style="margin-top: 2rem; display:inline-block;" class="mainpage__article-addbookmark btn btn-success" data-userid="<?= $authorinfo['id']; ?>" data-postid="<?= $_GET['id']; ?>">Bokmärk inlägget</button>
             <?php if(!isset($_SESSION['username'])) { ?>
                 <div class="alert alert-warning alert-dismissible fade show nolike" role="alert">
-                <strong>Notering!</strong> Du måste vara inloggad för att gilla eller ogilla inlägget. Vänligen <a href="register.php" target="_blank">registrera dig</a> eller <a href="login.php" target="_blank">logga in</a> om du redan är en medlem.
+                <strong>Notering!</strong> Du måste vara inloggad för att spara inlägget som bokmärke alternativt gilla eller ogilla inlägget. Vänligen <a href="register.php" target="_blank">registrera dig</a> eller <a href="login.php" target="_blank">logga in</a> om du redan är en medlem.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -509,6 +571,9 @@
                 xhttpComment.open('GET', './loadcomments.php?id=<?= $_GET['id']; ?>', true);
                 xhttpComment.send();
                 </script>
+
+
+                
                 <div class="comments">
                     <!-- <div class="comment">
                         <div class="comment__left">

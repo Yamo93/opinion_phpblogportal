@@ -140,3 +140,31 @@
         </div>
         </nav>
     </header>
+
+    <script>
+
+        let xhttpBookmark = new XMLHttpRequest();
+        xhttpBookmark.onreadystatechange = function () {
+        if (this.status === 200 && this.readyState === 4) {
+        // console.log(this.responseText);
+        let bookmarks = JSON.parse(this.response);
+        // console.log(bookmarks);
+        if(bookmarks instanceof Array === false) {
+            // Print out one bookmark
+            let markup = `
+                <a class="dropdown-item" href="post.php?id=${bookmarks.post_id}" target="_blank">${bookmarks.title.length < 20 ? bookmarks.title : bookmarks.title.slice(0, 20) + '...'} av <span>${bookmarks.firstname} ${bookmarks.lastname}</span></a>
+                `;
+                document.querySelector('.bookmarkslist').insertAdjacentHTML('beforeend', markup);
+        } else if(bookmarks instanceof Array) {
+            bookmarks.forEach(bookmark => {
+                let markup = `
+                <a class="dropdown-item" href="post.php?id=${bookmark.post_id}" target="_blank">${bookmark.title.length < 20 ? bookmark.title : bookmark.title.slice(0, 20) + '...'} av <span>${bookmark.firstname} ${bookmark.lastname}</span></a>
+                `;
+                document.querySelector('.bookmarkslist').insertAdjacentHTML('beforeend', markup);
+            });
+        }
+        }
+        }
+        xhttpBookmark.open('GET', './loadbookmarks.php', true);
+        xhttpBookmark.send();
+    </script>
