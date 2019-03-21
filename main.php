@@ -158,7 +158,10 @@
                     ?>
                 </span></p>
                 </div>
+                <div class="buttons">
                 <a href="post.php?id=<?= $val['id']; ?>" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
+                <a href="#" class="mainpage__article-addbookmark btn btn-success">Bokmärk</a>
+                </div>
             </article>
                 <?php } ?>
 

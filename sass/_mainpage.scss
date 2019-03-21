@@ -237,10 +237,18 @@
             span { font-weight: bold; }
         }
 
-        &-readbtn:link, &-readbtn:visited {
+        .buttons {
+            display: flex;
+        }
+
+        &-readbtn:link, &-readbtn:visited, &-addbookmark:link, &-addbookmark:visited {
             display: block;
             width: 90px;
             font-size: 1.6rem;
+        }
+
+        &-readbtn:link, &-readbtn:visited {
+            margin-right: 2rem;
         }
     }
 

@@ -8,6 +8,18 @@
                 font-family: $secondary-font;
                 font-size: 1.6rem;
             }
+
+            a.dropdown-item:link, a:visited {
+                span {
+                    font-size: 1.4rem;
+                    color: $electronblue;
+                }
+
+                span.membername {
+                    color: $white;
+                }
+            }
+
         }
 
         input[type=search] {

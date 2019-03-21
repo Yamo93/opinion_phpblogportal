@@ -299,7 +299,10 @@ class Post {
             $stmt->bind_param("sdd", $this->commentContent, $this->userID, $this->postID);
             $result = $stmt->execute();
             return $result;
+    }
 
+    function loadBookmarksAPI() {
+        
     }
 }
 

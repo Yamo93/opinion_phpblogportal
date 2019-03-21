@@ -184,7 +184,7 @@ class User {
         // Implement logic
     }
 
-    function uploadUserImg($username) {
+    function uploadUserImg($username, $thumb = false, $thumb_folder = '', $thumb_width = '', $thumb_height = '') {
         if(empty($_FILES)) {
             return false;
         }
@@ -198,36 +198,37 @@ class User {
     
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if($check !== false) {
-                echo "File is an image - " . $check["mime"] . ".";
+                echo "Filen är en bild - " . $check["mime"] . ".";
                 $uploadOk = 1;
             } else {
-                echo "File is not an image.";
+                echo "Filen är inte en bild.";
                 $uploadOk = 0;
             }
     
             // Check if file already exists
             if (file_exists($target_file)) {
-                echo "Sorry, file already exists.";
+                echo "Tyvärr, filen existerar redan.";
                 $uploadOk = 0;
             }
             // Check file size
-            if ($_FILES["fileToUpload"]["size"] > 500000) {
-                echo "Sorry, your file is too large.";
+            if ($_FILES["fileToUpload"]["size"] > 2000000) {
+                echo "Tyvärr, filen är för stor.";
                 $uploadOk = 0;
             }
             // Allow certain file formats
             if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" ) {
-                echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                echo "Tyvärr, de enda giltiga formaten är JPG, JPEG, PNG och GIF.";
                 $uploadOk = 0;
             }
             // Check if $uploadOk is set to 0 by an error
             if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
+                echo "Tyvärr, din bild har ej laddats upp.";
             // if everything is ok, try to upload file
             } else {
-                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir . $username . '.' . $imageFileType)) {
-                    echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+                $pathAndFilename = $target_dir . $username . '.' . $imageFileType;
+                if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $pathAndFilename)) {
+                    echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " har laddats upp.";
     
                     // Sparar filnamn i DB
                     $stmt = $this->db->prepare("INSERT INTO images(filename, user_id) VALUES(?, ?);");
@@ -239,17 +240,59 @@ class User {
                     
     
                     $result = $stmt->execute();
+
+                    // Skapar thumbnail
+                    if($thumb == true)
+                    {
+                        $thumbnail = $thumb_folder.$filename;
+                        list($width,$height) = getimagesize($pathAndFilename);
+                        $thumb_create = imagecreatetruecolor($thumb_width,$thumb_height);
+                        switch($imageFileType){
+                            case 'jpg':
+                                $source = imagecreatefromjpeg($pathAndFilename);
+                                break;
+                            case 'jpeg':
+                                $source = imagecreatefromjpeg($pathAndFilename);
+                                break;
+            
+                            case 'png':
+                                $source = imagecreatefrompng($pathAndFilename);
+                                break;
+                            case 'gif':
+                                $source = imagecreatefromgif($pathAndFilename);
+                                break;
+                            default:
+                                $source = imagecreatefromjpeg($pathAndFilename);
+                        }
+            
+                        imagecopyresized($thumb_create,$source,0,0,0,0,$thumb_width,$thumb_height,$width,$height);
+                        switch($imageFileType){
+                            case 'jpg' || 'jpeg':
+                                imagejpeg($thumb_create,$thumbnail,100);
+                                break;
+                            case 'png':
+                                imagepng($thumb_create,$thumbnail,100);
+                                break;
+            
+                            case 'gif':
+                                imagegif($thumb_create,$thumbnail,100);
+                                break;
+                            default:
+                                imagejpeg($thumb_create,$thumbnail,100);
+                        }
+            
+                    }
     
                     return $result;
     
     
                 } else {
-                    echo "Sorry, there was an error uploading your file.";
+                    echo "Något gick fel vid bilduppladdningen.";
                 }
             }
 
         } else {
-            echo "Image not updated.";
+            echo "Bild ej uppdaterad.";
         }
     }
 
@@ -273,7 +316,7 @@ class User {
         return $result['filename'];
     }
 
-    function updateUserImg($username, $user_id) {
+    function updateUserImg($username, $user_id, $thumb = false, $thumb_folder = '', $thumb_width = '', $thumb_height = '') {
         if(empty($_FILES)) {
             return false;
         }
@@ -301,36 +344,37 @@ class User {
         
                 $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
                 if($check !== false) {
-                    echo "File is an image - " . $check["mime"] . ".";
+                    echo "Filen är en bild - " . $check["mime"] . ".";
                     $uploadOk = 1;
                 } else {
-                    echo "File is not an image.";
+                    echo "Filen är inte en bild.";
                     $uploadOk = 0;
                 }
         
                 // Check if file already exists
                 if (file_exists($target_file)) {
-                    echo "Sorry, file already exists.";
+                    echo "Tyvärr, filen existerar redan.";
                     $uploadOk = 0;
                 }
                 // Check file size
-                if ($_FILES["fileToUpload"]["size"] > 500000) {
-                    echo "Sorry, your file is too large.";
+                if ($_FILES["fileToUpload"]["size"] > 2000000) {
+                    echo "Tyvärr, filen är för stor.";
                     $uploadOk = 0;
                 }
                 // Allow certain file formats
                 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
                 && $imageFileType != "gif" ) {
-                    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                    echo "Tyvärr, de enda giltiga formaten är JPG, JPEG, PNG och GIF.";
                     $uploadOk = 0;
                 }
                 // Check if $uploadOk is set to 0 by an error
                 if ($uploadOk == 0) {
-                    echo "Sorry, your file was not uploaded.";
+                    echo "Tyvärr, din bild har ej laddats upp.";
                 // if everything is ok, try to upload file
                 } else {
-                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir . $username . '.' . $imageFileType)) {
-                        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been updated.";
+                    $pathAndFilename = $target_dir . $username . '.' . $imageFileType;
+                    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $pathAndFilename)) {
+                        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " har uppdaterats.";
         
                         // Sparar filnamn i DB
                         $stmt = $this->db->prepare("INSERT INTO images(filename, user_id) VALUES(?, ?);");
@@ -342,19 +386,61 @@ class User {
                         
         
                         $result = $stmt->execute();
+
+                    // Skapar thumbnail
+                    if($thumb == true)
+                    {
+                        $thumbnail = $thumb_folder.$filename;
+                        list($width,$height) = getimagesize($pathAndFilename);
+                        $thumb_create = imagecreatetruecolor($thumb_width,$thumb_height);
+                        switch($imageFileType){
+                            case 'jpg':
+                                $source = imagecreatefromjpeg($pathAndFilename);
+                                break;
+                            case 'jpeg':
+                                $source = imagecreatefromjpeg($pathAndFilename);
+                                break;
+            
+                            case 'png':
+                                $source = imagecreatefrompng($pathAndFilename);
+                                break;
+                            case 'gif':
+                                $source = imagecreatefromgif($pathAndFilename);
+                                break;
+                            default:
+                                $source = imagecreatefromjpeg($pathAndFilename);
+                        }
+            
+                        imagecopyresized($thumb_create,$source,0,0,0,0,$thumb_width,$thumb_height,$width,$height);
+                        switch($imageFileType){
+                            case 'jpg' || 'jpeg':
+                                imagejpeg($thumb_create,$thumbnail,100);
+                                break;
+                            case 'png':
+                                imagepng($thumb_create,$thumbnail,100);
+                                break;
+            
+                            case 'gif':
+                                imagegif($thumb_create,$thumbnail,100);
+                                break;
+                            default:
+                                imagejpeg($thumb_create,$thumbnail,100);
+                        }
+            
+                    }
         
                         return $result;
         
         
                     } else {
-                        echo "Sorry, there was an error uploading your file.";
+                        echo "Något gick fel vid bilduppladdning.";
                     }
                 }
     
             }
 
         } else {
-            echo "Image not updated.";
+            echo "Bild ej uppdaterad.";
         }
 
     }

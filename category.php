@@ -80,7 +80,7 @@
                 $result = $post->getPostsFromCategory($_GET['id'], 5);
                 foreach($result as $grabbedpost => $val) { ?>
             <article class="mainpage__article">
-                <h2 class="mainpage__article-title"><?= $val['title']; ?></h2>
+                <h2 class="mainpage__article-title"><a href="post.php?id=<?= $val['id']; ?>"><?= $val['title']; ?></a></h2>
                 <p class="mainpage__article-desc"><?= $val['description']; ?></p>
                 <p class="mainpage__article-category">Kategori: <span><?= $post->getCategoryName($val['category_id']); ?></span></p>
                 <p class="mainpage__article-author">Av <span><a href="profile.php?id=<?= $val['user_id'];?>" target="_blank"><?php

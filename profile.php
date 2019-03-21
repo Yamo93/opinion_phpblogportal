@@ -12,12 +12,12 @@
         }
 
         if(isset($_POST['submitimg'])) {
-            $user->uploadUserImg($_SESSION['username']);
+            $user->uploadUserImg($_SESSION['username'], true, 'uploadedimg/thumbs/', '250', '250');
         }
 
         if(isset($_POST['updateimg'])) {
             $user_id = $user->getUserID($_SESSION['username']);
-            $user->updateUserImg($_SESSION['username'], $user_id);
+            $user->updateUserImg($_SESSION['username'], $user_id, true, 'uploadedimg/thumbs/', '250', '250');
             // echo "user id: " . $user->getUserID($_SESSION['username']);
         }
     
@@ -87,7 +87,7 @@
         ?>
 
         <div class="profile__img" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./uploadedimg/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
         
         <?php if($uploadImg) { ?>
         <div class="imageformwrapper">

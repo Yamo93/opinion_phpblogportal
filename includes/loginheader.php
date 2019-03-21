@@ -83,7 +83,7 @@
         <ul class="navbar-nav mr-auto">
         <li class="nav-item active dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOne" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Välkommen, <span><?php 
+            Välkommen, <span class="membername"><?php 
                 $welcomeuser = $user->getUserInfo($_SESSION['id']);
                 $firstname = $welcomeuser['firstname'];
                 echo $firstname;
@@ -105,6 +105,17 @@
             </li>
             <li class="nav-item">
             <a class="nav-link" href="about.php">Om webbplatsen</a>
+            </li>
+            <li class="nav-item active dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownOne" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Mina bokmärken
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownOne">
+                <a class="dropdown-item" href="bookmarks.php">Bokmärkshanteraren</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="post.php?id=1">Titel Ett av <span>Yamo Geb</span></a>
+                <a class="dropdown-item" href="post.php?id=2">Titel Två av <span>Fredde Fredriksson</span></a>
+            </div>
             </li>
 
             <!-- Dropdown för kategorier i små menyer -->

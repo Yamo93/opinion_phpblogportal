@@ -184,7 +184,7 @@
         ?>
 
         <div class="post__authorimg" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./uploadedimg/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
 
             <!-- Slut på bilduppladdning -->
             <div class="post__authorinfo">
@@ -317,7 +317,7 @@
         ?>
 
         <div class="commentbox__img" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./uploadedimg/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
                     </div>
                     <div class="commentbox__right">
 
@@ -369,7 +369,7 @@
                     if (!comments.filename) {
                     imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
                     } else {
-                    imgStyle = ` style="background-image: url(./uploadedimg/${comments.filename});"`;
+                    imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comments.filename});"`;
                     }
                     document.querySelector('.commentsection__title').textContent = "1 kommentar";
                     let markup = `
@@ -396,7 +396,7 @@
                 if (!comment.filename) {
                     imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
                 } else {
-                    imgStyle = ` style="background-image: url(./uploadedimg/${comment.filename});"`;
+                    imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comment.filename});"`;
                 }
                 let markup = `
                 <div class="comment">
@@ -441,7 +441,7 @@
                     if (!comments.filename) {
                         imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
                     } else {
-                        imgStyle = ` style="background-image: url(./uploadedimg/${comments.filename});"`;
+                        imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comments.filename});"`;
                     }
 
 
@@ -469,7 +469,7 @@
                     if (!comment.filename) {
                         imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
                     } else {
-                        imgStyle = ` style="background-image: url(./uploadedimg/${comment.filename});"`;
+                        imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comment.filename});"`;
                     }
 
                 let markup = `

@@ -128,6 +128,11 @@ a:hover, a:active {
   .header .navbar .nav-item a:link, .header .navbar .nav-item a:visited {
     font-family: "Open Sans", sans-serif;
     font-size: 1.6rem; }
+  .header .navbar .nav-item a.dropdown-item:link span, .header .navbar .nav-item a:visited span {
+    font-size: 1.4rem;
+    color: #0984e3; }
+  .header .navbar .nav-item a.dropdown-item:link span.membername, .header .navbar .nav-item a:visited span.membername {
+    color: #f3f3f3; }
   .header .navbar input[type=search] {
     font-size: 1.6rem;
     font-family: "Open Sans", sans-serif; }
@@ -386,10 +391,14 @@ a:hover, a:active {
       border: 0.5px solid #00b894; }
       .mainpage__article-visits span {
         font-weight: bold; }
-    .mainpage__article-readbtn:link, .mainpage__article-readbtn:visited {
+    .mainpage__article .buttons {
+      display: flex; }
+    .mainpage__article-readbtn:link, .mainpage__article-readbtn:visited, .mainpage__article-addbookmark:link, .mainpage__article-addbookmark:visited {
       display: block;
       width: 90px;
       font-size: 1.6rem; }
+    .mainpage__article-readbtn:link, .mainpage__article-readbtn:visited {
+      margin-right: 2rem; }
   .mainpage__article:not(:last-child) {
     border-bottom: 0.3px solid rgba(51, 51, 51, 0.6); }
   .mainpage .amountusers, .mainpage .amountposts, .mainpage .mostread {
@@ -513,9 +522,19 @@ a:hover, a:active {
     .post__author .post__authorimg {
       width: 7rem;
       height: 7rem;
-      background-image: url(../img/userimgs/yamo93.jpeg);
       background-size: cover;
       background-position: center; }
+      .post__author .post__authorimg .name {
+        background-color: #00b894;
+        width: 100%;
+        height: 100%;
+        color: #f3f3f3;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .post__author .post__authorimg .name p {
+          font-size: 2rem; }
     .post__author .post__authorinfo {
       margin-left: 1.5rem; }
       .post__author .post__authorinfo .post__authorname, .post__author .post__authorinfo .post__date, .post__author .post__authorinfo .post__read {
@@ -583,9 +602,19 @@ a.returnbtn:link, a.returnbtn:visited {
     .commentsection .commentbox__img {
       width: 8rem;
       height: 8rem;
-      background-image: url(../img/userimgs/yamo93.jpeg);
       background-position: center;
       background-size: cover; }
+      .commentsection .commentbox__img .name {
+        background-color: #00b894;
+        width: 100%;
+        height: 100%;
+        color: #f3f3f3;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .commentsection .commentbox__img .name p {
+          font-size: 2.5rem; }
     .commentsection .commentbox__right {
       width: 70%; }
       .commentsection .commentbox__right #commentfield {
@@ -626,9 +655,19 @@ a.returnbtn:link, a.returnbtn:visited {
         .commentsection .comments .comment__left .comment__img {
           width: 6rem;
           height: 6rem;
-          background-image: url(../img/userimgs/yamo93.jpeg);
           background-position: center;
           background-size: cover; }
+          .commentsection .comments .comment__left .comment__img .name {
+            background-color: #00b894;
+            width: 100%;
+            height: 100%;
+            color: #f3f3f3;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center; }
+            .commentsection .comments .comment__left .comment__img .name p {
+              font-size: 2.5rem; }
       .commentsection .comments .comment__right {
         width: 80%; }
       .commentsection .comments .comment__author {
