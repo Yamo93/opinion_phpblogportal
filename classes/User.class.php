@@ -190,7 +190,9 @@ class User {
         }
 
         if(isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['size'] > 0) {
-            $target_dir = "img/uploadedimg/";
+            // $target_dir = "img/uploadedimg/"; // lokalt
+            $target_dir = "../../writeable/uploadedimg/"; // publikt
+            
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -324,9 +326,12 @@ class User {
         if(isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['size'] > 0) {
             // Radera användarens bild från mapp
             $filename = $this->getUserImgFilename($user_id);
-            if(file_exists('./img/uploadedimg/' . $filename)) {
-                unlink('./img/uploadedimg/' . $filename);
-                unlink('./img/uploadedimg/thumbs/' . $filename);
+            // if(file_exists('./img/uploadedimg/' . $filename)) {
+            //     unlink('./img/uploadedimg/' . $filename);
+            //     unlink('./img/uploadedimg/thumbs/' . $filename);
+            if(file_exists('../../writeable/uploadedimg/' . $filename)) {
+                unlink('../../writeable/uploadedimg/' . $filename);
+                unlink('../../writeable/uploadedimg/thumbs/' . $filename);
 
             } else {
                 echo "couldnt remove file from folder";
@@ -338,7 +343,8 @@ class User {
             $result = $this->db->query($sql);
     
             if($result) { // filnamn är raderat från db
-                $target_dir = "img/uploadedimg/";
+                // $target_dir = "img/uploadedimg/";
+                $target_dir = "../../writeable/uploadedimg/";
                 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                 $uploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

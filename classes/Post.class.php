@@ -19,7 +19,7 @@ class Post {
         // Error case
         if ($this->db->connect_errno)
         {
-        printf("Fel vid anslutning", $mysqli->connect_error);
+        printf("Fel vid anslutning", $this->db->connect_error);
         exit();
         }
     }

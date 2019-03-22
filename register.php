@@ -39,7 +39,7 @@
               </div>';
         }
 
-    } elseif(!isset($_POST['confirm'])) {
+    } elseif(isset($_POST['registerbtn']) && !isset($_POST['confirm'])) {
         $message = '<div class="alert alert-warning" role="alert">
         Du måste bocka av knappen för att kunna registrera dig.</div>';
     }

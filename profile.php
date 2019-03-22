@@ -12,12 +12,12 @@
         }
 
         if(isset($_POST['submitimg'])) {
-            $user->uploadUserImg($_SESSION['username'], true, 'img/uploadedimg/thumbs/', '250', '250');
+            $user->uploadUserImg($_SESSION['username'], true, '../../writeable/uploadedimg/thumbs/', '250', '250');
         }
 
         if(isset($_POST['updateimg'])) {
             $user_id = $user->getUserID($_SESSION['username']);
-            $user->updateUserImg($_SESSION['username'], $user_id, true, 'img/uploadedimg/thumbs/', '250', '250');
+            $user->updateUserImg($_SESSION['username'], $user_id, true, '../../writeable/uploadedimg/thumbs/', '250', '250');
             // echo "user id: " . $user->getUserID($_SESSION['username']);
         }
     
@@ -89,21 +89,31 @@
         </h1>
 
         <?php 
-        $updateImg = false; // uppdatering ej tillgänglig
-        $uploadImg = true; // uppladdning tillgänglig
-        if($user->isImgUploaded($user->getUserID($_SESSION['username']))) {
-            $updateImg = true;
-            $uploadImg = false;
+        // Kontrollerar om profilanvändaren har en bild
+        $profileHasImg = false;
+        $profileFilename = $user->getUserImgFilename(($_GET['id']));
+        if($profileFilename) {
+            $profileHasImg = true;
+        }
 
-            $filename = $user->getUserImgFilename($user->getUserID($_SESSION['username']));
+
+        // Kontrollerar om detta är den inloggade användarens profilsida
+        
+        if(isset($_SESSION['id']) && $_GET['id'] == $_SESSION['id']) {
+            $updateImg = false; // uppdatering ej tillgänglig
+            $uploadImg = true; // uppladdning tillgänglig
+            if($user->isImgUploaded($_SESSION['id'])) {
+                $updateImg = true;
+                $uploadImg = false;
+            }
         }
 
         ?>
 
-        <div class="profile__img" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./img/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+        <div class="profile__img" style="<?php if($profileHasImg) 
+            echo 'background-image: url(../../writeable/uploadedimg/thumbs/' . $profileFilename; ?>);"><?php if(!$profileHasImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
         
-        <?php if($uploadImg && $user->getUserID($_SESSION['username']) == $_GET['id']) { ?>
+        <?php if(isset($uploadImg) && $uploadImg && $_SESSION['id'] == $_GET['id']) { ?>
         <div class="imageformwrapper">
             <h2>Ladda upp din personliga bild</h2>
             <form method="post" enctype="multipart/form-data">
@@ -114,7 +124,7 @@
         </div>
         <?php } ?>
 
-        <?php if($updateImg && $user->getUserID($_SESSION['username']) == $_GET['id']) { ?>
+        <?php if(isset($updateImg) && $updateImg && $user->getUserID($_SESSION['username']) == $_GET['id']) { ?>
         <div class="imageformwrapper">
             <h2>Uppdatera din personliga bild</h2>
             <form method="post" enctype="multipart/form-data">

@@ -23,11 +23,11 @@
         if(isset($_POST['addpost'])) {
             // print_R($_POST);
             if($post->addPost($_POST['title'], $_POST['desc'], $_POST['editor1'], $_SESSION['id'], $_POST['categoryid'])) {
-                $message = '<div class="alert alert-success" role="alert">
+                $message = '<div class="alert alert-success" role="alert" style="margin-top: 6rem;">
                 Blogginlägget har publicerats!
               </div>';
             } else {
-                $message = '<div class="alert alert-danger" role="alert">
+                $message = '<div class="alert alert-danger" role="alert" style="margin-top: 6rem;">
                 Något gick fel. Vänligen försök igen.
               </div>';
             }
@@ -41,7 +41,7 @@
     // Redigeringsfunktion
     if(isset($_POST['editpost'])) {
         if($post->editPost($_GET['id'], $_POST['title'], $_POST['desc'], $_POST['editor2'], $_POST['categoryid'])) {
-            $message = '<div class="alert alert-success" role="alert">
+            $message = '<div class="alert alert-success" role="alert" style="margin-top: 6rem;">
             Blogginlägget har uppdaterats!
           </div>';
         } else {
@@ -54,12 +54,12 @@
     // Redigeringsfunktion
     if(isset($_POST['delete'])) {
         if($post->deletePost($_GET['id'])) {
-            $message = '<div class="alert alert-danger" role="alert">
+            $message = '<div class="alert alert-danger" role="alert" style="margin-top: 6rem;">
             Blogginlägget har raderats!
           </div>';
           $returnToMainPage = true;
         } else {
-            $message = '<div class="alert alert-warning" role="alert">
+            $message = '<div class="alert alert-warning" role="alert" style="margin-top: 6rem;">
             Något gick fel. Vänligen försök igen.
           </div>';
         }
@@ -199,7 +199,7 @@
         ?>
 
         <div class="post__authorimg" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./img/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $authorinfo['firstname'][0] . ' ' . $authorinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(../../writeable/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $authorinfo['firstname'][0] . ' ' . $authorinfo['lastname'][0] . "</p></div>"; ?></div>
 
             <!-- Slut på bilduppladdning -->
             <div class="post__authorinfo">
@@ -395,19 +395,19 @@
                     <div class="commentbox__left">
                         <!-- <div class="commentbox__img"></div> -->
                         <?php 
-        $updateCommentImg = false; // uppdatering ej tillgänglig
-        $uploadCommentImg = true; // uppladdning tillgänglig
-        if(isset($_SESSION['username']) && $user->isImgUploaded($user->getUserID($_SESSION['username']))) {
-            $updateCommentImg = true;
-            $uploadCommentImg = false;
+                        $updateCommentImg = false; // uppdatering ej tillgänglig
+                        $uploadCommentImg = true; // uppladdning tillgänglig
+                        if(isset($_SESSION['username']) && $user->isImgUploaded($user->getUserID($_SESSION['username']))) {
+                            $updateCommentImg = true;
+                            $uploadCommentImg = false;
 
-            $filename = $user->getUserImgFilename($user->getUserID($_SESSION['username']));
-        }
+                            $filename = $user->getUserImgFilename($user->getUserID($_SESSION['username']));
+                        }
 
-        ?>
+                        ?>
 
         <div class="commentbox__img" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./img/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(../../writeable/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
                     </div>
                     <div class="commentbox__right">
 
@@ -456,12 +456,12 @@
                     document.querySelector('#commentfield').value = "";
 
                     if (comments instanceof Array === false) {
-                    let imgTxt = null;
+                    let imgTxt = "";
                     let imgStyle = null;
                     if (!comments.filename) {
                     imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
                     } else {
-                    imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comments.filename});"`;
+                    imgStyle = ` style="background-image: url(../../writeable/uploadedimg/thumbs/${comments.filename});"`;
                     }
                     document.querySelector('.commentsection__title').textContent = "1 kommentar";
                     let markup = `
@@ -488,7 +488,7 @@
                 if (!comment.filename) {
                     imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
                 } else {
-                    imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comment.filename});"`;
+                    imgStyle = ` style="background-image: url(../../writeable/uploadedimg/thumbs/${comment.filename});"`;
                 }
                 let markup = `
                 <div class="comment">
@@ -528,12 +528,12 @@
                 let comments = JSON.parse(this.response);
 
                 if (comments instanceof Array === false) {
-                    let imgTxt = null;
+                    let imgTxt = "";
                     let imgStyle = null;
                     if (!comments.filename) {
                         imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
                     } else {
-                        imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comments.filename});"`;
+                        imgStyle = ` style="background-image: url(../../writeable/uploadedimg/thumbs/${comments.filename});"`;
                     }
 
 
@@ -561,7 +561,7 @@
                     if (!comment.filename) {
                         imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
                     } else {
-                        imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comment.filename});"`;
+                        imgStyle = ` style="background-image: url(../../writeable/uploadedimg/thumbs/${comment.filename});"`;
                     }
 
                 let markup = `
