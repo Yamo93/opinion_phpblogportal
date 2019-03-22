@@ -12,12 +12,12 @@
         }
 
         if(isset($_POST['submitimg'])) {
-            $user->uploadUserImg($_SESSION['username'], true, 'uploadedimg/thumbs/', '250', '250');
+            $user->uploadUserImg($_SESSION['username'], true, 'img/uploadedimg/thumbs/', '250', '250');
         }
 
         if(isset($_POST['updateimg'])) {
             $user_id = $user->getUserID($_SESSION['username']);
-            $user->updateUserImg($_SESSION['username'], $user_id, true, 'uploadedimg/thumbs/', '250', '250');
+            $user->updateUserImg($_SESSION['username'], $user_id, true, 'img/uploadedimg/thumbs/', '250', '250');
             // echo "user id: " . $user->getUserID($_SESSION['username']);
         }
     
@@ -32,6 +32,20 @@
     
     if(isset($_SESSION['username'])) {
         include_once('includes/loginheader.php');
+
+        if(isset($_POST['addpost'])) {
+            // print_R($_POST);
+            if($post->addPost($_POST['title'], $_POST['desc'], $_POST['editor1'], $_SESSION['id'], $_POST['categoryid'])) {
+                $message = '<div class="alert alert-success" role="alert">
+                Blogginlägget har publicerats!
+              </div>';
+            } else {
+                $message = '<div class="alert alert-danger" role="alert">
+                Något gick fel. Vänligen försök igen.
+              </div>';
+            }
+        }
+
     } else {
         include_once('includes/defaultheader.php');
     }
@@ -87,7 +101,7 @@
         ?>
 
         <div class="profile__img" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(./img/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
         
         <?php if($uploadImg && $user->getUserID($_SESSION['username']) == $_GET['id']) { ?>
         <div class="imageformwrapper">

@@ -43,7 +43,7 @@
     <meta name="msapplication-config" content="./img/favicon/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Tinos:400,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700%7CTinos:400,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
@@ -85,9 +85,7 @@
             <label class="form-check-label" for="exampleCheck1">Låt mig förbli inloggad</label>
             </div>
             <input type="submit" class="btn btn-primary" name="submit" value="Logga in">
-            <a href="#" class="forgot">
-            <button type="submit" class="btn btn-warning">Glömt lösenord</button>
-            </a>
+            <a href="#" class="forgot btn btn-warning">Glömt lösenord</a>
             </form>
 
             <div class="card">
@@ -95,7 +93,7 @@
                 <h5 class="card-title">Är du ny på Opinion?</h5>
                 <p class="card-text">Du kan enkelt registrera ett kostnadsfritt konto genom att klicka på knappen nedanför.</p>
                 <div class="buttons">
-                    <a href="register.php" class="card-link"><button class="btn btn-success btn-sm">Registrera dig nu</button></a>
+                    <a href="register.php" class="card-link btn btn-success btn-sm">Registrera dig nu</a>
                 </div>
                 </div>
             </div>

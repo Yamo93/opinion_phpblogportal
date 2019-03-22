@@ -190,7 +190,7 @@ class User {
         }
 
         if(isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['size'] > 0) {
-            $target_dir = "uploadedimg/";
+            $target_dir = "img/uploadedimg/";
             $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
             $uploadOk = 1;
             $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -324,8 +324,8 @@ class User {
         if(isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['size'] > 0) {
             // Radera användarens bild från mapp
             $filename = $this->getUserImgFilename($user_id);
-            if(file_exists('./uploadedimg/' . $filename)) {
-                unlink('./uploadedimg/' . $filename);
+            if(file_exists('./img/uploadedimg/' . $filename)) {
+                unlink('./img/uploadedimg/' . $filename);
             } else {
                 echo "couldnt remove file from folder";
                 return false;
@@ -336,7 +336,7 @@ class User {
             $result = $this->db->query($sql);
     
             if($result) { // filnamn är raderat från db
-                $target_dir = "uploadedimg/";
+                $target_dir = "img/uploadedimg/";
                 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
                 $uploadOk = 1;
                 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

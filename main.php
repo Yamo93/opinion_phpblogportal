@@ -105,10 +105,10 @@
                 $userPosts = $post->getPostsFromUser($userArray['id']);
                 if($userPosts) { ?>
 
-                <ol>
-                    <h3><?= $userArray['username'] . 's inlägg:'; ?> <span class="showprofile"><a href="profile.php?id=<?= $userArray['id'] ?>" target="_blank">Visa <?= $userArray['username'] . 's profil' ?></a></span></h3>
+                <h3><?= $userArray['username'] . 's inlägg:'; ?> <span class="showprofile"><a href="profile.php?id=<?= $userArray['id'] ?>" target="_blank">Visa <?= $userArray['username'] . 's profil' ?></a></span></h3>
+                <ol style="margin-left: 2rem;">
                 <?php foreach($userPosts as $index => $userPost) { ?>
-                        <p><a href="post.php?id=<?= $userPost['id']; ?>" class="userpostlink" target="_blank"><?= $userPost['title']; ?></a><span class="userpostdate"><?= substr($userPost['created_date'], 0, 10) ?></span></p>
+                        <li><p><a href="post.php?id=<?= $userPost['id']; ?>" class="userpostlink" target="_blank"><?= $userPost['title']; ?></a><span class="userpostdate"><?= substr($userPost['created_date'], 0, 10) ?></span></p></li>
                         
                     <?php } ?>
 
@@ -144,7 +144,7 @@
             <article class="mainpage__article">
                 <h2 class="mainpage__article-title"><a href="post.php?id=<?= $val['id']; ?>"><?= $val['title']; ?></a></h2>
                 <p class="mainpage__article-desc"><?= $val['description']; ?></p>
-                <p class="mainpage__article-category">Kategori: <span><?= $post->getCategoryName($val['category_id']); ?></span></p>
+                <p class="mainpage__article-category">Kategori: <span><a href="category.php?id=<?= $val['category_id']; ?>"><?= $post->getCategoryName($val['category_id']); ?></a></span></p>
                 <p class="mainpage__article-author">Av <span><a href="profile.php?id=<?= $val['user_id'];?>" target="_blank"><?php
                 $userinfo = $user->getUserInfo($val['user_id']);
                 echo $userinfo['firstname'] . ' ' . $userinfo['lastname'];

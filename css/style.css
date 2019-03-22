@@ -221,6 +221,8 @@ a:hover, a:active {
     @media screen and (max-width: 450px) {
       .login .container {
         width: 100%; } }
+    .login .container .forgot {
+      font-size: 1.8rem; }
     .login .container .card {
       margin-top: 3rem;
       width: 100%; }
@@ -372,6 +374,8 @@ a:hover, a:active {
         font-family: "Open Sans", sans-serif;
         color: #f3f3f3;
         padding: 2px 3px; }
+        .mainpage__article-category span a:link, .mainpage__article-category span a:visited {
+          color: inherit; }
     .mainpage__article-date, .mainpage__article-read {
       display: inline-block;
       margin-right: .5rem;
@@ -511,6 +515,8 @@ a:hover, a:active {
       font-family: "Open Sans", sans-serif;
       color: #f3f3f3;
       padding: 3px 5px; }
+      .post__category span a:link, .post__category span a:visited {
+        color: inherit; }
   .post__visits {
     font-size: 1.6rem;
     margin-bottom: 2.5rem; }

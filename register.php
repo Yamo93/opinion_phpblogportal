@@ -48,7 +48,7 @@
             <?php if(isset($message)) echo $message; ?>
 
             <?php if($displayForm) { ?>
-            <form method="post" enctype="multipart/form-data" action="register.php" name="contentForm" role="form" data-toggle="validator" novalidate="true">
+            <form method="post" enctype="multipart/form-data" action="register.php" name="contentForm" role="form" data-toggle="validator">
             <h1 class="login__title">Registrera dig på Opinion.</h1>
             <div class="form-group">
             <label for="InputFirstname">Förnamn (*)</label>
@@ -87,10 +87,10 @@
                 <h5 class="card-title">Har du redan ett konto eller har du glömt ditt lösenord?</h5>
                 <p class="card-text">Då kan du slippa registreringsprocessen och logga in, eller begära ett nytt lösenord.</p>
                 <div class="buttons">
-                    <a href="login.php" class="card-link"><button class="btn btn-success btn-sm">Logga in nu</button></a>
-                    <a href="#" class="forgot">
-                    <button type="submit" class="btn btn-warning">Glömt lösenord</button>
-                    </a>
+                    <a href="login.php" class="card-link btn btn-success btn-sm">Logga in nu</a>
+                    
+                    <a href="#" class="forgot btn btn-warning">Glömt lösenord</a>
+                    
                 </div>
                 </div>
             </div>
@@ -100,7 +100,7 @@
                 <h5 class="card-title">Grattis. Nu är du medlem på Opinion!</h5>
                 <p class="card-text">Vänligen klicka på knappen nedan och logga in med dina användaruppgifter.</p>
                 <div class="buttons">
-                    <a href="login.php" class="card-link"><button class="btn btn-success btn-sm">Logga in nu</button></a>
+                <a href="login.php" class="card-link btn btn-success btn-sm">Logga in nu</a>
                 </div>
                 </div>
             </div>

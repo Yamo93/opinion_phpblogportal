@@ -18,6 +18,21 @@
 
     if(isset($_SESSION['username'])) {
         include_once('includes/loginheader.php');
+
+
+        if(isset($_POST['addpost'])) {
+            // print_R($_POST);
+            if($post->addPost($_POST['title'], $_POST['desc'], $_POST['editor1'], $_SESSION['id'], $_POST['categoryid'])) {
+                $message = '<div class="alert alert-success" role="alert">
+                Blogginlägget har publicerats!
+              </div>';
+            } else {
+                $message = '<div class="alert alert-danger" role="alert">
+                Något gick fel. Vänligen försök igen.
+              </div>';
+            }
+        }
+
     } else {
         include_once('includes/defaultheader.php');
     }
@@ -85,7 +100,7 @@
       </div>
       <div class="modal-footer">
         <input type="submit" name="delete" value="Radera inlägget" class="btn btn-danger">
-        <button type="button" type="submit" class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
+        <button class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
       </div>
     </form>
     </div>
@@ -94,7 +109,7 @@
 
 
     <!-- Modal -->
-    <div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="editPostBtn" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
         <div class="modal-header">
@@ -106,16 +121,16 @@
         <div class="modal-body">
         <form method="post">
             <div class="form-group">
-            <label for="blogtitle">Titel</label>
-            <input type="text" name="title" class="form-control" id="blogtitle" placeholder="Ange inläggets titel" value="<?= $selectedpost['title']; ?>" required>
+            <label for="editblogtitle">Titel</label>
+            <input type="text" name="title" class="form-control" id="editblogtitle" placeholder="Ange inläggets titel" value="<?= $selectedpost['title']; ?>" required>
             </div>
             <div class="form-group">
-            <label for="blogdesc">Beskrivning</label>
-            <input type="text" name="desc" class="form-control" id="blogdesc" placeholder="Skriv en kort beskrivning om inlägget" value="<?= $selectedpost['description']; ?>" required>
+            <label for="editblogdesc">Beskrivning</label>
+            <input type="text" name="desc" class="form-control" id="editblogdesc" placeholder="Skriv en kort beskrivning om inlägget" value="<?= $selectedpost['description']; ?>" required>
             </div>
             <div class="form-group">
-            <label for="blogcategory">Välj ämne (frivilligt)</label>
-            <select class="form-control" id="blogcategory" name="categoryid">
+            <label for="editblogcategory">Välj ämne (frivilligt)</label>
+            <select class="form-control" id="editblogcategory" name="categoryid">
             <option value="1" <?php if($selectedpost['category_id'] == 1) echo "selected" ?>>Allmänt</option>
             <option value="2" <?php if($selectedpost['category_id'] == 2) echo "selected" ?>>Teknologi</option>
             <option value="3" <?php if($selectedpost['category_id'] == 3) echo "selected" ?>>Hälsa</option>
@@ -125,15 +140,15 @@
             </select>
             </div>
             <div class="form-group">
-            <label for="blogcontent">Redigera ditt inlägg nedan</label>
-            <textarea class="form-control" name="editor2" id="blogcontent" rows="3"><?= $selectedpost['content']; ?></textarea>
+            <label for="editblogcontent">Redigera ditt inlägg nedan</label>
+            <textarea class="form-control" name="editor2" id="editblogcontent" rows="3"><?= $selectedpost['content']; ?></textarea>
             </div>
-        </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Gå tillbaka</button>
             <button name="editpost" type="submit" class="btn btn-success">Redigera inlägg</button>
+        </div>
         </form>
-    </div>
+        </div>
         </div>
     </div>
     </div>
@@ -168,7 +183,7 @@
         <?php if(!isset($returnToMainPage))  { ?>
         <h1 class="post__title"><?= $selectedpost['title']; ?></h1>
         <p class="post__desc"><?= $selectedpost['description']; ?></p>
-        <p class="post__category">Kategori: <span><?= $post->getCategoryName($selectedpost['category_id']); ?></span></p>
+        <p class="post__category">Kategori: <span><a href="category.php?id=<?= $selectedpost['category_id']; ?>" target="_blank"><?= $post->getCategoryName($selectedpost['category_id']); ?></a></span></p>
         <div class="post__author">
             <!-- <div class="post__authorimg"></div> -->
             <?php 
@@ -184,7 +199,7 @@
         ?>
 
         <div class="post__authorimg" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $authorinfo['firstname'][0] . ' ' . $authorinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(./img/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $authorinfo['firstname'][0] . ' ' . $authorinfo['lastname'][0] . "</p></div>"; ?></div>
 
             <!-- Slut på bilduppladdning -->
             <div class="post__authorinfo">
@@ -208,7 +223,7 @@
             //  Kontrollerar att den inloggade medlemmen är inläggets författare
 
             if(isset($authorIsLoggedIn) && $authorIsLoggedIn) {
-                echo '<button type="button" class="btn btn-primary editbtn" data-toggle="modal" data-target="#editPost">
+                echo '<button type="button" class="btn btn-primary editbtn" data-toggle="modal" data-target="#editPost" id="editPostBtn">
                 Redigera inlägget
                 </button>';
                 echo '<button type="button" class="btn btn-danger deletebtn" data-toggle="modal" data-target="#deletemodal">
@@ -390,7 +405,7 @@
         ?>
 
         <div class="commentbox__img" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(./uploadedimg/thumbs/' . $filename; ?>"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+            echo 'background-image: url(./img/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
                     </div>
                     <div class="commentbox__right">
 
@@ -444,7 +459,7 @@
                     if (!comments.filename) {
                     imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
                     } else {
-                    imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comments.filename});"`;
+                    imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comments.filename});"`;
                     }
                     document.querySelector('.commentsection__title').textContent = "1 kommentar";
                     let markup = `
@@ -471,7 +486,7 @@
                 if (!comment.filename) {
                     imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
                 } else {
-                    imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comment.filename});"`;
+                    imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comment.filename});"`;
                 }
                 let markup = `
                 <div class="comment">
@@ -516,7 +531,7 @@
                     if (!comments.filename) {
                         imgTxt = `<div class='name'><p>${comments.firstname[0]} ${comments.lastname[0]}</p></div>`;
                     } else {
-                        imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comments.filename});"`;
+                        imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comments.filename});"`;
                     }
 
 
@@ -544,7 +559,7 @@
                     if (!comment.filename) {
                         imgTxt = `<div class='name'><p>${comment.firstname[0]} ${comment.lastname[0]}</p></div>`;
                     } else {
-                        imgStyle = ` style="background-image: url(./uploadedimg/thumbs/${comment.filename});"`;
+                        imgStyle = ` style="background-image: url(./img/uploadedimg/thumbs/${comment.filename});"`;
                     }
 
                 let markup = `

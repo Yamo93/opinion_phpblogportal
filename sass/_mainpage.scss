@@ -207,6 +207,10 @@
                 font-family: $secondary-font;
                 color: $white;
                 padding: 2px 3px;
+
+                a:link, a:visited {
+                    color: inherit;
+                }
             }
         }
 
