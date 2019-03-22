@@ -165,6 +165,7 @@
         }
         }
         }
-        xhttpBookmark.open('GET', './loadbookmarks.php', true);
+        // xhttpBookmark.open('GET', './loadbookmarks.php', true);
+        xhttpBookmark.open('GET', './api/loadbookmarks.php', true);
         xhttpBookmark.send();
     </script>

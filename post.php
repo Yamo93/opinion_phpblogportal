@@ -242,7 +242,7 @@
                 document.querySelector('.numdislikes').textContent = reactions.dislikes;
                 }
                 }
-                xhttp.open('GET', './loadreactions.php?id=<?= $_GET['id']; ?>', true);
+                xhttp.open('GET', './api/loadreactions.php?id=<?= $_GET['id']; ?>', true);
                 xhttp.send();
             </script>
 
@@ -254,10 +254,10 @@
                     }
                     function addBookmark(event) {
                         if(event.target.matches('.mainpage__article-addbookmark')) {
-                            console.log(event.target.dataset.postid);
-                            console.log(event.target.dataset.userid);
+                            // console.log(event.target.dataset.postid);
+                            // console.log(event.target.dataset.userid);
                             var httpBookmarkAdd = new XMLHttpRequest();
-                            var url = 'addbookmark.php';
+                            var url = './api/addbookmark.php';
                             var params = {
                                 postID: event.target.dataset.postid,
                                 userID: event.target.dataset.userid
@@ -332,7 +332,7 @@
 
                 function addReaction() {
                     var http = new XMLHttpRequest();
-                    var url = 'addreaction.php';
+                    var url = './api/addreaction.php';
                     var params = {
                         postID: <?= $_GET['id']; ?>,
                         userID: <?= $user->getUserID($_SESSION['username']); ?>,
@@ -413,7 +413,7 @@
                         } else {
 
                             var httpCommentAdd = new XMLHttpRequest();
-                    var url = 'addcomment.php';
+                    var url = './api/addcomment.php';
                     var params = {
                         postID: <?= $_GET['id']; ?>,
                         userID: <?= $user->getUserID($_SESSION['username']); ?>,
@@ -568,7 +568,7 @@
 
                 }
                 }
-                xhttpComment.open('GET', './loadcomments.php?id=<?= $_GET['id']; ?>', true);
+                xhttpComment.open('GET', './api/loadcomments.php?id=<?= $_GET['id']; ?>', true);
                 xhttpComment.send();
                 </script>
 

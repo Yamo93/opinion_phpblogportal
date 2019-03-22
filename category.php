@@ -112,10 +112,10 @@
                     }
                     function addBookmark(event) {
                         if(event.target.matches('.mainpage__article-addbookmark')) {
-                            console.log(event.target.dataset.postid);
-                            console.log(event.target.dataset.userid);
+                            // console.log(event.target.dataset.postid);
+                            // console.log(event.target.dataset.userid);
                             var httpBookmarkAdd = new XMLHttpRequest();
-                            var url = 'addbookmark.php';
+                            var url = './api/addbookmark.php';
                             var params = {
                                 postID: event.target.dataset.postid,
                                 userID: event.target.dataset.userid

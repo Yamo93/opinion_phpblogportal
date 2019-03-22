@@ -6,7 +6,7 @@
     define("DB_NAME", 'opinion_blogportal');
     
     function my_autoloader($class) {
-        include './classes/' . $class . '.class.php';
+        include '../classes/' . $class . '.class.php';
     }
     
     spl_autoload_register('my_autoloader');
@@ -25,33 +25,34 @@
 
     $post->postID = $data->postID;
     $post->userID = $user->getUserID($_SESSION['username']);
-    $post->commentContent = $data->content;
 
-    if($post->addCommentAPI()) {
-        // Ladda in de uppdaterade kommentarerna
-        $postArray = $post->loadCommentsAPI();
+    if($post->addBookmarkAPI()) {
+        // Ladda in de uppdaterade bokmärken
+        $postArray = $post->loadBookmarksAPI();
 
         if(isset($postArray['result']) && $postArray['result']->num_rows === 1) {
     
-            $userinfo = $user->getUserInfo($postArray['fetchedArray']['user_id']);
-            // print_r($userinfo); // användarinformation
-            $postArray['fetchedArray']['username'] = $userinfo['username'];
-            $postArray['fetchedArray']['firstname'] = $userinfo['firstname'];
-            $postArray['fetchedArray']['lastname'] = $userinfo['lastname'];
-            $postArray['fetchedArray']['filename'] = $user->getUserImgFilename($postArray['fetchedArray']['user_id']);
+            $authorinfo = $user->getUserInfoFromPostID($postArray['fetchedArray']['post_id']);
+
+            $postinfo = $post->getPost($postArray['fetchedArray']['post_id']);
+    
+            $postArray['fetchedArray']['title'] = $postinfo['title'];
+            $postArray['fetchedArray']['firstname'] = $authorinfo['firstname'];
+            $postArray['fetchedArray']['lastname'] = $authorinfo['lastname'];
     
             print_r(json_encode($postArray['fetchedArray']));
     
         } else {
     
-            foreach($postArray as $post => $val) {
-            $userinfo = $user->getUserInfo($val['user_id']);
-            $val['username'] = $userinfo['username'];
-            $val['firstname'] = $userinfo['firstname'];
-            $val['lastname'] = $userinfo['lastname'];
-            $val['filename'] = $user->getUserImgFilename($val['user_id']);
-            $array[$post] = json_decode(json_encode($val));
-            }
+            foreach($postArray as $postIndex => $val) {
+                $authorinfo = $user->getUserInfoFromPostID($val['post_id']);
+        
+                $postinfo = $post->getPost($val['post_id']);
+                $val['title'] = $postinfo['title'];
+                $val['firstname'] = $authorinfo['firstname'];
+                $val['lastname'] = $authorinfo['lastname'];
+                $array[$postIndex] = json_decode(json_encode($val));
+                }
     
             print_r(json_encode($array));
         }
