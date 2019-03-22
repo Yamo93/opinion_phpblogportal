@@ -1,0 +1,31 @@
+.about {
+    width: 90%;
+    min-height:70vh;
+    padding: 2rem 5%;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    &__title {
+        margin: 2.5rem auto;
+    }
+
+    .nav-tabs {
+        font-family: $secondary-font;
+    }
+
+    .tab-content {
+        font-size: 1.8rem;
+        padding: 2.5rem 0;
+
+        .tab-pane {
+            text-align: left; 
+        }
+
+        form {
+            margin-top: 3rem;
+        }
+    } 
+}

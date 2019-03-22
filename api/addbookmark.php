@@ -23,6 +23,8 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
+    // Filtrerar input
+    $data->postID = filter_var($data->postID, FILTER_SANITIZE_NUMBER_INT);
     $post->postID = $data->postID;
     $post->userID = $user->getUserID($_SESSION['username']);
 

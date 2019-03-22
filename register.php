@@ -14,7 +14,7 @@
     $displayForm = true;
     global $displayForm;
 
-    if(isset($_POST['registerbtn']) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email'])) {
+    if(isset($_POST['registerbtn']) && isset($_POST['confirm']) && !empty($_POST['firstname']) && !empty($_POST['lastname']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email'])) {
 
         $resultArray = $user->registerUser($_POST['firstname'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
 
@@ -39,6 +39,9 @@
               </div>';
         }
 
+    } elseif(!isset($_POST['confirm'])) {
+        $message = '<div class="alert alert-warning" role="alert">
+        Du måste bocka av knappen för att kunna registrera dig.</div>';
     }
 ?>
 
@@ -78,6 +81,12 @@
             <div class="form-group">
             <label for="fileToUpload">Ladda upp ditt personliga foto (frivilligt)</label>
             <input type="file" name="fileToUpload" id="fileToUpload" class="form-control-file">
+            </div>
+            <div class="form-check" style="margin: 2.5rem 0">
+            <input class="form-check-input" type="checkbox" name="confirm" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1" style="font-size: 1.6rem; margin-left: 1.5rem;">
+            Genom att klicka godkänner du att ovanstående uppgifter lagras i syfte för inloggning
+            </label>
             </div>
             <input type="submit" class="btn btn-primary" value="Registrera dig" name="registerbtn">
             </form>

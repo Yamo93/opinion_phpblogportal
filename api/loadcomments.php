@@ -18,7 +18,7 @@
     $post = new Post();
     $user = new User();
 
-    $post->postID = isset($_GET['id']) ? intval($_GET['id']) : die();
+    $post->postID = isset($_GET['id']) ? filter_var(intval($_GET['id']), FILTER_SANITIZE_NUMBER_INT) : die();
 
     $postArray = $post->loadCommentsAPI();
 

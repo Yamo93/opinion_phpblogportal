@@ -326,6 +326,8 @@ class User {
             $filename = $this->getUserImgFilename($user_id);
             if(file_exists('./img/uploadedimg/' . $filename)) {
                 unlink('./img/uploadedimg/' . $filename);
+                unlink('./img/uploadedimg/thumbs/' . $filename);
+
             } else {
                 echo "couldnt remove file from folder";
                 return false;

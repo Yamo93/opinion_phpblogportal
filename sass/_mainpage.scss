@@ -54,6 +54,7 @@
     }
 
     .card.card-body {
+        width: 80%;
         @media screen and (max-width: 500px) {
             width: 90%;
         }
@@ -270,7 +271,7 @@
         }
     }
 
-    .amountusers, .amountposts {
+    .amountusers, .mostread, .amountposts {
         padding-bottom: 1rem;
         border-bottom: .5px dotted $electronblue;
 
@@ -280,6 +281,10 @@
                 color: $electronblue;
             }
         }
+    }
+
+    .amountposts {
+        border-bottom: none;
     }
 
     .mostread {

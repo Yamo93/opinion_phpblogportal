@@ -1,22 +1,8 @@
 <section class="mainpage__right">
             <h1 class="mainpage__title">Statistik om <span>Opinion</span></h1>
-            <div class="amountusers">
-                <i class="fas fa-users usersicon"></i>
-                <h2>Antalet användare:</h2>
-                <p class="info"><span><?php 
-                $amountusers = $user->countUsers(); 
-                echo $amountusers['amountusers']; ?></span> användare</p>
-            </div>
-            <div class="amountposts">
-            <i class="far fa-edit posticon"></i>
-                <h2>Antalet inlägg:</h2>
-                <p class="info"><span><?php 
-                $amountposts = $post->countPosts(); 
-                echo $amountposts['amountposts']; ?></span> inlägg</p>
-            </div>
             <div class="mostread">
                 <i class="fas fa-fire-alt fireicon"></i>
-                <h2>Opinions hetaste ämnen:</h2>
+                <h2>Opinions hetaste ämnen</h2>
                 <ul>
                     <?php 
                     $popularTopicArray = $post->orderPopularTopics();
@@ -36,5 +22,19 @@
                     <p class="popularauthor">Av <span>User3</span></p>
                     <p class="reads">30 läsningar</p></li> -->
                 </ul>
+            </div>
+            <div class="amountusers">
+                <i class="fas fa-users usersicon"></i>
+                <h2>Antalet användare</h2>
+                <p class="info"><span><?php 
+                $amountusers = $user->countUsers(); 
+                echo $amountusers['amountusers']; ?></span> användare</p>
+            </div>
+            <div class="amountposts">
+            <i class="far fa-edit posticon"></i>
+                <h2>Antalet inlägg</h2>
+                <p class="info"><span><?php 
+                $amountposts = $post->countPosts(); 
+                echo $amountposts['amountposts']; ?></span> inlägg</p>
             </div>
         </section>

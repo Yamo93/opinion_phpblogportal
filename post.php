@@ -331,7 +331,9 @@
                     <button class="dislikelink" data-type="2">Ogilla <i class="fas fa-thumbs-down"></i></button><span class="numdislikes">0</span>
                 </div>
             </div>
+            <?php if(isset($_SESSION['username'])) { ?>
             <button style="margin-top: 2rem; display:inline-block;" class="mainpage__article-addbookmark btn btn-success" data-userid="<?= $authorinfo['id']; ?>" data-postid="<?= $_GET['id']; ?>">Bokmärk inlägget</button>
+            <?php } ?>
             <?php if(!isset($_SESSION['username'])) { ?>
                 <div class="alert alert-warning alert-dismissible fade show nolike" role="alert">
                 <strong>Notering!</strong> Du måste vara inloggad för att spara inlägget som bokmärke alternativt gilla eller ogilla inlägget. Vänligen <a href="register.php" target="_blank">registrera dig</a> eller <a href="login.php" target="_blank">logga in</a> om du redan är en medlem.

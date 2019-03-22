@@ -274,9 +274,11 @@ a:hover, a:active {
   .userlist .collapse, .userlist .multi-collapse {
     font-size: 1.8rem;
     text-align: left; }
-  @media screen and (max-width: 500px) {
-    .userlist .card.card-body {
-      width: 90%; } }
+  .userlist .card.card-body {
+    width: 80%; }
+    @media screen and (max-width: 500px) {
+      .userlist .card.card-body {
+        width: 90%; } }
   .userlist .accordion .cardwrapper {
     width: 80%; }
     @media screen and (max-width: 500px) {
@@ -411,12 +413,14 @@ a:hover, a:active {
       font-size: 1.8rem;
       font-weight: 600;
       margin-bottom: 1rem; }
-  .mainpage .amountusers, .mainpage .amountposts {
+  .mainpage .amountusers, .mainpage .mostread, .mainpage .amountposts {
     padding-bottom: 1rem;
     border-bottom: 0.5px dotted #0984e3; }
-    .mainpage .amountusers .info span, .mainpage .amountposts .info span {
+    .mainpage .amountusers .info span, .mainpage .mostread .info span, .mainpage .amountposts .info span {
       font-weight: 600;
       color: #0984e3; }
+  .mainpage .amountposts {
+    border-bottom: none; }
   .mainpage .mostread ul li {
     margin-bottom: 1rem; }
     .mainpage .mostread ul li p {
@@ -795,3 +799,40 @@ a.returnbtn:link, a.returnbtn:visited {
       margin-left: 5px;
       font-weight: bold;
       color: #232323; }
+
+.about {
+  width: 90%;
+  min-height: 70vh;
+  padding: 2rem 5%;
+  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; }
+  .about__title {
+    margin: 2.5rem auto; }
+  .about .nav-tabs {
+    font-family: "Open Sans", sans-serif; }
+  .about .tab-content {
+    font-size: 1.8rem;
+    padding: 2.5rem 0; }
+    .about .tab-content .tab-pane {
+      text-align: left; }
+    .about .tab-content form {
+      margin-top: 3rem; }
+
+.settings {
+  width: 90%;
+  min-height: 60vh;
+  padding: 2rem 5%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center; }
+  .settings__title {
+    margin: 2.5rem auto; }
+  .settings .accordion {
+    width: 100%; }
+    .settings .accordion .card-body {
+      font-size: 1.6rem; }

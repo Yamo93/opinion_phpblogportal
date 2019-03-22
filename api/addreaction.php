@@ -23,6 +23,11 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
+    // Filtrerar värden
+    $data->postID = filter_var($data->postID, FILTER_SANITIZE_NUMBER_INT);
+    $data->type = filter_var($data->type, FILTER_SANITIZE_NUMBER_INT);
+
+    // Tilldelning av värden
     $post->postID = $data->postID;
     $post->userID = $user->getUserID($_SESSION['username']);
     $post->reactionType = $data->type;

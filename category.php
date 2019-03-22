@@ -100,7 +100,9 @@
                 </div>
                 <div class="buttons">
                 <a href="post.php?id=<?= $val['id']; ?>" class="mainpage__article-readbtn btn btn-primary">Läs mer</a>
+                <?php if(isset($_SESSION['username'])) { ?>
                 <button class="mainpage__article-addbookmark btn btn-success" data-userid="<?= $val['user_id']; ?>" data-postid="<?= $val['id']; ?>">Bokmärk</button>
+                <?php } ?>
                 </div>
             </article>
                 <?php } ?>

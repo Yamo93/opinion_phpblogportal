@@ -23,6 +23,11 @@
     // Get raw posted data
     $data = json_decode(file_get_contents("php://input"));
 
+    // Filtrerar input
+    $data->postID = filter_var($data->postID, FILTER_SANITIZE_NUMBER_INT);
+    $data->content = filter_var($data->content, FILTER_SANITIZE_STRING);
+
+    // Tilldelar egenskaperna de nya värdena
     $post->postID = $data->postID;
     $post->userID = $user->getUserID($_SESSION['username']);
     $post->commentContent = $data->content;
