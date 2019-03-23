@@ -19,16 +19,16 @@
         $resultArray = $user->registerUser($_POST['firstname'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
 
 
-        if(isset($_FILES['fileToUpload'])) {
-            $user->uploadUserImg($_POST['username']);
-        };
-
-
 
 
         extract($resultArray);
 
         if($arrayResult) {
+            if(isset($_FILES['fileToUpload'])) {
+                // Lägg till thumb
+                $user->uploadUserImg($_POST['username']);
+            };
+
             $displayForm = false;
             $message = '<div class="alert alert-' . $alertClass . '" role="alert"  style="margin-bottom: 5rem;">
             ' . $alertMessage . '
