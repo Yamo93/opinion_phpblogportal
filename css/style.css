@@ -716,7 +716,7 @@ a.returnbtn:link, a.returnbtn:visited {
     .profile {
       margin-top: 7rem;
       padding: 2rem 3rem;
-      min-height: none;
+      min-height: 0;
       height: 80%; } }
   @media screen and (max-width: 500px) {
     .profile {

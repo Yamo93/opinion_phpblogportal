@@ -406,8 +406,8 @@
 
                         ?>
 
-        <div class="commentbox__img" style="<?php if(!$uploadImg) 
-            echo 'background-image: url(../../writeable/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
+        <div class="commentbox__img" style="<?php if(!$uploadCommentImg) 
+            echo 'background-image: url(../../writeable/uploadedimg/thumbs/' . $filename; ?>);"><?php if($uploadCommentImg) echo "<div class='name'><p>" . $userinfo['firstname'][0] . ' ' . $userinfo['lastname'][0] . "</p></div>"; ?></div>
                     </div>
                     <div class="commentbox__right">
 
