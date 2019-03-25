@@ -26,7 +26,7 @@
         if($arrayResult) {
             if(isset($_FILES['fileToUpload'])) {
                 // Lägg till thumb
-                $user->uploadUserImg($_POST['username']);
+                $user->uploadUserImg($_POST['username'], true, '../../writeable/uploadedimg/thumbs/', '250', '250');
             };
 
             $displayForm = false;

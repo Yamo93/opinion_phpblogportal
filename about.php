@@ -9,7 +9,9 @@
 
     $displayForm = true;
 
+    // Formulär
     if(isset($_POST['submitmsg']) && !empty($_POST['email']) && !empty($_POST['subject']) && !empty($_POST['message'])) {
+        // Filtrerar input
         $email = strip_tags($_POST['email']);
         $email = filter_var($email, FILTER_SANITIZE_EMAIL);
         $message = strip_tags($_POST['message']);
