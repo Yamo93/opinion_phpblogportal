@@ -6,11 +6,7 @@ session_start();
 // define("DB_PASSWORD", 'yamo123');
 // define("DB_NAME", 'opinion_blogportal');
 
-/* Publikt */
-define("DB_HOST", 'studentmysql.miun.se');
-define("DB_USERNAME", 'yage1800');
-define("DB_PASSWORD", 'j9jxpj24');
-define("DB_NAME", 'yage1800');
+include_once('properties.php');
 
 function my_autoloader($class) {
     include 'classes/' . $class . '.class.php';
